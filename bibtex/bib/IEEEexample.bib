@@ -1,0 +1,557 @@
+IEEEexample.bib 
+V1.13 (2008/09/30)
+Copyright (c) 2002-2008 by Michael Shell
+See: http://www.michaelshell.org/
+for current contact information.
+
+This is an example BibTeX database for the official IEEEtran.bst
+BibTeX style file.
+
+Some entries call strings that are defined in the IEEEabrv.bib file.
+Therefore, IEEEabrv.bib should be loaded prior to this file.
+Usage:
+
+\bibliographystyle{./IEEEtran}
+\bibliography{./IEEEabrv,./IEEEexample}
+
+
+Support sites:
+http://www.michaelshell.org/tex/ieeetran/
+http://www.ctan.org/tex-archive/macros/latex/contrib/IEEEtran/
+and/or
+http://www.ieee.org/
+
+*************************************************************************
+Legal Notice:
+This code is offered as-is without any warranty either expressed or
+implied; without even the implied warranty of MERCHANTABILITY or
+FITNESS FOR A PARTICULAR PURPOSE! 
+User assumes all risk.
+In no event shall IEEE or any contributor to this code be liable for
+any damages or losses, including, but not limited to, incidental,
+consequential, or any other damages, resulting from the use or misuse
+of any information contained here.
+
+All comments are the opinions of their respective authors and are not
+necessarily endorsed by the IEEE.
+
+This work is distributed under the LaTeX Project Public License (LPPL)
+( http://www.latex-project.org/ ) version 1.3, and may be freely used,
+distributed and modified. A copy of the LPPL, version 1.3, is included
+in the base LaTeX documentation of all distributions of LaTeX released
+2003/12/01 or later.
+Retain all contribution notices and credits.
+** Modified files should be clearly indicated as such, including  **
+** renaming them and changing author support contact information. **
+
+File list of work: IEEEabrv.bib, IEEEfull.bib, IEEEexample.bib,
+                   IEEEtran.bst, IEEEtranS.bst, IEEEtranSA.bst,
+                   IEEEtranN.bst, IEEEtranSN.bst, IEEEtran_bst_HOWTO.pdf
+*************************************************************************
+
+
+Note that, because the example references were taken from actual IEEE
+publications, these examples do not always contain the full amount
+of information that may be desirable (for use with other BibTeX styles).
+In particular, full names (not abbreviated with initials) should be
+entered whenever possible as some (non-IEEE) bibliography styles use
+full names. IEEEtran.bst will automatically abbreviate when it encounters
+full names.
+ 
+@Article{Nguyen2020,
+author={Nguyen, Van Nhan
+and Jenssen, Robert
+and Roverso, Davide},
+title={LS-Net: fast single-shot line-segment detector},
+journal={Machine Vision and Applications},
+year={2020},
+month={Oct},
+day={29},
+volume={32},
+number={1},
+pages={12},
+abstract={In unmanned aerial vehicle (UAV) flights, power lines are considered as one of the most threatening hazards and one of the most difficult obstacles to avoid. In recent years, many vision-based techniques have been proposed to detect power lines to facilitate self-driving UAVs and automatic obstacle avoidance. However, most of the proposed methods are typically based on a common three-step approach: (i) edge detection, (ii) the Hough transform, and (iii) spurious line elimination based on power line constrains. These approaches not only are slow and inaccurate but also require a huge amount of effort in post-processing to distinguish between power lines and spurious lines.  In this paper, we introduce LS-Net, a fast single-shot line-segment detector, and apply it to power line detection. The LS-Net is by design fully convolutional, and it consists of three modules: (i) a fully convolutional feature extractor, (ii) a classifier, and (iii) a line segment regressor. Due to the unavailability of large datasets with annotations of power lines, we render synthetic images of power lines using the physically based rendering approach and propose a series of effective data augmentation techniques to generate more training data. With a customized version of the VGG-16 network as the backbone, the proposed approach outperforms existing state-of-the-art approaches. In addition, the LS-Net can detect power lines in near real time. This suggests that our proposed approach has a promising role in automatic obstacle avoidance and as a valuable component of self-driving UAVs, especially for automatic autonomous power line inspection.},
+issn={1432-1769},
+doi={10.1007/s00138-020-01138-6},
+url={https://doi.org/10.1007/s00138-020-01138-6}
+}
+
+@article{related_work_hyeyeon_choi_2021,
+title = {Weakly supervised power line detection algorithm using a recursive noisy label update with refined broken line segments},
+journal = {Expert Systems with Applications},
+volume = {165},
+pages = {113895},
+year = {2021},
+issn = {0957-4174},
+doi = {https://doi.org/10.1016/j.eswa.2020.113895},
+url = {https://www.sciencedirect.com/science/article/pii/S0957417420306953},
+author = {Hyeyeon Choi and Gyogwon Koo and Bum Jun Kim and Sang Woo Kim},
+keywords = {Weakly supervised learning, Power lines, Semantic segmentation, Line segments, Industrial application},
+abstract = {Detection of power lines in aerial images is an important problem to prevent accidents of unmanned aerial vehicles operating at low altitudes in the electrical industry. Recently, pixel-level power line detection using deep learning has been studied but production of the pixel-level annotations for massive dataset is difficult. In this study, we propose a power line detection algorithm using weakly supervised learning method to reduce the labeling cost for dataset generation. The algorithm is divided into two stages. First, an approximately localized mask was generated based on a convolutional neural network which was trained with only patch-level labels. Second, recursive training of segmentation network with refined broken line segments was executed. A refinement algorithm, line segment connecting (LSC) is a power-line-specialized refinement module that connects broken lines by approximating the segments as partially straight. In proposed algorithm, predicted image at each recursive step was updated as a label of the next training and the label was developed by itself with LSC. The comprehensive experimental results of our algorithm showed state-of-art F1-score of 94.3% in weakly supervised learning approaches on public dataset. This result suggests that the proposed algorithm is useful for low labeling cost with high performance in line detection application.}
+}
+
+@INPROCEEDINGS{related_work_adam_stambler_2019,
+  author={Stambler, Adam and Sherwin, Gary and Rowe, Patrick},
+  booktitle={2019 International Conference on Robotics and Automation (ICRA)}, 
+  title={Detection and Reconstruction of Wires Using Cameras for Aircraft Safety Systems}, 
+  year={2019},
+  volume={},
+  number={},
+  pages={697-703},
+  doi={10.1109/ICRA.2019.8793526}
+}
+
+@ARTICLE{related_work_yan_li_2018,
+  author={Li, Yan and Pan, Chaofeng and Cao, Xianbin and Wu, Dapeng},
+  journal={IEEE Transactions on Emerging Topics in Computational Intelligence}, 
+  title={Power Line Detection by Pyramidal Patch Classification}, 
+  year={2019},
+  volume={3},
+  number={6},
+  pages={416-426},
+  doi={10.1109/TETCI.2018.2849414}
+}
+
+@article{related_work_Zhiyong_Dai_2020,
+author = {Dai, Zhiyong and Yi, Jianjun and Zhang, Yajun and Zhou, Bo and He, Liang},
+title = {Fast and Accurate Cable Detection Using CNN},
+year = {2020},
+issue_date = {Dec 2020},
+publisher = {Kluwer Academic Publishers},
+address = {USA},
+volume = {50},
+number = {12},
+issn = {0924-669X},
+url = {https://doi.org/10.1007/s10489-020-01746-9},
+doi = {10.1007/s10489-020-01746-9},
+abstract = {In recent years, unmanned aerial vehicle (UAV) based vision inspections have been widely applied in electricity systems for both efficiency improvement and labor cost saving. Cable detection is essential for both navigation and flight safety of aerial vehicles. However, power cable detection is widely regarded as a challenging task since the targets are very weak and very easy to be confused with cluttered backgrounds. Traditional line and edge detectors are lack of robustness to scene variations. Recent deep learning based methods also can not support fast and stable power cable detection well for onboard applications . In this paper, a new convolutional neural network (CNN) based cable detection method is proposed. First of all, we encode cables by groups of evenly distributed key points, which reduce the complexities of detection tasks. By this approach, the proposed model detect grouped key points of cables from aerial images directly and the detailed pixels of cables can be restore with the curve equations which are implicitly behind those grouped key points. Subsequently, new methods of data labeling and augmentation, sample matching, post clustering, and performance evaluation for cable key points detection are presented. Finally, comprehensive experimental results demonstrate the efficiency and accuracy of our proposed cable detection method.},
+journal = {Applied Intelligence},
+month = {dec},
+pages = {4688–4707},
+numpages = {20},
+keywords = {Deep learning, Cable detection, Convolutional neural networks}
+}
+
+@Article{related_work_rabeea_haffari_2021,
+AUTHOR = {Jaffari, Rabeea and Hashmani, Manzoor Ahmed and Reyes-Aldasoro, Constantino Carlos},
+TITLE = {A Novel Focal Phi Loss for Power Line Segmentation with Auxiliary Classifier U-Net},
+JOURNAL = {Sensors},
+VOLUME = {21},
+YEAR = {2021},
+NUMBER = {8},
+ARTICLE-NUMBER = {2803},
+URL = {https://www.mdpi.com/1424-8220/21/8/2803},
+PubMedID = {33923472},
+ISSN = {1424-8220},
+ABSTRACT = {The segmentation of power lines (PLs) from aerial images is a crucial task for the safe navigation of unmanned aerial vehicles (UAVs) operating at low altitudes. Despite the advances in deep learning-based approaches for PL segmentation, these models are still vulnerable to the class imbalance present in the data. The PLs occupy only a minimal portion (1–5%) of the aerial images as compared to the background region (95–99%). Generally, this class imbalance problem is addressed via the use of PL-specific detectors in conjunction with the popular class balanced cross entropy (BBCE) loss function. However, these PL-specific detectors do not work outside their application areas and a BBCE loss requires hyperparameter tuning for class-wise weights, which is not trivial. Moreover, the BBCE loss results in low dice scores and precision values and thus, fails to achieve an optimal trade-off between dice scores, model accuracy, and precision–recall values. In this work, we propose a generalized focal loss function based on the Matthews correlation coefficient (MCC) or the Phi coefficient to address the class imbalance problem in PL segmentation while utilizing a generic deep segmentation architecture. We evaluate our loss function by improving the vanilla U-Net model with an additional convolutional auxiliary classifier head (ACU-Net) for better learning and faster model convergence. The evaluation of two PL datasets, namely the Mendeley Power Line Dataset and the Power Line Dataset of Urban Scenes (PLDU), where PLs occupy around 1% and 2% of the aerial images area, respectively, reveal that our proposed loss function outperforms the popular BBCE loss by 16% in PL dice scores on both the datasets, 19% in precision and false detection rate (FDR) values for the Mendeley PL dataset and 15% in precision and FDR values for the PLDU with a minor degradation in the accuracy and recall values. Moreover, our proposed ACU-Net outperforms the baseline vanilla U-Net for the characteristic evaluation parameters in the range of 1–10% for both the PL datasets. Thus, our proposed loss function with ACU-Net achieves an optimal trade-off for the characteristic evaluation parameters without any bells and whistles. Our code is available at Github.},
+DOI = {10.3390/s21082803}
+}
+
+@INPROCEEDINGS{related_work_rainesh_mandaan_2017,
+  author={Madaan, Ratnesh and Maturana, Daniel and Scherer, Sebastian},
+  booktitle={2017 IEEE/RSJ International Conference on Intelligent Robots and Systems (IROS)}, 
+  title={Wire detection using synthetic data and dilated convolutional networks for unmanned aerial vehicles}, 
+  year={2017},
+  volume={},
+  number={},
+  pages={3487-3494},
+  doi={10.1109/IROS.2017.8206190}
+}
+
+@INPROCEEDINGS{related_work_sang_jun_lee_2017,
+  author={Lee, Sang Jun and Yun, Jong Pil and Choi, Hyeyeon and Kwon, Wookyong and Koo, Gyogwon and Kim, Sang Woo},
+  booktitle={2017 IEEE Symposium Series on Computational Intelligence (SSCI)}, 
+  title={Weakly supervised learning with convolutional neural networks for power line localization}, 
+  year={2017},
+  volume={},
+  number={},
+  pages={1-8},
+  doi={10.1109/SSCI.2017.8285410}
+}
+
+@ARTICLE{related_work_yan_li_2019,
+  author={Li, Yan and Xiao, Zehao and Zhen, Xiantong and Cao, Xianbin},
+  journal={IEEE Geoscience and Remote Sensing Letters}, 
+  title={Attentional Information Fusion Networks for Cross-Scene Power Line Detection}, 
+  year={2019},
+  volume={16},
+  number={10},
+  pages={1635-1639},
+  doi={10.1109/LGRS.2019.2903217}
+}
+
+@ARTICLE{related_work_omer_emre_yetgin_2018,
+  author={Yetgin, Ömer Emre and Benligiray, Burak and Gerek, Ömer Nezih},
+  journal={IEEE Transactions on Aerospace and Electronic Systems}, 
+  title={Power Line Recognition From Aerial Images With Deep Learning}, 
+  year={2019},
+  volume={55},
+  number={5},
+  pages={2241-2252},
+  doi={10.1109/TAES.2018.2883879}
+}
+
+
+@Article{related_work_heng_zhang_2019,
+AUTHOR = {Zhang, Heng and Yang, Wen and Yu, Huai and Zhang, Haijian and Xia, Gui-Song},
+TITLE = {Detecting Power Lines in UAV Images with Convolutional Features and Structured Constraints},
+JOURNAL = {Remote Sensing},
+VOLUME = {11},
+YEAR = {2019},
+NUMBER = {11},
+ARTICLE-NUMBER = {1342},
+URL = {https://www.mdpi.com/2072-4292/11/11/1342},
+ISSN = {2072-4292},
+ABSTRACT = {Power line detection plays an important role in an automated UAV-based electricity inspection system, which is crucial for real-time motion planning and navigation along power lines. Previous methods which adopt traditional filters and gradients may fail to capture complete power lines due to noisy backgrounds. To overcome this, we develop an accurate power line detection method using convolutional and structured features. Specifically, we first build a convolutional neural network to obtain hierarchical responses from each layer. Simultaneously, the rich feature maps are integrated to produce a fusion output, then we extract the structured information including length, width, orientation and area from the coarsest feature map. Finally, we combine the fusion output with structured information to get a result with clear background. The proposed method fully exploits multiscale and structured prior information to conduct both accurate and efficient detection. In addition, we release two power line datasets due to the scarcity in the public domain. The method is evaluated on the well-annotated power line datasets and achieves competitive performance compared with state-of-the-art methods.},
+DOI = {10.3390/rs11111342}
+}
+
+@misc{related_work_rabab_abdelfattah_2022,
+  doi = {10.48550/ARXIV.2204.07243},
+  url = {https://arxiv.org/abs/2204.07243},
+  author = {Abdelfattah, Rabab and Wang, Xiaofeng and Wang, Song},
+  keywords = {Computer Vision and Pattern Recognition (cs.CV), FOS: Computer and information sciences, FOS: Computer and information sciences},
+  title = {PLGAN: Generative Adversarial Networks for Power-Line Segmentation in Aerial Images},
+  publisher = {arXiv},
+  year = {2022},
+  copyright = {arXiv.org perpetual, non-exclusive license}
+}
+
+@ARTICLE{related_work_steger_1998,
+  author={Steger, C.},
+  journal={IEEE Transactions on Pattern Analysis and Machine Intelligence}, 
+  title={An unbiased detector of curvilinear structures}, 
+  year={1998},
+  volume={20},
+  number={2},
+  pages={113-125},
+  doi={10.1109/34.659930}
+}
+
+@inproceedings{related_work_kasturi_2002,
+  title={Wire Detection Algorithms for Navigation},
+  author={Rangachar Kasturi and Octavia I. Camps},
+  year={2002}
+}
+
+@ARTICLE{related_work_candamo_2009,
+  author={Candamo, Joshua and Kasturi, Rangachar and Goldgof, Dmitry and Sarkar, Sudeep},
+  journal={IEEE Transactions on Aerospace and Electronic Systems}, 
+  title={Detection of Thin Lines using Low-Quality Video from Low-Altitude Aircraft in Urban Settings}, 
+  year={2009},
+  volume={45},
+  number={3},
+  pages={937-949},
+  doi={10.1109/TAES.2009.5259175}
+}
+
+@INPROCEEDINGS{related_work_golightly_2005,
+  author={Golightly, I. and Jones, D.},
+  booktitle={ICAR '05. Proceedings., 12th International Conference on Advanced Robotics, 2005.}, 
+  title={Visual control of an unmanned aerial vehicle for power line inspection}, 
+  year={2005},
+  volume={},
+  number={},
+  pages={288-295},
+  doi={10.1109/ICAR.2005.1507426}
+}
+
+@ARTICLE{related_work_guanjian_yan_2007,
+  author={Yan, Guangjian and Li, Chaoyang and Zhou, Guoqing and Zhang, Wuming and Li, Xiaowen},
+  journal={IEEE Geoscience and Remote Sensing Letters}, 
+  title={Automatic Extraction of Power Lines From Aerial Images}, 
+  year={2007},
+  volume={4},
+  number={3},
+  pages={387-391},
+  doi={10.1109/LGRS.2007.895714}
+}
+
+@INPROCEEDINGS{related_work_zhengrong_li_2008,
+  author={Li, Zhengrong and Liu, Yuee and Hayward, Ross and Zhang, Jinglan and Cai, Jinhai},
+  booktitle={2008 23rd International Conference Image and Vision Computing New Zealand}, 
+  title={Knowledge-based power line detection for UAV surveillance and inspection systems}, 
+  year={2008},
+  volume={},
+  number={},
+  pages={1-6},
+  doi={10.1109/IVCNZ.2008.4762118}
+}
+
+@INPROCEEDINGS{related_work_t_santos_2017,
+  author={Santos, T. and Moreira, M. and Almeida, J. and Dias, A. and Martins, A. and Dinis, J. and Formiga, J. and Silva, E.},
+  booktitle={2017 IEEE International Conference on Autonomous Robot Systems and Competitions (ICARSC)}, 
+  title={PLineD: Vision-based power lines detection for Unmanned Aerial Vehicles}, 
+  year={2017},
+  volume={},
+  number={},
+  pages={253-259},
+  doi={10.1109/ICARSC.2017.7964084}
+}
+
+﻿@Article{related_work_li_zhenrong_2010,
+author={Li, Zhengrong
+and Liu, Yuee
+and Walker, Rodney
+and Hayward, Ross
+and Zhang, Jinglan},
+title={Towards automatic power line detection for a UAV surveillance system using pulse coupled neural filter and an improved Hough transform},
+journal={Machine Vision and Applications},
+year={2010},
+month={Aug},
+day={01},
+volume={21},
+number={5},
+pages={677-686},
+abstract={Spatial information captured from optical remote sensors on board unmanned aerial vehicles (UAVs) has great potential in automatic surveillance of electrical infrastructure. For an automatic vision-based power line inspection system, detecting power lines from a cluttered background is one of the most important and challenging tasks. In this paper, a novel method is proposed, specifically for power line detection from aerial images. A pulse coupled neural filter is developed to remove background noise and generate an edge map prior to the Hough transform being employed to detect straight lines. An improved Hough transform is used by performing knowledge-based line clustering in Hough space to refine the detection results. The experiment on real image data captured from a UAV platform demonstrates that the proposed approach is effective for automatic power line detection.},
+issn={1432-1769},
+doi={10.1007/s00138-009-0206-y},
+url={https://doi.org/10.1007/s00138-009-0206-y}
+}
+
+@INPROCEEDINGS{related_work_boris_alpatov_2016,
+  author={Alpatov, Boris and Babayan, Pavel and Shubin, Nikita},
+  booktitle={2016 5th Mediterranean Conference on Embedded Computing (MECO)}, 
+  title={Power line detection using Integrated Vector Radon Transform}, 
+  year={2016},
+  volume={},
+  number={},
+  pages={162-164},
+  doi={10.1109/MECO.2016.7525729}
+}
+
+@article{related_work_biqin_song_2014,
+title = {Power line detection from optical images},
+journal = {Neurocomputing},
+volume = {129},
+pages = {350-361},
+year = {2014},
+issn = {0925-2312},
+doi = {https://doi.org/10.1016/j.neucom.2013.09.023},
+url = {https://www.sciencedirect.com/science/article/pii/S0925231213009429},
+author = {Biqin Song and Xuelong Li},
+keywords = {Power line detection, Threat avoidance, Matched filter, Line segment pool, Graph-cut model},
+abstract = {Image-based power line detection is highly important for threat avoidance when the aerial vehicles fly in low altitude. However, it is very challenging for the requirements of high detection rates, low false alarms and real-time application. In this paper, a sequential local-to-global power line detection algorithm is proposed. In the local criterion, a line segment pool is detected by morphological filtering an edge map image, which is computed based on matched filter (MF) and first-order derivative of Gaussian (FDOG). It results in over detection to guarantee high detection rates. In the next global criterion, grouping the line segments into whole power lines is formulated as a graph-cut model based on graph theory. The principal advantage of the proposed algorithm is that it can detect not only the straight power lines but also the curve ones. Experimental results demonstrate that the algorithm has good performances both in detection accuracy and in processing time.}
+}
+
+@INPROCEEDINGS{related_work_chaofeng_pan_2016,
+  author={Pan, Chaofeng and Cao, Xianbin and Wu, Dapeng},
+  booktitle={2016 IEEE Global Conference on Signal and Information Processing (GlobalSIP)}, 
+  title={Power line detection via background noise removal}, 
+  year={2016},
+  volume={},
+  number={},
+  pages={871-875},
+  doi={10.1109/GlobalSIP.2016.7905967}
+}
+
+@INPROCEEDINGS{related_work_jayavardhana_gubbi,
+  author={Gubbi, Jayavardhana and Varghese, Ashley and Balamuralidhar, P},
+  booktitle={2017 Fifteenth IAPR International Conference on Machine Vision Applications (MVA)}, 
+  title={A new deep learning architecture for detection of long linear infrastructure}, 
+  year={2017},
+  volume={},
+  number={},
+  pages={207-210},
+  doi={10.23919/MVA.2017.7986837}
+}
+
+@ARTICLE{lsd,
+  author={Grompone von Gioi, Rafael and Jakubowicz, Jeremie and Morel, Jean-Michel and Randall, Gregory},
+  journal={IEEE Transactions on Pattern Analysis and Machine Intelligence}, 
+  title={LSD: A Fast Line Segment Detector with a False Detection Control}, 
+  year={2010},
+  volume={32},
+  number={4},
+  pages={722-732},
+  doi={10.1109/TPAMI.2008.300}}
+
+ @inproceedings{deng2009imagenet,
+  title={Imagenet: A large-scale hierarchical image database},
+  author={Deng, Jia and Dong, Wei and Socher, Richard and Li, Li-Jia and Li, Kai and Fei-Fei, Li},
+  booktitle={2009 IEEE conference on computer vision and pattern recognition},
+  pages={248--255},
+  year={2009},
+  organization={Ieee}
+}
+
+@INPROCEEDINGS{vbp,
+  author={Bojarski, Mariusz and Choromanska, Anna and Choromanski, Krzysztof and Firner, Bernhard and Ackel, Larry J and Muller, Urs and Yeres, Phil and Zieba, Karol},
+  booktitle={2018 IEEE International Conference on Robotics and Automation (ICRA)}, 
+  title={VisualBackProp: Efficient Visualization of CNNs for Autonomous Driving}, 
+  year={2018},
+  volume={},
+  number={},
+  pages={4701-4708},
+  doi={10.1109/ICRA.2018.8461053}
+}
+
+@article{convnext,
+  title={A ConvNet for the 2020s},
+  author={Zhuang Liu and Hanzi Mao and Chaozheng Wu and Christoph Feichtenhofer and Trevor Darrell and Saining Xie},
+  journal={2022 IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR)},
+  year={2022},
+  pages={11966-11976}
+}
+
+@article{resnet,
+  title={Deep Residual Learning for Image Recognition},
+  author={Kaiming He and X. Zhang and Shaoqing Ren and Jian Sun},
+  journal={2016 IEEE Conference on Computer Vision and Pattern Recognition (CVPR)},
+  year={2015},
+  pages={770-778}
+}
+
+@article{swin,
+  title={Swin Transformer: Hierarchical Vision Transformer using Shifted Windows},
+  author={Ze Liu and Yutong Lin and Yue Cao and Han Hu and Yixuan Wei and Zheng Zhang and Stephen Lin and Baining Guo},
+  journal={2021 IEEE/CVF International Conference on Computer Vision (ICCV)},
+  year={2021},
+  pages={9992-10002}
+}
+
+@article{resnext,
+  title={Aggregated Residual Transformations for Deep Neural Networks},
+  author={Saining Xie and Ross B. Girshick and Piotr Doll{\'a}r and Zhuowen Tu and Kaiming He},
+  journal={2017 IEEE Conference on Computer Vision and Pattern Recognition (CVPR)},
+  year={2016},
+  pages={5987-5995}
+}
+
+@article{batchnorm,
+  title={Batch Normalization: Accelerating Deep Network Training by Reducing Internal Covariate Shift},
+  author={Sergey Ioffe and Christian Szegedy},
+  journal={ArXiv},
+  year={2015},
+  volume={abs/1502.03167}
+}
+
+@article{layernorm,
+  title={Layer Normalization},
+  author={Jimmy Ba and Jamie Ryan Kiros and Geoffrey E. Hinton},
+  journal={ArXiv},
+  year={2016},
+  volume={abs/1607.06450}
+}
+
+@inproceedings{relu,
+author = {Nair, Vinod and Hinton, Geoffrey E.},
+title = {Rectified Linear Units Improve Restricted Boltzmann Machines},
+year = {2010},
+isbn = {9781605589077},
+publisher = {Omnipress},
+address = {Madison, WI, USA},
+abstract = {Restricted Boltzmann machines were developed using binary stochastic hidden units. These can be generalized by replacing each binary unit by an infinite number of copies that all have the same weights but have progressively more negative biases. The learning and inference rules for these "Stepped Sigmoid Units" are unchanged. They can be approximated efficiently by noisy, rectified linear units. Compared with binary units, these units learn features that are better for object recognition on the NORB dataset and face verification on the Labeled Faces in the Wild dataset. Unlike binary units, rectified linear units preserve information about relative intensities as information travels through multiple layers of feature detectors.},
+booktitle = {Proceedings of the 27th International Conference on International Conference on Machine Learning},
+pages = {807–814},
+numpages = {8},
+location = {Haifa, Israel},
+series = {ICML'10}
+}
+
+@article{gelu,
+  title={Bridging Nonlinearities and Stochastic Regularizers with Gaussian Error Linear Units},
+  author={Dan Hendrycks and Kevin Gimpel},
+  journal={ArXiv},
+  year={2016},
+  volume={abs/1606.08415}
+}
+
+@article{16x16,
+  title={An Image is Worth 16x16 Words: Transformers for Image Recognition at Scale},
+  author={Alexey Dosovitskiy and Lucas Beyer and Alexander Kolesnikov and Dirk Weissenborn and Xiaohua Zhai and Thomas Unterthiner and Mostafa Dehghani and Matthias Minderer and Georg Heigold and Sylvain Gelly and Jakob Uszkoreit and Neil Houlsby},
+  journal={ArXiv},
+  year={2020},
+  volume={abs/2010.11929}
+}
+
+@article{attention,
+  title={Attention is All you Need},
+  author={Ashish Vaswani and Noam M. Shazeer and Niki Parmar and Jakob Uszkoreit and Llion Jones and Aidan N. Gomez and Lukasz Kaiser and Illia Polosukhin},
+  journal={ArXiv},
+  year={2017},
+  volume={abs/1706.03762}
+}
+
+@article{DETR,
+  title={End-to-End Object Detection with Transformers},
+  author={Nicolas Carion and Francisco Massa and Gabriel Synnaeve and Nicolas Usunier and Alexander Kirillov and Sergey Zagoruyko},
+  journal={ArXiv},
+  year={2020},
+  volume={abs/2005.12872}
+}
+
+@InProceedings{TTPLA,
+    author    = {Abdelfattah, Rabab and Wang, Xiaofeng and Wang, Song},
+    title     = {TTPLA: An Aerial-Image Dataset for Detection and Segmentation of Transmission Towers and Power Lines},
+    booktitle = {Proceedings of the Asian Conference on Computer Vision (ACCV)},
+    month     = {November},
+    year      = {2020}
+}
+
+@misc{skeleton,
+  author = {Huang, Lingdong },
+  title = {Skeleton Tracing},
+  year = {2021},
+  publisher = {GitHub},
+  journal = {GitHub repository},
+  howpublished = {\url{https://github.com/LingDong-/skeleton-tracing}},
+  commit = {f5dd65e2389f9311dd3c24b9a83bd852c28c49e9}
+}
+
+@article{RDP,
+  title={ALGORITHMS FOR THE REDUCTION OF THE NUMBER OF POINTS REQUIRED TO REPRESENT A DIGITIZED LINE OR ITS CARICATURE},
+  author={David H. Douglas and Thomas K. Peucker},
+  journal={Cartographica: The International Journal for Geographic Information and Geovisualization},
+  year={1973},
+  volume={10},
+  pages={112-122}
+}
+
+@misc{PLD_UAV,
+  author = {S, Heng },
+  title = {PLD-UAV},
+  year = {2019},
+  publisher = {GitHub},
+  journal = {GitHub repository},
+  howpublished = {\url{https://github.com/SnorkerHeng/PLD-UAV}},
+  commit = {d68d7984970caada2d074e78f5e8cc987d10cb39}
+}
+@MISC{Mendely,
+  title     = "Ground truth of powerline dataset ({infrared-IR} and visible
+               {light-VL})",
+  author    = "Yetgin, {\"O}mer Emre",
+  abstract  = "Despite a relatively crowded literature about detection of power
+               lines for aircraft safety, the works are mostly optimized with
+               very few training images; some even use artificially generated
+               images. The IR imaging case is even less utilized. The reason is
+               clearly the tremendous workload to obtain real images. With this
+               demand in mind, the authors cooperated with the Turkish
+               Electricity Transmission Company (TEIAS) to obtain video
+               captures from actual aircraft. Later, the authors made a
+               thorough inspection over the video frames to isolate, capture
+               and clean thousands of valuable images. In this content, 400 IR
+               and 400 VL images are acquired and scaled to a size of 512x512.
+               The IR folder contains IR images with power line, ground truths
+               and overlay images of these images. The VL folder contains VL
+               images with power line, ground truths and overlay images of
+               these images. The IR and VL groups were deliberately constructed
+               to contain both regular and especially confusing scenes. ``TY''
+               shows that there are no power lines in the images. ``TV'' shows
+               that there are power lines in the images. The videos were
+               captured from 21 different regions all over Turkey at different
+               seasonal days. Due to varying background behavior, varying
+               temperatures and weather conditions, and varying lighting
+               conditions, the achieved positive set contains several difficult
+               scenes where low contrast causes close to invisibility for power
+               lines. The original video resolutions were 576x325 for IR and
+               full HD for VL, however, the captured frames were scaled down to
+               smaller sizes and the effect of resizing was tested for various
+               image sizes. An image size of 512x512 is sufficient for a
+               consistently accurate power line detection The program developed
+               by Assistant Professor Cihan Topal from Anadolu University
+               Electrical and Electronics Department was used to draw ground
+               truths.",
+  publisher = "Mendeley",
+  year      =  2019
+}
