@@ -112,7 +112,9 @@
 % *** GRAPHICS RELATED PACKAGES ***
 %
 \ifCLASSINFOpdf
-  % \usepackage[pdftex]{graphicx}
+  \usepackage[pdftex]{graphicx}
+  \usepackage{subfig}
+  \usepackage{tabularx}
   % declare the path(s) where your graphic files are
   % \graphicspath{{../pdf/}{../jpeg/}}
   % and their extensions so you won't have to specify these with
@@ -675,6 +677,102 @@ We also evaluated the method using a dataset of powerlines aggregated by EsmartS
 In this dataset, the lines annotated includes conductors, guy wires and overhead ground wires. Conductors are normally in parallel. However, the other two type of wires can have different directions and, hence, there are many visual crossings. Included in the dataset are also some instances of line segments being in close proximity. The dataset contains 2961 images for training and 468 images for testing. Examples are shown in Fig. \ref{esmart_examples_fig}.
 
 \subsection{Implementation Details}
+
+% \begin{figure}
+%   \centering
+%   \includegraphics[width=0.8\textwidth]{imgs/esmart_base_imgs/Alta__4ba599e9-bf87-4283-aa2c-8d0bdd9b4e6e.JPG}
+%   \caption{This is a wide figure that spans both columns.}
+%   \label{fig:img1}
+% \end{figure*}
+
+\begin{figure*}
+  \begin{tabularx}{\textwidth}{cccc}
+  \centering
+  \subfloat{\includegraphics[width = 1.65in]{imgs/esmart_base_imgs/Alta__4ba599e9-bf87-4283-aa2c-8d0bdd9b4e6e.JPG}} &
+  \subfloat{\includegraphics[width = 1.65in]{imgs/esmart_gt/Alta__4ba599e9-bf87-4283-aa2c-8d0bdd9b4e6e.png}} &
+  \subfloat{\includegraphics[width = 1.65in]{imgs/esmart_old/Alta__4ba599e9-bf87-4283-aa2c-8d0bdd9b4e6e.png}} &
+  \subfloat{\includegraphics[width = 1.65in]{imgs/esmart_new/Alta__4ba599e9-bf87-4283-aa2c-8d0bdd9b4e6e.png}}\\
+  \subfloat{\includegraphics[width = 1.65in]{imgs/esmart_base_imgs/Alta__05ceb653-bdc2-78a8-0747-a63831e3ebc9.JPG}} &
+  \subfloat{\includegraphics[width = 1.65in]{imgs/esmart_gt/Alta__05ceb653-bdc2-78a8-0747-a63831e3ebc9.png}} &
+  \subfloat{\includegraphics[width = 1.65in]{imgs/esmart_old/Alta__05ceb653-bdc2-78a8-0747-a63831e3ebc9.png}} &
+  \subfloat{\includegraphics[width = 1.65in]{imgs/esmart_new/Alta__05ceb653-bdc2-78a8-0747-a63831e3ebc9.png}}\\
+  \subfloat{\includegraphics[width = 1.65in]{imgs/esmart_base_imgs/Alta__6a6a5379-a993-4be1-9d79-236991f70d38.JPG}} &
+  \subfloat{\includegraphics[width = 1.65in]{imgs/esmart_gt/Alta__6a6a5379-a993-4be1-9d79-236991f70d38.png}} &
+  \subfloat{\includegraphics[width = 1.65in]{imgs/esmart_old/Alta__6a6a5379-a993-4be1-9d79-236991f70d38.png}} &
+  \subfloat{\includegraphics[width = 1.65in]{imgs/esmart_new/Alta__6a6a5379-a993-4be1-9d79-236991f70d38.png}}\\
+  \subfloat{\includegraphics[width = 1.65in]{imgs/esmart_base_imgs/Alta__9abf75f2-84d8-490d-9a2e-ae77606bcd02.JPG}} &
+  \subfloat{\includegraphics[width = 1.65in]{imgs/esmart_gt/Alta__9abf75f2-84d8-490d-9a2e-ae77606bcd02.png}} &
+  \subfloat{\includegraphics[width = 1.65in]{imgs/esmart_old/Alta__9abf75f2-84d8-490d-9a2e-ae77606bcd02.png}} &
+  \subfloat{\includegraphics[width = 1.65in]{imgs/esmart_new/Alta__9abf75f2-84d8-490d-9a2e-ae77606bcd02.png}}\\
+  % \subfloat{\includegraphics[width = 1.65in]{imgs/esmart_base_imgs/Alta__9d9d2fa1-7cb0-4cd7-bb92-64aee15e2b70.JPG}} &
+  % \subfloat{\includegraphics[width = 1.65in]{imgs/esmart_gt/Alta__9d9d2fa1-7cb0-4cd7-bb92-64aee15e2b70.png}} &
+  % \subfloat{\includegraphics[width = 1.65in]{imgs/esmart_old/Alta__9d9d2fa1-7cb0-4cd7-bb92-64aee15e2b70.png}} &
+  % \subfloat{\includegraphics[width = 1.65in]{imgs/esmart_new/Alta__9d9d2fa1-7cb0-4cd7-bb92-64aee15e2b70.png}}\\
+  \subfloat{\includegraphics[width = 1.65in]{imgs/esmart_base_imgs/Alta__98d795b2-512d-e740-2b9c-dfb9b6b40696.JPG}} &
+  \subfloat{\includegraphics[width = 1.65in]{imgs/esmart_gt/Alta__98d795b2-512d-e740-2b9c-dfb9b6b40696.png}} &
+  \subfloat{\includegraphics[width = 1.65in]{imgs/esmart_old/Alta__98d795b2-512d-e740-2b9c-dfb9b6b40696.png}} &
+  \subfloat{\includegraphics[width = 1.65in]{imgs/esmart_new/Alta__98d795b2-512d-e740-2b9c-dfb9b6b40696.png}}\\
+
+  % Add caption row
+  Image & Ground truth & LSNet & LSNetv2
+  % \subfloat[caption]{\includegraphics[width = 1.5in]{something}}\\
+  \end{tabularx}
+  \caption{4 x 4}
+\end{figure*}
+
+\begin{figure*}
+  \begin{tabularx}{\textwidth}{cccc}
+  \centering
+  \subfloat{\includegraphics[width = 1.65in]{imgs/esmart_base_imgs/Alta__a1cf5776-0454-4ef6-8726-ad25b0023293.JPG}} &
+  \subfloat{\includegraphics[width = 1.65in]{imgs/esmart_gt/Alta__a1cf5776-0454-4ef6-8726-ad25b0023293.png}} &
+  \subfloat{\includegraphics[width = 1.65in]{imgs/esmart_old/Alta__a1cf5776-0454-4ef6-8726-ad25b0023293.png}} &
+  \subfloat{\includegraphics[width = 1.65in]{imgs/esmart_new/Alta__a1cf5776-0454-4ef6-8726-ad25b0023293.png}}\\
+  \subfloat{\includegraphics[width = 1.65in]{imgs/esmart_base_imgs/Alta__bbbc763d-c6c4-4ab9-0b9b-9e0307a872ae.JPG}} &
+  \subfloat{\includegraphics[width = 1.65in]{imgs/esmart_gt/Alta__bbbc763d-c6c4-4ab9-0b9b-9e0307a872ae.png}} &
+  \subfloat{\includegraphics[width = 1.65in]{imgs/esmart_old/Alta__bbbc763d-c6c4-4ab9-0b9b-9e0307a872ae.png}} &
+  \subfloat{\includegraphics[width = 1.65in]{imgs/esmart_new/Alta__bbbc763d-c6c4-4ab9-0b9b-9e0307a872ae.png}}\\
+  \subfloat{\includegraphics[width = 1.65in]{imgs/esmart_base_imgs/Alta__cf519095-8e39-35eb-448d-1cd731af29b1.JPG}} &
+  \subfloat{\includegraphics[width = 1.65in]{imgs/esmart_gt/Alta__cf519095-8e39-35eb-448d-1cd731af29b1.png}} &
+  \subfloat{\includegraphics[width = 1.65in]{imgs/esmart_old/Alta__cf519095-8e39-35eb-448d-1cd731af29b1.png}} &
+  \subfloat{\includegraphics[width = 1.65in]{imgs/esmart_new/Alta__cf519095-8e39-35eb-448d-1cd731af29b1.png}}\\
+  \subfloat{\includegraphics[width = 1.65in]{imgs/esmart_base_imgs/Dalane__Dalane+IA__DAT_6749.JPG}} &
+  \subfloat{\includegraphics[width = 1.65in]{imgs/esmart_gt/Dalane__Dalane+IA__DAT_6749.png}} &
+  \subfloat{\includegraphics[width = 1.65in]{imgs/esmart_old/Dalane__Dalane+IA__DAT_6749.png}} &
+  \subfloat{\includegraphics[width = 1.65in]{imgs/esmart_new/Dalane__Dalane+IA__DAT_6749.png}}\\
+  \subfloat{\includegraphics[width = 1.65in]{imgs/esmart_base_imgs/Dalane__Dalane+IA__DAT_7559.JPG}} &
+  \subfloat{\includegraphics[width = 1.65in]{imgs/esmart_gt/Dalane__Dalane+IA__DAT_7559.png}} &
+  \subfloat{\includegraphics[width = 1.65in]{imgs/esmart_old/Dalane__Dalane+IA__DAT_7559.png}} &
+  \subfloat{\includegraphics[width = 1.65in]{imgs/esmart_new/Dalane__Dalane+IA__DAT_7559.png}}\\
+  
+  % Add caption row
+  Image & Ground truth & LSNet & LSNetv2
+  % \subfloat[caption]{\includegraphics[width = 1.5in]{something}}\\
+  \end{tabularx}
+  \caption{4 x 4}
+\end{figure*}
+
+\begin{figure*}
+  \begin{tabularx}{\textwidth}{cccc}
+  \centering
+  \subfloat{\includegraphics[width = 1.65in]{imgs/esmart_base_imgs/Dalane__Dalane+IA__DAT_7909.JPG}} &
+  \subfloat{\includegraphics[width = 1.65in]{imgs/esmart_gt/Dalane__Dalane+IA__DAT_7909.png}} &
+  \subfloat{\includegraphics[width = 1.65in]{imgs/esmart_old/Dalane__Dalane+IA__DAT_7909.png}} &
+  \subfloat{\includegraphics[width = 1.65in]{imgs/esmart_new/Dalane__Dalane+IA__DAT_7909.png}}\\
+  \subfloat{\includegraphics[width = 1.65in]{imgs/esmart_base_imgs/Alta__a1cf5776-0454-4ef6-8726-ad25b0023293.JPG}} &
+  \subfloat{\includegraphics[width = 1.65in]{imgs/esmart_gt/Alta__a1cf5776-0454-4ef6-8726-ad25b0023293.png}} &
+  \subfloat{\includegraphics[width = 1.65in]{imgs/esmart_old/Alta__a1cf5776-0454-4ef6-8726-ad25b0023293.png}} &
+  \subfloat{\includegraphics[width = 1.65in]{imgs/esmart_new/Alta__a1cf5776-0454-4ef6-8726-ad25b0023293.png}}\\
+  \subfloat{\includegraphics[width = 1.65in]{imgs/esmart_base_imgs/Alta__bbbc763d-c6c4-4ab9-0b9b-9e0307a872ae.JPG}} &
+  \subfloat{\includegraphics[width = 1.65in]{imgs/esmart_gt/Alta__bbbc763d-c6c4-4ab9-0b9b-9e0307a872ae.png}} &
+  \subfloat{\includegraphics[width = 1.65in]{imgs/esmart_old/Alta__bbbc763d-c6c4-4ab9-0b9b-9e0307a872ae.png}} &
+  \subfloat{\includegraphics[width = 1.65in]{imgs/esmart_new/Alta__bbbc763d-c6c4-4ab9-0b9b-9e0307a872ae.png}}\\
+
+  % Add caption row
+  Image & Ground truth & LSNet & LSNetv2
+  % \subfloat[caption]{\includegraphics[width = 1.5in]{something}}\\
+  \end{tabularx}
+  \caption{4 x 4}
+\end{figure*}
 
 \subsection{Evaluation Metrics}
 
