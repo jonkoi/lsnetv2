@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.18 (TeX Live 2017/Debian) (preloaded format=pdflatex 2023.2.3)  3 FEB 2023 16:51
+This is pdfTeX, Version 3.14159265-2.6-1.40.18 (TeX Live 2017/Debian) (preloaded format=pdflatex 2023.2.3)  20 FEB 2023 23:34
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -238,6 +238,12 @@ LaTeX Font Info:    Overwriting math alphabet `\mathfrak' in version `bold'
 (Font)                  U/euf/m/n --> U/euf/b/n on input line 106.
 ) (/usr/share/texlive/texmf-dist/tex/latex/doublestroke/dsfont.sty
 Package: dsfont 1995/08/01 v0.1 Double stroke roman fonts
+) (/usr/share/texlive/texmf-dist/tex/latex/multirow/multirow.sty
+Package: multirow 2016/11/25 v2.2 Span multiple rows of a table
+\multirow@colwidth=\skip54
+\multirow@cntb=\count115
+\multirow@dima=\skip55
+\bigstrutjot=\dimen152
 ) (/usr/share/texlive/texmf-dist/tex/latex/xcolor/xcolor.sty
 Package: xcolor 2016/05/11 v2.12 LaTeX color extensions (UK)
  (/usr/share/texlive/texmf-dist/tex/latex/graphics-cfg/color.cfg
@@ -253,35 +259,39 @@ Package xcolor Info: Model `tHsb' substituted by `hsb' on input line 1368.
 Package xcolor Info: Model `HSB' substituted by `hsb' on input line 1369.
 Package xcolor Info: Model `Gray' substituted by `gray' on input line 1370.
 Package xcolor Info: Model `wave' substituted by `hsb' on input line 1371.
-) (/20TB0/ls_workspace/63dcfe5f7520d4bfbf2498a7/bare_jrnl.aux)
+) (/20TB0/ls_workspace/63dcfe5f7520d4bfbf2498a7/bare_jrnl.aux
+
+LaTeX Warning: Label `ablation_esmart' multiply defined.
+
+)
 \openout1 = `bare_jrnl.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 359.
-LaTeX Font Info:    ... okay on input line 359.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 359.
-LaTeX Font Info:    ... okay on input line 359.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 359.
-LaTeX Font Info:    ... okay on input line 359.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 359.
-LaTeX Font Info:    ... okay on input line 359.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 359.
-LaTeX Font Info:    ... okay on input line 359.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 359.
-LaTeX Font Info:    ... okay on input line 359.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 360.
+LaTeX Font Info:    ... okay on input line 360.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 360.
+LaTeX Font Info:    ... okay on input line 360.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 360.
+LaTeX Font Info:    ... okay on input line 360.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 360.
+LaTeX Font Info:    ... okay on input line 360.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 360.
+LaTeX Font Info:    ... okay on input line 360.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 360.
+LaTeX Font Info:    ... okay on input line 360.
 
 -- Lines per column: 58 (exact).
 (/usr/share/texlive/texmf-dist/tex/context/base/mkii/supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
-\scratchcounter=\count115
-\scratchdimen=\dimen152
+\scratchcounter=\count116
+\scratchdimen=\dimen153
 \scratchbox=\box30
-\nofMPsegments=\count116
-\nofMParguments=\count117
+\nofMPsegments=\count117
+\nofMParguments=\count118
 \everyMPshowfont=\toks23
-\MPscratchCnt=\count118
-\MPscratchDim=\dimen153
-\MPnumerator=\count119
-\makeMPintoPDFobject=\count120
+\MPscratchCnt=\count119
+\MPscratchDim=\dimen154
+\MPnumerator=\count120
+\makeMPintoPDFobject=\count121
 \everyMPtoPDFconversion=\toks24
 ) (/usr/share/texlive/texmf-dist/tex/latex/oberdiek/epstopdf-base.sty
 Package: epstopdf-base 2016/05/15 v2.6 Base part for package epstopdf
@@ -327,70 +337,70 @@ File: epstopdf-sys.cfg 2010/07/13 v1.3 Configuration of (r)epstopdf for TeX Live
 Package caption Info: Begin \AtBeginDocument code.
 Package caption Info: subfig package v1.3 is loaded.
 Package caption Info: End \AtBeginDocument code.
-LaTeX Font Info:    Try loading font information for U+msa on input line 447.
+LaTeX Font Info:    Try loading font information for U+msa on input line 448.
  (/usr/share/texlive/texmf-dist/tex/latex/amsfonts/umsa.fd
 File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 )
-LaTeX Font Info:    Try loading font information for U+msb on input line 447.
+LaTeX Font Info:    Try loading font information for U+msb on input line 448.
  (/usr/share/texlive/texmf-dist/tex/latex/amsfonts/umsb.fd
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 )
 LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <6> not available
-(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 447.
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 448.
 
 
-LaTeX Warning: Citation `pge_bankruptcy' on page 1 undefined on input line 487.
+LaTeX Warning: Citation `pge_bankruptcy' on page 1 undefined on input line 488.
 
 [1{/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}
 
 
 ]
 
-LaTeX Warning: Citation `SSD' on page 2 undefined on input line 622.
+LaTeX Warning: Citation `SSD' on page 2 undefined on input line 623.
 
 
-LaTeX Warning: Citation `YOLO' on page 2 undefined on input line 622.
+LaTeX Warning: Citation `YOLO' on page 2 undefined on input line 623.
 
 
-LaTeX Warning: Citation `SSD' on page 2 undefined on input line 626.
+LaTeX Warning: Citation `SSD' on page 2 undefined on input line 627.
 
 
-LaTeX Warning: Citation `YOLO' on page 2 undefined on input line 626.
+LaTeX Warning: Citation `YOLO' on page 2 undefined on input line 627.
 
 
-LaTeX Warning: Reference `' on page 2 undefined on input line 626.
+LaTeX Warning: Reference `' on page 2 undefined on input line 627.
 
 
-LaTeX Warning: Reference `lsnet_architecture' on page 2 undefined on input line 628.
+LaTeX Warning: Reference `lsnet_architecture' on page 2 undefined on input line 629.
 
 
-LaTeX Warning: Citation `VGG16' on page 2 undefined on input line 628.
+LaTeX Warning: Citation `VGG16' on page 2 undefined on input line 629.
 
 
-LaTeX Warning: Citation `group_norm' on page 2 undefined on input line 628.
+LaTeX Warning: Citation `group_norm' on page 2 undefined on input line 629.
 
 
-LaTeX Warning: Reference `lsnet_config' on page 2 undefined on input line 628.
+LaTeX Warning: Reference `lsnet_config' on page 2 undefined on input line 629.
 
 
-LaTeX Warning: Citation `torchscan' on page 2 undefined on input line 637.
+LaTeX Warning: Citation `torchscan' on page 2 undefined on input line 638.
 
 
-LaTeX Warning: Reference `' on page 2 undefined on input line 637.
+LaTeX Warning: Reference `' on page 2 undefined on input line 638.
 
 [2]
 
-LaTeX Warning: Citation `?' on page 3 undefined on input line 645.
+LaTeX Warning: Citation `?' on page 3 undefined on input line 646.
 
-LaTeX Font Info:    Try loading font information for U+euf on input line 649.
+LaTeX Font Info:    Try loading font information for U+euf on input line 650.
 (/usr/share/texlive/texmf-dist/tex/latex/amsfonts/ueuf.fd
 File: ueuf.fd 2013/01/14 v3.01 Euler Fraktur
 )
-LaTeX Font Info:    Try loading font information for U+dsrom on input line 655.
+LaTeX Font Info:    Try loading font information for U+dsrom on input line 656.
  (/usr/share/texlive/texmf-dist/tex/latex/doublestroke/Udsrom.fd
 File: Udsrom.fd 1995/08/01 v0.1 Double stroke roman font definitions
 )
-Underfull \hbox (badness 1546) in paragraph at lines 655--656
+Underfull \hbox (badness 1546) in paragraph at lines 656--657
 \OT1/ptm/m/n/10 Sim-i-larly to [[]], this loss is de-fined as $\OMS/cmsy/m/n/10 ^^@[]\OT1/cmr/m/n/10 (\OML/cmm/m/it/10 c[]\OT1/cmr/m/n/10 ) +
  []
 
@@ -409,280 +419,318 @@ Missing character: There is no € in font ptmr7t!
 Missing character: There is no “ in font ptmr7t!
 
 
-LaTeX Warning: Reference `ttpla_examples_fig' on page 4 undefined on input line 673.
+LaTeX Warning: Reference `ttpla_examples_fig' on page 4 undefined on input line 674.
 
 
-LaTeX Warning: Reference `esmart_examples_fig' on page 4 undefined on input line 677.
+LaTeX Warning: Reference `esmart_examples_fig' on page 4 undefined on input line 678.
+
+
+LaTeX Warning: No positions in optional float specifier.
+               Default added (so using `tbp') on input line 686.
+
+
+LaTeX Warning: No positions in optional float specifier.
+               Default added (so using `tbp') on input line 700.
+
+
+LaTeX Warning: No positions in optional float specifier.
+               Default added (so using `tbp') on input line 714.
+
+
+LaTeX Warning: No positions in optional float specifier.
+               Default added (so using `tbp') on input line 733.
+
+
+LaTeX Warning: No positions in optional float specifier.
+               Default added (so using `tbp') on input line 747.
+
+
+LaTeX Warning: No positions in optional float specifier.
+               Default added (so using `tbp') on input line 760.
+
+
+LaTeX Warning: No positions in optional float specifier.
+               Default added (so using `tbp') on input line 777.
 
 File: imgs/esmart_base_imgs/Alta__4ba599e9-bf87-4283-aa2c-8d0bdd9b4e6e.JPG Graphic file (type jpg)
 <use imgs/esmart_base_imgs/Alta__4ba599e9-bf87-4283-aa2c-8d0bdd9b4e6e.JPG>
-Package pdftex.def Info: imgs/esmart_base_imgs/Alta__4ba599e9-bf87-4283-aa2c-8d0bdd9b4e6e.JPG  used on input line 719.
+Package pdftex.def Info: imgs/esmart_base_imgs/Alta__4ba599e9-bf87-4283-aa2c-8d0bdd9b4e6e.JPG  used on input line 838.
 (pdftex.def)             Requested size: 119.24506pt x 119.22638pt.
 File: imgs/esmart_gt/Alta__4ba599e9-bf87-4283-aa2c-8d0bdd9b4e6e.png Graphic file (type png)
 <use imgs/esmart_gt/Alta__4ba599e9-bf87-4283-aa2c-8d0bdd9b4e6e.png>
-Package pdftex.def Info: imgs/esmart_gt/Alta__4ba599e9-bf87-4283-aa2c-8d0bdd9b4e6e.png  used on input line 719.
+Package pdftex.def Info: imgs/esmart_gt/Alta__4ba599e9-bf87-4283-aa2c-8d0bdd9b4e6e.png  used on input line 838.
 (pdftex.def)             Requested size: 119.24506pt x 119.24207pt.
 File: imgs/esmart_old/Alta__4ba599e9-bf87-4283-aa2c-8d0bdd9b4e6e.png Graphic file (type png)
 <use imgs/esmart_old/Alta__4ba599e9-bf87-4283-aa2c-8d0bdd9b4e6e.png>
-Package pdftex.def Info: imgs/esmart_old/Alta__4ba599e9-bf87-4283-aa2c-8d0bdd9b4e6e.png  used on input line 719.
+Package pdftex.def Info: imgs/esmart_old/Alta__4ba599e9-bf87-4283-aa2c-8d0bdd9b4e6e.png  used on input line 838.
 (pdftex.def)             Requested size: 119.24506pt x 119.24207pt.
 File: imgs/esmart_new/Alta__4ba599e9-bf87-4283-aa2c-8d0bdd9b4e6e.png Graphic file (type png)
 <use imgs/esmart_new/Alta__4ba599e9-bf87-4283-aa2c-8d0bdd9b4e6e.png>
-Package pdftex.def Info: imgs/esmart_new/Alta__4ba599e9-bf87-4283-aa2c-8d0bdd9b4e6e.png  used on input line 719.
+Package pdftex.def Info: imgs/esmart_new/Alta__4ba599e9-bf87-4283-aa2c-8d0bdd9b4e6e.png  used on input line 838.
 (pdftex.def)             Requested size: 119.24506pt x 119.24207pt.
 File: imgs/esmart_base_imgs/Alta__05ceb653-bdc2-78a8-0747-a63831e3ebc9.JPG Graphic file (type jpg)
 <use imgs/esmart_base_imgs/Alta__05ceb653-bdc2-78a8-0747-a63831e3ebc9.JPG>
-Package pdftex.def Info: imgs/esmart_base_imgs/Alta__05ceb653-bdc2-78a8-0747-a63831e3ebc9.JPG  used on input line 719.
+Package pdftex.def Info: imgs/esmart_base_imgs/Alta__05ceb653-bdc2-78a8-0747-a63831e3ebc9.JPG  used on input line 838.
 (pdftex.def)             Requested size: 119.24506pt x 119.22638pt.
 File: imgs/esmart_gt/Alta__05ceb653-bdc2-78a8-0747-a63831e3ebc9.png Graphic file (type png)
 <use imgs/esmart_gt/Alta__05ceb653-bdc2-78a8-0747-a63831e3ebc9.png>
-Package pdftex.def Info: imgs/esmart_gt/Alta__05ceb653-bdc2-78a8-0747-a63831e3ebc9.png  used on input line 719.
+Package pdftex.def Info: imgs/esmart_gt/Alta__05ceb653-bdc2-78a8-0747-a63831e3ebc9.png  used on input line 838.
 (pdftex.def)             Requested size: 119.24506pt x 119.24207pt.
 File: imgs/esmart_old/Alta__05ceb653-bdc2-78a8-0747-a63831e3ebc9.png Graphic file (type png)
 <use imgs/esmart_old/Alta__05ceb653-bdc2-78a8-0747-a63831e3ebc9.png>
-Package pdftex.def Info: imgs/esmart_old/Alta__05ceb653-bdc2-78a8-0747-a63831e3ebc9.png  used on input line 719.
+Package pdftex.def Info: imgs/esmart_old/Alta__05ceb653-bdc2-78a8-0747-a63831e3ebc9.png  used on input line 838.
 (pdftex.def)             Requested size: 119.24506pt x 119.24207pt.
 File: imgs/esmart_new/Alta__05ceb653-bdc2-78a8-0747-a63831e3ebc9.png Graphic file (type png)
 <use imgs/esmart_new/Alta__05ceb653-bdc2-78a8-0747-a63831e3ebc9.png>
-Package pdftex.def Info: imgs/esmart_new/Alta__05ceb653-bdc2-78a8-0747-a63831e3ebc9.png  used on input line 719.
+Package pdftex.def Info: imgs/esmart_new/Alta__05ceb653-bdc2-78a8-0747-a63831e3ebc9.png  used on input line 838.
 (pdftex.def)             Requested size: 119.24506pt x 119.24207pt.
 File: imgs/esmart_base_imgs/Alta__6a6a5379-a993-4be1-9d79-236991f70d38.JPG Graphic file (type jpg)
 <use imgs/esmart_base_imgs/Alta__6a6a5379-a993-4be1-9d79-236991f70d38.JPG>
-Package pdftex.def Info: imgs/esmart_base_imgs/Alta__6a6a5379-a993-4be1-9d79-236991f70d38.JPG  used on input line 719.
+Package pdftex.def Info: imgs/esmart_base_imgs/Alta__6a6a5379-a993-4be1-9d79-236991f70d38.JPG  used on input line 838.
 (pdftex.def)             Requested size: 119.24506pt x 119.22638pt.
 File: imgs/esmart_gt/Alta__6a6a5379-a993-4be1-9d79-236991f70d38.png Graphic file (type png)
 <use imgs/esmart_gt/Alta__6a6a5379-a993-4be1-9d79-236991f70d38.png>
-Package pdftex.def Info: imgs/esmart_gt/Alta__6a6a5379-a993-4be1-9d79-236991f70d38.png  used on input line 719.
+Package pdftex.def Info: imgs/esmart_gt/Alta__6a6a5379-a993-4be1-9d79-236991f70d38.png  used on input line 838.
 (pdftex.def)             Requested size: 119.24506pt x 119.24207pt.
 File: imgs/esmart_old/Alta__6a6a5379-a993-4be1-9d79-236991f70d38.png Graphic file (type png)
 <use imgs/esmart_old/Alta__6a6a5379-a993-4be1-9d79-236991f70d38.png>
-Package pdftex.def Info: imgs/esmart_old/Alta__6a6a5379-a993-4be1-9d79-236991f70d38.png  used on input line 719.
+Package pdftex.def Info: imgs/esmart_old/Alta__6a6a5379-a993-4be1-9d79-236991f70d38.png  used on input line 838.
 (pdftex.def)             Requested size: 119.24506pt x 119.24207pt.
 File: imgs/esmart_new/Alta__6a6a5379-a993-4be1-9d79-236991f70d38.png Graphic file (type png)
 <use imgs/esmart_new/Alta__6a6a5379-a993-4be1-9d79-236991f70d38.png>
-Package pdftex.def Info: imgs/esmart_new/Alta__6a6a5379-a993-4be1-9d79-236991f70d38.png  used on input line 719.
+Package pdftex.def Info: imgs/esmart_new/Alta__6a6a5379-a993-4be1-9d79-236991f70d38.png  used on input line 838.
 (pdftex.def)             Requested size: 119.24506pt x 119.24207pt.
 File: imgs/esmart_base_imgs/Alta__9abf75f2-84d8-490d-9a2e-ae77606bcd02.JPG Graphic file (type jpg)
 <use imgs/esmart_base_imgs/Alta__9abf75f2-84d8-490d-9a2e-ae77606bcd02.JPG>
-Package pdftex.def Info: imgs/esmart_base_imgs/Alta__9abf75f2-84d8-490d-9a2e-ae77606bcd02.JPG  used on input line 719.
+Package pdftex.def Info: imgs/esmart_base_imgs/Alta__9abf75f2-84d8-490d-9a2e-ae77606bcd02.JPG  used on input line 838.
 (pdftex.def)             Requested size: 119.24506pt x 119.22638pt.
 File: imgs/esmart_gt/Alta__9abf75f2-84d8-490d-9a2e-ae77606bcd02.png Graphic file (type png)
 <use imgs/esmart_gt/Alta__9abf75f2-84d8-490d-9a2e-ae77606bcd02.png>
-Package pdftex.def Info: imgs/esmart_gt/Alta__9abf75f2-84d8-490d-9a2e-ae77606bcd02.png  used on input line 719.
+Package pdftex.def Info: imgs/esmart_gt/Alta__9abf75f2-84d8-490d-9a2e-ae77606bcd02.png  used on input line 838.
 (pdftex.def)             Requested size: 119.24506pt x 119.24207pt.
 File: imgs/esmart_old/Alta__9abf75f2-84d8-490d-9a2e-ae77606bcd02.png Graphic file (type png)
 <use imgs/esmart_old/Alta__9abf75f2-84d8-490d-9a2e-ae77606bcd02.png>
-Package pdftex.def Info: imgs/esmart_old/Alta__9abf75f2-84d8-490d-9a2e-ae77606bcd02.png  used on input line 719.
+Package pdftex.def Info: imgs/esmart_old/Alta__9abf75f2-84d8-490d-9a2e-ae77606bcd02.png  used on input line 838.
 (pdftex.def)             Requested size: 119.24506pt x 119.24207pt.
 File: imgs/esmart_new/Alta__9abf75f2-84d8-490d-9a2e-ae77606bcd02.png Graphic file (type png)
 <use imgs/esmart_new/Alta__9abf75f2-84d8-490d-9a2e-ae77606bcd02.png>
-Package pdftex.def Info: imgs/esmart_new/Alta__9abf75f2-84d8-490d-9a2e-ae77606bcd02.png  used on input line 719.
+Package pdftex.def Info: imgs/esmart_new/Alta__9abf75f2-84d8-490d-9a2e-ae77606bcd02.png  used on input line 838.
 (pdftex.def)             Requested size: 119.24506pt x 119.24207pt.
 File: imgs/esmart_base_imgs/Alta__98d795b2-512d-e740-2b9c-dfb9b6b40696.JPG Graphic file (type jpg)
 <use imgs/esmart_base_imgs/Alta__98d795b2-512d-e740-2b9c-dfb9b6b40696.JPG>
-Package pdftex.def Info: imgs/esmart_base_imgs/Alta__98d795b2-512d-e740-2b9c-dfb9b6b40696.JPG  used on input line 719.
+Package pdftex.def Info: imgs/esmart_base_imgs/Alta__98d795b2-512d-e740-2b9c-dfb9b6b40696.JPG  used on input line 838.
 (pdftex.def)             Requested size: 119.24506pt x 119.22638pt.
 File: imgs/esmart_gt/Alta__98d795b2-512d-e740-2b9c-dfb9b6b40696.png Graphic file (type png)
 <use imgs/esmart_gt/Alta__98d795b2-512d-e740-2b9c-dfb9b6b40696.png>
-Package pdftex.def Info: imgs/esmart_gt/Alta__98d795b2-512d-e740-2b9c-dfb9b6b40696.png  used on input line 719.
+Package pdftex.def Info: imgs/esmart_gt/Alta__98d795b2-512d-e740-2b9c-dfb9b6b40696.png  used on input line 838.
 (pdftex.def)             Requested size: 119.24506pt x 119.24207pt.
 File: imgs/esmart_old/Alta__98d795b2-512d-e740-2b9c-dfb9b6b40696.png Graphic file (type png)
 <use imgs/esmart_old/Alta__98d795b2-512d-e740-2b9c-dfb9b6b40696.png>
-Package pdftex.def Info: imgs/esmart_old/Alta__98d795b2-512d-e740-2b9c-dfb9b6b40696.png  used on input line 719.
+Package pdftex.def Info: imgs/esmart_old/Alta__98d795b2-512d-e740-2b9c-dfb9b6b40696.png  used on input line 838.
 (pdftex.def)             Requested size: 119.24506pt x 119.24207pt.
 File: imgs/esmart_new/Alta__98d795b2-512d-e740-2b9c-dfb9b6b40696.png Graphic file (type png)
 <use imgs/esmart_new/Alta__98d795b2-512d-e740-2b9c-dfb9b6b40696.png>
-Package pdftex.def Info: imgs/esmart_new/Alta__98d795b2-512d-e740-2b9c-dfb9b6b40696.png  used on input line 719.
+Package pdftex.def Info: imgs/esmart_new/Alta__98d795b2-512d-e740-2b9c-dfb9b6b40696.png  used on input line 838.
 (pdftex.def)             Requested size: 119.24506pt x 119.24207pt.
 
-Overfull \hbox (8.98022pt too wide) in alignment at lines 719--719
+Overfull \hbox (8.98022pt too wide) in alignment at lines 838--838
 [][][][] 
  []
 
 
-LaTeX Warning: Float too large for page by 1.81055pt on input line 721.
+LaTeX Warning: Float too large for page by 1.81055pt on input line 840.
 
 File: imgs/esmart_base_imgs/Alta__a1cf5776-0454-4ef6-8726-ad25b0023293.JPG Graphic file (type jpg)
 <use imgs/esmart_base_imgs/Alta__a1cf5776-0454-4ef6-8726-ad25b0023293.JPG>
-Package pdftex.def Info: imgs/esmart_base_imgs/Alta__a1cf5776-0454-4ef6-8726-ad25b0023293.JPG  used on input line 750.
+Package pdftex.def Info: imgs/esmart_base_imgs/Alta__a1cf5776-0454-4ef6-8726-ad25b0023293.JPG  used on input line 869.
 (pdftex.def)             Requested size: 119.24506pt x 119.22638pt.
 File: imgs/esmart_gt/Alta__a1cf5776-0454-4ef6-8726-ad25b0023293.png Graphic file (type png)
 <use imgs/esmart_gt/Alta__a1cf5776-0454-4ef6-8726-ad25b0023293.png>
-Package pdftex.def Info: imgs/esmart_gt/Alta__a1cf5776-0454-4ef6-8726-ad25b0023293.png  used on input line 750.
+Package pdftex.def Info: imgs/esmart_gt/Alta__a1cf5776-0454-4ef6-8726-ad25b0023293.png  used on input line 869.
 (pdftex.def)             Requested size: 119.24506pt x 119.24207pt.
 File: imgs/esmart_old/Alta__a1cf5776-0454-4ef6-8726-ad25b0023293.png Graphic file (type png)
 <use imgs/esmart_old/Alta__a1cf5776-0454-4ef6-8726-ad25b0023293.png>
-Package pdftex.def Info: imgs/esmart_old/Alta__a1cf5776-0454-4ef6-8726-ad25b0023293.png  used on input line 750.
+Package pdftex.def Info: imgs/esmart_old/Alta__a1cf5776-0454-4ef6-8726-ad25b0023293.png  used on input line 869.
 (pdftex.def)             Requested size: 119.24506pt x 119.24207pt.
 File: imgs/esmart_new/Alta__a1cf5776-0454-4ef6-8726-ad25b0023293.png Graphic file (type png)
 <use imgs/esmart_new/Alta__a1cf5776-0454-4ef6-8726-ad25b0023293.png>
-Package pdftex.def Info: imgs/esmart_new/Alta__a1cf5776-0454-4ef6-8726-ad25b0023293.png  used on input line 750.
+Package pdftex.def Info: imgs/esmart_new/Alta__a1cf5776-0454-4ef6-8726-ad25b0023293.png  used on input line 869.
 (pdftex.def)             Requested size: 119.24506pt x 119.24207pt.
 File: imgs/esmart_base_imgs/Alta__bbbc763d-c6c4-4ab9-0b9b-9e0307a872ae.JPG Graphic file (type jpg)
 <use imgs/esmart_base_imgs/Alta__bbbc763d-c6c4-4ab9-0b9b-9e0307a872ae.JPG>
-Package pdftex.def Info: imgs/esmart_base_imgs/Alta__bbbc763d-c6c4-4ab9-0b9b-9e0307a872ae.JPG  used on input line 750.
+Package pdftex.def Info: imgs/esmart_base_imgs/Alta__bbbc763d-c6c4-4ab9-0b9b-9e0307a872ae.JPG  used on input line 869.
 (pdftex.def)             Requested size: 119.24506pt x 119.22638pt.
 File: imgs/esmart_gt/Alta__bbbc763d-c6c4-4ab9-0b9b-9e0307a872ae.png Graphic file (type png)
 <use imgs/esmart_gt/Alta__bbbc763d-c6c4-4ab9-0b9b-9e0307a872ae.png>
-Package pdftex.def Info: imgs/esmart_gt/Alta__bbbc763d-c6c4-4ab9-0b9b-9e0307a872ae.png  used on input line 750.
+Package pdftex.def Info: imgs/esmart_gt/Alta__bbbc763d-c6c4-4ab9-0b9b-9e0307a872ae.png  used on input line 869.
 (pdftex.def)             Requested size: 119.24506pt x 119.24207pt.
 File: imgs/esmart_old/Alta__bbbc763d-c6c4-4ab9-0b9b-9e0307a872ae.png Graphic file (type png)
 <use imgs/esmart_old/Alta__bbbc763d-c6c4-4ab9-0b9b-9e0307a872ae.png>
-Package pdftex.def Info: imgs/esmart_old/Alta__bbbc763d-c6c4-4ab9-0b9b-9e0307a872ae.png  used on input line 750.
+Package pdftex.def Info: imgs/esmart_old/Alta__bbbc763d-c6c4-4ab9-0b9b-9e0307a872ae.png  used on input line 869.
 (pdftex.def)             Requested size: 119.24506pt x 119.24207pt.
 File: imgs/esmart_new/Alta__bbbc763d-c6c4-4ab9-0b9b-9e0307a872ae.png Graphic file (type png)
 <use imgs/esmart_new/Alta__bbbc763d-c6c4-4ab9-0b9b-9e0307a872ae.png>
-Package pdftex.def Info: imgs/esmart_new/Alta__bbbc763d-c6c4-4ab9-0b9b-9e0307a872ae.png  used on input line 750.
+Package pdftex.def Info: imgs/esmart_new/Alta__bbbc763d-c6c4-4ab9-0b9b-9e0307a872ae.png  used on input line 869.
 (pdftex.def)             Requested size: 119.24506pt x 119.24207pt.
 File: imgs/esmart_base_imgs/Alta__cf519095-8e39-35eb-448d-1cd731af29b1.JPG Graphic file (type jpg)
 <use imgs/esmart_base_imgs/Alta__cf519095-8e39-35eb-448d-1cd731af29b1.JPG>
-Package pdftex.def Info: imgs/esmart_base_imgs/Alta__cf519095-8e39-35eb-448d-1cd731af29b1.JPG  used on input line 750.
+Package pdftex.def Info: imgs/esmart_base_imgs/Alta__cf519095-8e39-35eb-448d-1cd731af29b1.JPG  used on input line 869.
 (pdftex.def)             Requested size: 119.24506pt x 119.22638pt.
 File: imgs/esmart_gt/Alta__cf519095-8e39-35eb-448d-1cd731af29b1.png Graphic file (type png)
 <use imgs/esmart_gt/Alta__cf519095-8e39-35eb-448d-1cd731af29b1.png>
-Package pdftex.def Info: imgs/esmart_gt/Alta__cf519095-8e39-35eb-448d-1cd731af29b1.png  used on input line 750.
+Package pdftex.def Info: imgs/esmart_gt/Alta__cf519095-8e39-35eb-448d-1cd731af29b1.png  used on input line 869.
 (pdftex.def)             Requested size: 119.24506pt x 119.24207pt.
 File: imgs/esmart_old/Alta__cf519095-8e39-35eb-448d-1cd731af29b1.png Graphic file (type png)
 <use imgs/esmart_old/Alta__cf519095-8e39-35eb-448d-1cd731af29b1.png>
-Package pdftex.def Info: imgs/esmart_old/Alta__cf519095-8e39-35eb-448d-1cd731af29b1.png  used on input line 750.
+Package pdftex.def Info: imgs/esmart_old/Alta__cf519095-8e39-35eb-448d-1cd731af29b1.png  used on input line 869.
 (pdftex.def)             Requested size: 119.24506pt x 119.24207pt.
 File: imgs/esmart_new/Alta__cf519095-8e39-35eb-448d-1cd731af29b1.png Graphic file (type png)
 <use imgs/esmart_new/Alta__cf519095-8e39-35eb-448d-1cd731af29b1.png>
-Package pdftex.def Info: imgs/esmart_new/Alta__cf519095-8e39-35eb-448d-1cd731af29b1.png  used on input line 750.
+Package pdftex.def Info: imgs/esmart_new/Alta__cf519095-8e39-35eb-448d-1cd731af29b1.png  used on input line 869.
 (pdftex.def)             Requested size: 119.24506pt x 119.24207pt.
 File: imgs/esmart_base_imgs/Dalane__Dalane+IA__DAT_6749.JPG Graphic file (type jpg)
 <use imgs/esmart_base_imgs/Dalane__Dalane+IA__DAT_6749.JPG>
-Package pdftex.def Info: imgs/esmart_base_imgs/Dalane__Dalane+IA__DAT_6749.JPG  used on input line 750.
+Package pdftex.def Info: imgs/esmart_base_imgs/Dalane__Dalane+IA__DAT_6749.JPG  used on input line 869.
 (pdftex.def)             Requested size: 119.24506pt x 119.22638pt.
 File: imgs/esmart_gt/Dalane__Dalane+IA__DAT_6749.png Graphic file (type png)
 <use imgs/esmart_gt/Dalane__Dalane+IA__DAT_6749.png>
-Package pdftex.def Info: imgs/esmart_gt/Dalane__Dalane+IA__DAT_6749.png  used on input line 750.
+Package pdftex.def Info: imgs/esmart_gt/Dalane__Dalane+IA__DAT_6749.png  used on input line 869.
 (pdftex.def)             Requested size: 119.24506pt x 119.24207pt.
 File: imgs/esmart_old/Dalane__Dalane+IA__DAT_6749.png Graphic file (type png)
 <use imgs/esmart_old/Dalane__Dalane+IA__DAT_6749.png>
-Package pdftex.def Info: imgs/esmart_old/Dalane__Dalane+IA__DAT_6749.png  used on input line 750.
+Package pdftex.def Info: imgs/esmart_old/Dalane__Dalane+IA__DAT_6749.png  used on input line 869.
 (pdftex.def)             Requested size: 119.24506pt x 119.24207pt.
 File: imgs/esmart_new/Dalane__Dalane+IA__DAT_6749.png Graphic file (type png)
 <use imgs/esmart_new/Dalane__Dalane+IA__DAT_6749.png>
-Package pdftex.def Info: imgs/esmart_new/Dalane__Dalane+IA__DAT_6749.png  used on input line 750.
+Package pdftex.def Info: imgs/esmart_new/Dalane__Dalane+IA__DAT_6749.png  used on input line 869.
 (pdftex.def)             Requested size: 119.24506pt x 119.24207pt.
 File: imgs/esmart_base_imgs/Dalane__Dalane+IA__DAT_7559.JPG Graphic file (type jpg)
 <use imgs/esmart_base_imgs/Dalane__Dalane+IA__DAT_7559.JPG>
-Package pdftex.def Info: imgs/esmart_base_imgs/Dalane__Dalane+IA__DAT_7559.JPG  used on input line 750.
+Package pdftex.def Info: imgs/esmart_base_imgs/Dalane__Dalane+IA__DAT_7559.JPG  used on input line 869.
 (pdftex.def)             Requested size: 119.24506pt x 119.22638pt.
 File: imgs/esmart_gt/Dalane__Dalane+IA__DAT_7559.png Graphic file (type png)
 <use imgs/esmart_gt/Dalane__Dalane+IA__DAT_7559.png>
-Package pdftex.def Info: imgs/esmart_gt/Dalane__Dalane+IA__DAT_7559.png  used on input line 750.
+Package pdftex.def Info: imgs/esmart_gt/Dalane__Dalane+IA__DAT_7559.png  used on input line 869.
 (pdftex.def)             Requested size: 119.24506pt x 119.24207pt.
 File: imgs/esmart_old/Dalane__Dalane+IA__DAT_7559.png Graphic file (type png)
 <use imgs/esmart_old/Dalane__Dalane+IA__DAT_7559.png>
-Package pdftex.def Info: imgs/esmart_old/Dalane__Dalane+IA__DAT_7559.png  used on input line 750.
+Package pdftex.def Info: imgs/esmart_old/Dalane__Dalane+IA__DAT_7559.png  used on input line 869.
 (pdftex.def)             Requested size: 119.24506pt x 119.24207pt.
 File: imgs/esmart_new/Dalane__Dalane+IA__DAT_7559.png Graphic file (type png)
 <use imgs/esmart_new/Dalane__Dalane+IA__DAT_7559.png>
-Package pdftex.def Info: imgs/esmart_new/Dalane__Dalane+IA__DAT_7559.png  used on input line 750.
+Package pdftex.def Info: imgs/esmart_new/Dalane__Dalane+IA__DAT_7559.png  used on input line 869.
 (pdftex.def)             Requested size: 119.24506pt x 119.24207pt.
 
-Overfull \hbox (8.98022pt too wide) in alignment at lines 750--750
+Overfull \hbox (8.98022pt too wide) in alignment at lines 869--869
 [][][][] 
  []
 
 
-LaTeX Warning: Float too large for page by 1.81055pt on input line 752.
+LaTeX Warning: Float too large for page by 1.81055pt on input line 871.
 
 File: imgs/esmart_base_imgs/Dalane__Dalane+IA__DAT_7909.JPG Graphic file (type jpg)
 <use imgs/esmart_base_imgs/Dalane__Dalane+IA__DAT_7909.JPG>
-Package pdftex.def Info: imgs/esmart_base_imgs/Dalane__Dalane+IA__DAT_7909.JPG  used on input line 773.
+Package pdftex.def Info: imgs/esmart_base_imgs/Dalane__Dalane+IA__DAT_7909.JPG  used on input line 892.
 (pdftex.def)             Requested size: 119.24506pt x 119.22638pt.
 File: imgs/esmart_gt/Dalane__Dalane+IA__DAT_7909.png Graphic file (type png)
 <use imgs/esmart_gt/Dalane__Dalane+IA__DAT_7909.png>
-Package pdftex.def Info: imgs/esmart_gt/Dalane__Dalane+IA__DAT_7909.png  used on input line 773.
+Package pdftex.def Info: imgs/esmart_gt/Dalane__Dalane+IA__DAT_7909.png  used on input line 892.
 (pdftex.def)             Requested size: 119.24506pt x 119.24207pt.
 File: imgs/esmart_old/Dalane__Dalane+IA__DAT_7909.png Graphic file (type png)
 <use imgs/esmart_old/Dalane__Dalane+IA__DAT_7909.png>
-Package pdftex.def Info: imgs/esmart_old/Dalane__Dalane+IA__DAT_7909.png  used on input line 773.
+Package pdftex.def Info: imgs/esmart_old/Dalane__Dalane+IA__DAT_7909.png  used on input line 892.
 (pdftex.def)             Requested size: 119.24506pt x 119.24207pt.
 File: imgs/esmart_new/Dalane__Dalane+IA__DAT_7909.png Graphic file (type png)
 <use imgs/esmart_new/Dalane__Dalane+IA__DAT_7909.png>
-Package pdftex.def Info: imgs/esmart_new/Dalane__Dalane+IA__DAT_7909.png  used on input line 773.
+Package pdftex.def Info: imgs/esmart_new/Dalane__Dalane+IA__DAT_7909.png  used on input line 892.
 (pdftex.def)             Requested size: 119.24506pt x 119.24207pt.
 File: imgs/esmart_base_imgs/Alta__a1cf5776-0454-4ef6-8726-ad25b0023293.JPG Graphic file (type jpg)
 <use imgs/esmart_base_imgs/Alta__a1cf5776-0454-4ef6-8726-ad25b0023293.JPG>
-Package pdftex.def Info: imgs/esmart_base_imgs/Alta__a1cf5776-0454-4ef6-8726-ad25b0023293.JPG  used on input line 773.
+Package pdftex.def Info: imgs/esmart_base_imgs/Alta__a1cf5776-0454-4ef6-8726-ad25b0023293.JPG  used on input line 892.
 (pdftex.def)             Requested size: 119.24506pt x 119.22638pt.
 File: imgs/esmart_gt/Alta__a1cf5776-0454-4ef6-8726-ad25b0023293.png Graphic file (type png)
 <use imgs/esmart_gt/Alta__a1cf5776-0454-4ef6-8726-ad25b0023293.png>
-Package pdftex.def Info: imgs/esmart_gt/Alta__a1cf5776-0454-4ef6-8726-ad25b0023293.png  used on input line 773.
+Package pdftex.def Info: imgs/esmart_gt/Alta__a1cf5776-0454-4ef6-8726-ad25b0023293.png  used on input line 892.
 (pdftex.def)             Requested size: 119.24506pt x 119.24207pt.
 File: imgs/esmart_old/Alta__a1cf5776-0454-4ef6-8726-ad25b0023293.png Graphic file (type png)
 <use imgs/esmart_old/Alta__a1cf5776-0454-4ef6-8726-ad25b0023293.png>
-Package pdftex.def Info: imgs/esmart_old/Alta__a1cf5776-0454-4ef6-8726-ad25b0023293.png  used on input line 773.
+Package pdftex.def Info: imgs/esmart_old/Alta__a1cf5776-0454-4ef6-8726-ad25b0023293.png  used on input line 892.
 (pdftex.def)             Requested size: 119.24506pt x 119.24207pt.
 File: imgs/esmart_new/Alta__a1cf5776-0454-4ef6-8726-ad25b0023293.png Graphic file (type png)
 <use imgs/esmart_new/Alta__a1cf5776-0454-4ef6-8726-ad25b0023293.png>
-Package pdftex.def Info: imgs/esmart_new/Alta__a1cf5776-0454-4ef6-8726-ad25b0023293.png  used on input line 773.
+Package pdftex.def Info: imgs/esmart_new/Alta__a1cf5776-0454-4ef6-8726-ad25b0023293.png  used on input line 892.
 (pdftex.def)             Requested size: 119.24506pt x 119.24207pt.
 File: imgs/esmart_base_imgs/Alta__bbbc763d-c6c4-4ab9-0b9b-9e0307a872ae.JPG Graphic file (type jpg)
 <use imgs/esmart_base_imgs/Alta__bbbc763d-c6c4-4ab9-0b9b-9e0307a872ae.JPG>
-Package pdftex.def Info: imgs/esmart_base_imgs/Alta__bbbc763d-c6c4-4ab9-0b9b-9e0307a872ae.JPG  used on input line 773.
+Package pdftex.def Info: imgs/esmart_base_imgs/Alta__bbbc763d-c6c4-4ab9-0b9b-9e0307a872ae.JPG  used on input line 892.
 (pdftex.def)             Requested size: 119.24506pt x 119.22638pt.
 File: imgs/esmart_gt/Alta__bbbc763d-c6c4-4ab9-0b9b-9e0307a872ae.png Graphic file (type png)
 <use imgs/esmart_gt/Alta__bbbc763d-c6c4-4ab9-0b9b-9e0307a872ae.png>
-Package pdftex.def Info: imgs/esmart_gt/Alta__bbbc763d-c6c4-4ab9-0b9b-9e0307a872ae.png  used on input line 773.
+Package pdftex.def Info: imgs/esmart_gt/Alta__bbbc763d-c6c4-4ab9-0b9b-9e0307a872ae.png  used on input line 892.
 (pdftex.def)             Requested size: 119.24506pt x 119.24207pt.
 File: imgs/esmart_old/Alta__bbbc763d-c6c4-4ab9-0b9b-9e0307a872ae.png Graphic file (type png)
 <use imgs/esmart_old/Alta__bbbc763d-c6c4-4ab9-0b9b-9e0307a872ae.png>
-Package pdftex.def Info: imgs/esmart_old/Alta__bbbc763d-c6c4-4ab9-0b9b-9e0307a872ae.png  used on input line 773.
+Package pdftex.def Info: imgs/esmart_old/Alta__bbbc763d-c6c4-4ab9-0b9b-9e0307a872ae.png  used on input line 892.
 (pdftex.def)             Requested size: 119.24506pt x 119.24207pt.
 File: imgs/esmart_new/Alta__bbbc763d-c6c4-4ab9-0b9b-9e0307a872ae.png Graphic file (type png)
 <use imgs/esmart_new/Alta__bbbc763d-c6c4-4ab9-0b9b-9e0307a872ae.png>
-Package pdftex.def Info: imgs/esmart_new/Alta__bbbc763d-c6c4-4ab9-0b9b-9e0307a872ae.png  used on input line 773.
+Package pdftex.def Info: imgs/esmart_new/Alta__bbbc763d-c6c4-4ab9-0b9b-9e0307a872ae.png  used on input line 892.
 (pdftex.def)             Requested size: 119.24506pt x 119.24207pt.
 
-Overfull \hbox (8.98022pt too wide) in alignment at lines 773--773
+Overfull \hbox (8.98022pt too wide) in alignment at lines 892--892
 [][][][] 
  []
 
 
-LaTeX Warning: Citation `IEEEhowto:IEEEtranpage' on page 4 undefined on input line 830.
+LaTeX Warning: Citation `F03' on page 4 undefined on input line 903.
 
-(/20TB0/ls_workspace/63dcfe5f7520d4bfbf2498a7/bare_jrnl.bbl
+
+LaTeX Warning: Reference `hirecall' on page 4 undefined on input line 903.
+
+
+LaTeX Warning: Citation `IEEEhowto:IEEEtranpage' on page 4 undefined on input line 960.
+
+(/20TB0/ls_workspace/63dcfe5f7520d4bfbf2498a7/bare_jrnl.bbl [4] [5 </20TB0/ls_workspace/63dcfe5f7520d4bfbf2498a7/imgs/esmart_base_imgs/Alta__4ba599e9-bf87-4283-aa2c-8d0bdd9b4e6e.JPG> </20TB0/ls_workspace/63dcfe5f7520d4bfbf2498a7/imgs/esmart_gt/Alta__4ba599e9-bf87-4283-aa2c-8d0bdd9b4e6e.png (PNG copy)> </20TB0/ls_workspace/63dcfe5f7520d4bfbf2498a7/imgs/esmart_old/Alta__4ba599e9-bf87-4283-aa2c-8d0bdd9b4e6e.png (PNG copy)> </20TB0/ls_workspace/63dcfe5f7520d4bfbf2498a7/imgs/esmart_new/Alta__4ba599e9-bf87-4283-aa2c-8d0bdd9b4e6e.png (PNG copy)> </20TB0/ls_workspace/63dcfe5f7520d4bfbf2498a7/imgs/esmart_base_imgs/Alta__05ceb653-bdc2-78a8-0747-a63831e3ebc9.JPG> </20TB0/ls_workspace/63dcfe5f7520d4bfbf2498a7/imgs/esmart_gt/Alta__05ceb653-bdc2-78a8-0747-a63831e3ebc9.png (PNG copy)> </20TB0/ls_workspace/63dcfe5f7520d4bfbf2498a7/imgs/esmart_old/Alta__05ceb653-bdc2-78a8-0747-a63831e3ebc9.png (PNG copy)> </20TB0/ls_workspace/63dcfe5f7520d4bfbf2498a7/imgs/esmart_new/Alta__05ceb653-bdc2-78a8-0747-a63831e3ebc9.png (PNG copy)> </20TB0/ls_workspace/63dcfe5f7520d4bfbf2498a7/imgs/esmart_base_imgs/Alta__6a6a5379-a993-4be1-9d79-236991f70d38.JPG> </20TB0/ls_workspace/63dcfe5f7520d4bfbf2498a7/imgs/esmart_gt/Alta__6a6a5379-a993-4be1-9d79-236991f70d38.png (PNG copy)> </20TB0/ls_workspace/63dcfe5f7520d4bfbf2498a7/imgs/esmart_old/Alta__6a6a5379-a993-4be1-9d79-236991f70d38.png (PNG copy)> </20TB0/ls_workspace/63dcfe5f7520d4bfbf2498a7/imgs/esmart_new/Alta__6a6a5379-a993-4be1-9d79-236991f70d38.png (PNG copy)> </20TB0/ls_workspace/63dcfe5f7520d4bfbf2498a7/imgs/esmart_base_imgs/Alta__9abf75f2-84d8-490d-9a2e-ae77606bcd02.JPG> </20TB0/ls_workspace/63dcfe5f7520d4bfbf2498a7/imgs/esmart_gt/Alta__9abf75f2-84d8-490d-9a2e-ae77606bcd02.png (PNG copy)> </20TB0/ls_workspace/63dcfe5f7520d4bfbf2498a7/imgs/esmart_old/Alta__9abf75f2-84d8-490d-9a2e-ae77606bcd02.png (PNG copy)> </20TB0/ls_workspace/63dcfe5f7520d4bfbf2498a7/imgs/esmart_new/Alta__9abf75f2-84d8-490d-9a2e-ae77606bcd02.png (PNG copy)> </20TB0/ls_workspace/63dcfe5f7520d4bfbf2498a7/imgs/esmart_base_imgs/Alta__98d795b2-512d-e740-2b9c-dfb9b6b40696.JPG> </20TB0/ls_workspace/63dcfe5f7520d4bfbf2498a7/imgs/esmart_gt/Alta__98d795b2-512d-e740-2b9c-dfb9b6b40696.png (PNG copy)> </20TB0/ls_workspace/63dcfe5f7520d4bfbf2498a7/imgs/esmart_old/Alta__98d795b2-512d-e740-2b9c-dfb9b6b40696.png (PNG copy)> </20TB0/ls_workspace/63dcfe5f7520d4bfbf2498a7/imgs/esmart_new/Alta__98d795b2-512d-e740-2b9c-dfb9b6b40696.png>] [6 </20TB0/ls_workspace/63dcfe5f7520d4bfbf2498a7/imgs/esmart_base_imgs/Alta__a1cf5776-0454-4ef6-8726-ad25b0023293.JPG> </20TB0/ls_workspace/63dcfe5f7520d4bfbf2498a7/imgs/esmart_gt/Alta__a1cf5776-0454-4ef6-8726-ad25b0023293.png (PNG copy)> </20TB0/ls_workspace/63dcfe5f7520d4bfbf2498a7/imgs/esmart_old/Alta__a1cf5776-0454-4ef6-8726-ad25b0023293.png (PNG copy)> </20TB0/ls_workspace/63dcfe5f7520d4bfbf2498a7/imgs/esmart_new/Alta__a1cf5776-0454-4ef6-8726-ad25b0023293.png (PNG copy)> </20TB0/ls_workspace/63dcfe5f7520d4bfbf2498a7/imgs/esmart_base_imgs/Alta__bbbc763d-c6c4-4ab9-0b9b-9e0307a872ae.JPG> </20TB0/ls_workspace/63dcfe5f7520d4bfbf2498a7/imgs/esmart_gt/Alta__bbbc763d-c6c4-4ab9-0b9b-9e0307a872ae.png (PNG copy)> </20TB0/ls_workspace/63dcfe5f7520d4bfbf2498a7/imgs/esmart_old/Alta__bbbc763d-c6c4-4ab9-0b9b-9e0307a872ae.png (PNG copy)> </20TB0/ls_workspace/63dcfe5f7520d4bfbf2498a7/imgs/esmart_new/Alta__bbbc763d-c6c4-4ab9-0b9b-9e0307a872ae.png (PNG copy)> </20TB0/ls_workspace/63dcfe5f7520d4bfbf2498a7/imgs/esmart_base_imgs/Alta__cf519095-8e39-35eb-448d-1cd731af29b1.JPG> </20TB0/ls_workspace/63dcfe5f7520d4bfbf2498a7/imgs/esmart_gt/Alta__cf519095-8e39-35eb-448d-1cd731af29b1.png (PNG copy)> </20TB0/ls_workspace/63dcfe5f7520d4bfbf2498a7/imgs/esmart_old/Alta__cf519095-8e39-35eb-448d-1cd731af29b1.png (PNG copy)> </20TB0/ls_workspace/63dcfe5f7520d4bfbf2498a7/imgs/esmart_new/Alta__cf519095-8e39-35eb-448d-1cd731af29b1.png (PNG copy)> </20TB0/ls_workspace/63dcfe5f7520d4bfbf2498a7/imgs/esmart_base_imgs/Dalane__Dalane+IA__DAT_6749.JPG> </20TB0/ls_workspace/63dcfe5f7520d4bfbf2498a7/imgs/esmart_gt/Dalane__Dalane+IA__DAT_6749.png (PNG copy)> </20TB0/ls_workspace/63dcfe5f7520d4bfbf2498a7/imgs/esmart_old/Dalane__Dalane+IA__DAT_6749.png (PNG copy)> </20TB0/ls_workspace/63dcfe5f7520d4bfbf2498a7/imgs/esmart_new/Dalane__Dalane+IA__DAT_6749.png (PNG copy)> </20TB0/ls_workspace/63dcfe5f7520d4bfbf2498a7/imgs/esmart_base_imgs/Dalane__Dalane+IA__DAT_7559.JPG> </20TB0/ls_workspace/63dcfe5f7520d4bfbf2498a7/imgs/esmart_gt/Dalane__Dalane+IA__DAT_7559.png (PNG copy)> </20TB0/ls_workspace/63dcfe5f7520d4bfbf2498a7/imgs/esmart_old/Dalane__Dalane+IA__DAT_7559.png (PNG copy)> </20TB0/ls_workspace/63dcfe5f7520d4bfbf2498a7/imgs/esmart_new/Dalane__Dalane+IA__DAT_7559.png (PNG copy)>]
+Underfull \vbox (badness 1655) has occurred while \output is active []
+
+ [7]
+Underfull \vbox (badness 5985) has occurred while \output is active []
+
 Missing character: There is no Ã in font ptmr7t!
 Missing character: There is no Ã in font ptmr7t!
- [4] [5 </20TB0/ls_workspace/63dcfe5f7520d4bfbf2498a7/imgs/esmart_base_imgs/Alta__4ba599e9-bf87-4283-aa2c-8d0bdd9b4e6e.JPG> </20TB0/ls_workspace/63dcfe5f7520d4bfbf2498a7/imgs/esmart_gt/Alta__4ba599e9-bf87-4283-aa2c-8d0bdd9b4e6e.png (PNG copy)> </20TB0/ls_workspace/63dcfe5f7520d4bfbf2498a7/imgs/esmart_old/Alta__4ba599e9-bf87-4283-aa2c-8d0bdd9b4e6e.png (PNG copy)> </20TB0/ls_workspace/63dcfe5f7520d4bfbf2498a7/imgs/esmart_new/Alta__4ba599e9-bf87-4283-aa2c-8d0bdd9b4e6e.png (PNG copy)> </20TB0/ls_workspace/63dcfe5f7520d4bfbf2498a7/imgs/esmart_base_imgs/Alta__05ceb653-bdc2-78a8-0747-a63831e3ebc9.JPG> </20TB0/ls_workspace/63dcfe5f7520d4bfbf2498a7/imgs/esmart_gt/Alta__05ceb653-bdc2-78a8-0747-a63831e3ebc9.png (PNG copy)> </20TB0/ls_workspace/63dcfe5f7520d4bfbf2498a7/imgs/esmart_old/Alta__05ceb653-bdc2-78a8-0747-a63831e3ebc9.png (PNG copy)> </20TB0/ls_workspace/63dcfe5f7520d4bfbf2498a7/imgs/esmart_new/Alta__05ceb653-bdc2-78a8-0747-a63831e3ebc9.png (PNG copy)> </20TB0/ls_workspace/63dcfe5f7520d4bfbf2498a7/imgs/esmart_base_imgs/Alta__6a6a5379-a993-4be1-9d79-236991f70d38.JPG> </20TB0/ls_workspace/63dcfe5f7520d4bfbf2498a7/imgs/esmart_gt/Alta__6a6a5379-a993-4be1-9d79-236991f70d38.png (PNG copy)> </20TB0/ls_workspace/63dcfe5f7520d4bfbf2498a7/imgs/esmart_old/Alta__6a6a5379-a993-4be1-9d79-236991f70d38.png (PNG copy)> </20TB0/ls_workspace/63dcfe5f7520d4bfbf2498a7/imgs/esmart_new/Alta__6a6a5379-a993-4be1-9d79-236991f70d38.png (PNG copy)> </20TB0/ls_workspace/63dcfe5f7520d4bfbf2498a7/imgs/esmart_base_imgs/Alta__9abf75f2-84d8-490d-9a2e-ae77606bcd02.JPG> </20TB0/ls_workspace/63dcfe5f7520d4bfbf2498a7/imgs/esmart_gt/Alta__9abf75f2-84d8-490d-9a2e-ae77606bcd02.png (PNG copy)> </20TB0/ls_workspace/63dcfe5f7520d4bfbf2498a7/imgs/esmart_old/Alta__9abf75f2-84d8-490d-9a2e-ae77606bcd02.png (PNG copy)> </20TB0/ls_workspace/63dcfe5f7520d4bfbf2498a7/imgs/esmart_new/Alta__9abf75f2-84d8-490d-9a2e-ae77606bcd02.png (PNG copy)> </20TB0/ls_workspace/63dcfe5f7520d4bfbf2498a7/imgs/esmart_base_imgs/Alta__98d795b2-512d-e740-2b9c-dfb9b6b40696.JPG> </20TB0/ls_workspace/63dcfe5f7520d4bfbf2498a7/imgs/esmart_gt/Alta__98d795b2-512d-e740-2b9c-dfb9b6b40696.png (PNG copy)> </20TB0/ls_workspace/63dcfe5f7520d4bfbf2498a7/imgs/esmart_old/Alta__98d795b2-512d-e740-2b9c-dfb9b6b40696.png (PNG copy)> </20TB0/ls_workspace/63dcfe5f7520d4bfbf2498a7/imgs/esmart_new/Alta__98d795b2-512d-e740-2b9c-dfb9b6b40696.png>] [6 </20TB0/ls_workspace/63dcfe5f7520d4bfbf2498a7/imgs/esmart_base_imgs/Alta__a1cf5776-0454-4ef6-8726-ad25b0023293.JPG> </20TB0/ls_workspace/63dcfe5f7520d4bfbf2498a7/imgs/esmart_gt/Alta__a1cf5776-0454-4ef6-8726-ad25b0023293.png (PNG copy)> </20TB0/ls_workspace/63dcfe5f7520d4bfbf2498a7/imgs/esmart_old/Alta__a1cf5776-0454-4ef6-8726-ad25b0023293.png (PNG copy)> </20TB0/ls_workspace/63dcfe5f7520d4bfbf2498a7/imgs/esmart_new/Alta__a1cf5776-0454-4ef6-8726-ad25b0023293.png (PNG copy)> </20TB0/ls_workspace/63dcfe5f7520d4bfbf2498a7/imgs/esmart_base_imgs/Alta__bbbc763d-c6c4-4ab9-0b9b-9e0307a872ae.JPG> </20TB0/ls_workspace/63dcfe5f7520d4bfbf2498a7/imgs/esmart_gt/Alta__bbbc763d-c6c4-4ab9-0b9b-9e0307a872ae.png (PNG copy)> </20TB0/ls_workspace/63dcfe5f7520d4bfbf2498a7/imgs/esmart_old/Alta__bbbc763d-c6c4-4ab9-0b9b-9e0307a872ae.png (PNG copy)> </20TB0/ls_workspace/63dcfe5f7520d4bfbf2498a7/imgs/esmart_new/Alta__bbbc763d-c6c4-4ab9-0b9b-9e0307a872ae.png (PNG copy)> </20TB0/ls_workspace/63dcfe5f7520d4bfbf2498a7/imgs/esmart_base_imgs/Alta__cf519095-8e39-35eb-448d-1cd731af29b1.JPG> </20TB0/ls_workspace/63dcfe5f7520d4bfbf2498a7/imgs/esmart_gt/Alta__cf519095-8e39-35eb-448d-1cd731af29b1.png (PNG copy)> </20TB0/ls_workspace/63dcfe5f7520d4bfbf2498a7/imgs/esmart_old/Alta__cf519095-8e39-35eb-448d-1cd731af29b1.png (PNG copy)> </20TB0/ls_workspace/63dcfe5f7520d4bfbf2498a7/imgs/esmart_new/Alta__cf519095-8e39-35eb-448d-1cd731af29b1.png (PNG copy)> </20TB0/ls_workspace/63dcfe5f7520d4bfbf2498a7/imgs/esmart_base_imgs/Dalane__Dalane+IA__DAT_6749.JPG> </20TB0/ls_workspace/63dcfe5f7520d4bfbf2498a7/imgs/esmart_gt/Dalane__Dalane+IA__DAT_6749.png (PNG copy)> </20TB0/ls_workspace/63dcfe5f7520d4bfbf2498a7/imgs/esmart_old/Dalane__Dalane+IA__DAT_6749.png (PNG copy)> </20TB0/ls_workspace/63dcfe5f7520d4bfbf2498a7/imgs/esmart_new/Dalane__Dalane+IA__DAT_6749.png (PNG copy)> </20TB0/ls_workspace/63dcfe5f7520d4bfbf2498a7/imgs/esmart_base_imgs/Dalane__Dalane+IA__DAT_7559.JPG> </20TB0/ls_workspace/63dcfe5f7520d4bfbf2498a7/imgs/esmart_gt/Dalane__Dalane+IA__DAT_7559.png (PNG copy)> </20TB0/ls_workspace/63dcfe5f7520d4bfbf2498a7/imgs/esmart_old/Dalane__Dalane+IA__DAT_7559.png (PNG copy)> </20TB0/ls_workspace/63dcfe5f7520d4bfbf2498a7/imgs/esmart_new/Dalane__Dalane+IA__DAT_7559.png (PNG copy)>]
-Underfull \vbox (badness 1320) has occurred while \output is active []
 
+Underfull \vbox (badness 2529) has occurred while \output is active []
+
+ [8 </20TB0/ls_workspace/63dcfe5f7520d4bfbf2498a7/imgs/esmart_base_imgs/Dalane__Dalane+IA__DAT_7909.JPG> </20TB0/ls_workspace/63dcfe5f7520d4bfbf2498a7/imgs/esmart_gt/Dalane__Dalane+IA__DAT_7909.png (PNG copy)> </20TB0/ls_workspace/63dcfe5f7520d4bfbf2498a7/imgs/esmart_old/Dalane__Dalane+IA__DAT_7909.png (PNG copy)> </20TB0/ls_workspace/63dcfe5f7520d4bfbf2498a7/imgs/esmart_new/Dalane__Dalane+IA__DAT_7909.png (PNG copy)>]
 Missing character: There is no â in font ptmr7t!
 Missing character: There is no € in font ptmr7t!
 Missing character: There is no “ in font ptmr7t!
 
-Underfull \vbox (badness 1320) has occurred while \output is active []
-
- [7 </20TB0/ls_workspace/63dcfe5f7520d4bfbf2498a7/imgs/esmart_base_imgs/Dalane__Dalane+IA__DAT_7909.JPG> </20TB0/ls_workspace/63dcfe5f7520d4bfbf2498a7/imgs/esmart_gt/Dalane__Dalane+IA__DAT_7909.png (PNG copy)> </20TB0/ls_workspace/63dcfe5f7520d4bfbf2498a7/imgs/esmart_old/Dalane__Dalane+IA__DAT_7909.png (PNG copy)> </20TB0/ls_workspace/63dcfe5f7520d4bfbf2498a7/imgs/esmart_new/Dalane__Dalane+IA__DAT_7909.png (PNG copy)>]
 Underfull \hbox (badness 5652) in paragraph at lines 203--206
 \OT1/ptm/m/n/8 tic reg-u-lar-iz-ers with gaus-sian er-ror lin-ear units,'' \OT1/ptm/m/it/8 ArXiv\OT1/ptm/m/n/8 , vol.
  []
 
-) [8
-
-] (/20TB0/ls_workspace/63dcfe5f7520d4bfbf2498a7/bare_jrnl.aux)
+) [9] (/20TB0/ls_workspace/63dcfe5f7520d4bfbf2498a7/bare_jrnl.aux)
 
 LaTeX Warning: There were undefined references.
 
+
+LaTeX Warning: There were multiply-defined labels.
+
  ) 
 Here is how much of TeX's memory you used:
- 5025 strings out of 492982
- 87918 string characters out of 6134897
- 162487 words of memory out of 5000000
- 8489 multiletter control sequences out of 15000+600000
- 49217 words of font info for 99 fonts, out of 8000000 for 9000
+ 5099 strings out of 492982
+ 88966 string characters out of 6134897
+ 185100 words of memory out of 5000000
+ 8555 multiletter control sequences out of 15000+600000
+ 51424 words of font info for 109 fonts, out of 8000000 for 9000
  1144 hyphenation exceptions out of 8191
- 44i,13n,42p,3559b,434s stack positions out of 5000i,500n,10000p,200000b,80000s
-{/usr/share/texlive/texmf-dist/fonts/enc/dvips/base/8r.enc}</usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi5.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi7.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy7.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/doublestroke/dsrom10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/euler/eufm10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/euler/eufm7.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/times/utmb8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/times/utmbi8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/times/utmr8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/times/utmri8a.pfb>
-Output written on /20TB0/ls_workspace/63dcfe5f7520d4bfbf2498a7/bare_jrnl.pdf (8 pages, 8746206 bytes).
+ 44i,13n,42p,3559b,432s stack positions out of 5000i,500n,10000p,200000b,80000s
+{/usr/share/texlive/texmf-dist/fonts/enc/dvips/base/8r.enc}</usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi5.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi6.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi7.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi8.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr6.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy7.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/doublestroke/dsrom10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/euler/eufm10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/euler/eufm7.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/symbols/msam10.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/times/utmb8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/times/utmbi8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/times/utmr8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/times/utmri8a.pfb>
+Output written on /20TB0/ls_workspace/63dcfe5f7520d4bfbf2498a7/bare_jrnl.pdf (9 pages, 8782727 bytes).
 PDF statistics:
- 137 PDF objects out of 1000 (max. 8388607)
- 66 compressed objects within 1 object stream
+ 156 PDF objects out of 1000 (max. 8388607)
+ 80 compressed objects within 1 object stream
  0 named destinations out of 1000 (max. 500000)
  221 words of extra memory for PDF output out of 10000 (max. 10000000)
 
