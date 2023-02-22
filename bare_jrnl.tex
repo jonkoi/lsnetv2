@@ -161,6 +161,8 @@
 \usepackage{amsfonts}
 \usepackage{dsfont}
 \usepackage{multirow}
+\usepackage{schemata}
+\usepackage{makecell}
 % A popular package from the American Mathematical Society that provides
 % many useful and powerful commands for dealing with mathematics.
 %
@@ -485,7 +487,7 @@ IEEE, IEEEtran, journal, \LaTeX, paper, template.
 \commentM{Motivate need for powerline inspection}
 
 Electricity is the lifeblood of modern society, thus, it is essential to ensure stable electrical power supply across the nations. Hence, it is of utmost importance for utilities to inspect and maintain their electrical facilities on a regular basis. These tasks were conventionally done by human inspector manually following, observing and assessing the power grid. Recently, Unmanned Aerial
-Vehicles (UAVs) have been deployed to produce more quality and efficient observations due to their superior speed and ability to access higher altitude and more hazardous environments. To further boost the effectiveness and efficiency of inspection and maintenance tasks, the assessment step can be done automatically from the observations of UAVs, which, in many cases, are RGB images from cameras. Many automatic assessment solutions have recently been proposed, many of which are fueled by the power of artificial intelligence and deep learning. \textcolor{red}{Examples are (insulators, transmission towers, defects, severity)}. Among these tasks, cable, wire or powerline recognition and localization is very crucial. Accurate detection of powerlines helps focus the scope of downstream solutions for diagnosing faults (Tears, kinking, bird caging, etc...), identify intrusions (vegetation enroachment, etc,) on said powerlines. These tasks are extremely vital as failure in catching these undesirable events can lead to catastrophic and fatal consequences \cite{pge_bankruptcy}. Furthermore, the ability to detect powerlines is imperative for UAVs, and other forms of low-altitude flights, to navigate safely.
+Vehicles (UAVs) have been deployed to produce more quality and efficient observations due to their superior speed and ability to access higher altitude and more hazardous environments. To further boost the effectiveness and efficiency of inspection and maintenance tasks, the assessment step can be done automatically from the observations of UAVs, which, in many cases, are RGB images from cameras. Many automatic assessment solutions have recently been proposed, many of which are fueled by the power of artificial intelligence and deep learning. \textcolor{red}{Examples are (insulators, transmission towers, defects, severity)}. Among these tasks, cable, wire or powerline recognition and localization is very crucial. Accurate detection of powerlines helps focus the scope of downstream solutions for diagnosing faults (Tears, kinking, bird caging, etc...) and identifying intrusions (vegetation encroachment, etc,) on said powerlines. These tasks are extremely vital as failure in catching these undesirable events can lead to catastrophic and fatal consequences \cite{pge_bankruptcy}. Furthermore, the ability to detect powerlines is imperative for UAVs, and other forms of low-altitude flights, to navigate safely.
 
 However, it is nontrivial to detect powerlines due to their inconspicuous appearances. The powerline can be very thin and might be missed by approximity sensors on UAVs. On camera images, the width of powerlines can be as thin as 1 pixel. Furthermore, cluttered backgrounds and hindered powerline visibility and same-colored background, such as snow and white coating, can cause the powerlines to be imperceptible. Other conditions, such as fog and lighting, can also negatively affect the discernability of powerlines on images. 
 
@@ -494,26 +496,6 @@ However, it is nontrivial to detect powerlines due to their inconspicuous appear
 \commentM{Current state-of-the-art: Motivate shortcomings. Overlapping lines, can include a picture of it to motivate it further.}
 
 \commentM{In this work, ... (we propose the solution).}
-
-\IEEEPARstart{T}{his} demo file is intended to serve as a ``starter file''
-for IEEE journal papers produced under \LaTeX\ using
-IEEEtran.cls version 1.8b and later.
-% You must have at least 2 lines in the paragraph with the drop letter
-% (should never be an issue)
-I wish you the best of success.
-
-\hfill mds
- 
-\hfill August 26, 2015
-
-\subsection{Subsection Heading Here}
-Subsection text here.
-
-% needed in second column of first page if using \IEEEpubid
-%\IEEEpubidadjcol
-
-\subsubsection{Subsubsection Heading Here}
-Subsubsection text here.
 
 
 % An example of a floating figure using the graphicx package.
@@ -611,9 +593,12 @@ Subsubsection text here.
 % \fnbelowfloat command of the stfloats package.
 \section{Related Work}
 
-The problem of powerline detection has been tackled with traditioncal computer vision. An notable early attempt was proposed by Kasturi et al. \cite{related_work_kasturi_2002}, where Steger's method \cite{related_work_steger_1998} was used to extract features, which are then filtered using Hough transform to exclude short lines. Yan et al. \cite{related_work_guanjian_yan_2007} proposes Radon transform to generate line segments, group these segments by slope and distance threshholder, then finally use Kalman filter as the post-processing step.Li et al. \cite{related_work_li_zhenrong_2010} removes clutters and noises in the background using a pulse coupled neural filter before using Hough transforms and K-means clustering to detect and combine line segments. The aforementioned solutions and some others \cite{related_work_candamo_2009, related_work_golightly_2005, related_work_zhengrong_li_2008, related_work_boris_alpatov_2016} hold the strict assumptions that powerlines appear straight and in parallel orientations, and thus, do not always apply in reality. Song et al. \cite{related_work_biqin_song_2014} was able to cover curve powerlines by using a normalized graph cut model to link line segments, which were produced from the responses of a match filter and first-order derivative of Gaussian. However, the performance of all the methods above are affected by the conditions that the input images were taken in. Any differences in camera settings, environment, lighting, and view angle can lead to the hyper-parameters of these methods to be re-defined, which in turn may requires specialist expertise.
+The problem of powerline detection has been tackled with traditioncal computer vision and more recently with deep learning approaches. An notable early attempt was proposed by Kasturi et al. \cite{related_work_kasturi_2002}, where Steger's method \cite{related_work_steger_1998} was used to extract features, which are then filtered using the Hough transform to exclude short lines. Yan et al. \cite{related_work_guanjian_yan_2007} proposes \commentM{to leverage the?} Radon transform to generate line segments, group these segments by slope and distance thresholding, and then finally use Kalman filters as a post-processing step. Li et al. \cite{related_work_li_zhenrong_2010} removes clutter and noise in the background using a pulse coupled neural filter before using Hough transforms and K-means clustering to detect and combine line segments. The aforementioned solutions and some others \cite{related_work_candamo_2009, related_work_golightly_2005, related_work_zhengrong_li_2008, related_work_boris_alpatov_2016} hold the strict assumptions that powerlines appear straight and in parallel orientations, and thus, do not always apply in reality. Song et al. \cite{related_work_biqin_song_2014} was able to detect curved powerlines by using a normalized graph cut model to link line segments, which were produced from the responses of a match filter and first-order derivative of a Gaussian. However, the performance of all the methods above are affected by the conditions that the input images were taken in. Any differences in camera settings, environment, lighting, and view angle can lead to the hyper-parameters of these methods to be re-defined, which in turn may requires specialist expertise.
 
-Overall, deep learning can help alleviate the problems that traditional computer vision face. With enough data, deep learning solutions for classification and detection can generalize well to many practical scenarios. Pan et al. \cite{related_work_chaofeng_pan_2016} suggests training a convolutional neural network (CNN) that takes in edge features, which are produced by steerable filters, and classifies whether square patches from input image contains a line or not. Then Hough transform is used to detect the powerline segments. Similarly, Gubbi et al. \cite{related_work_jayavardhana_gubbi} also proposes using a CNN but, instead, uses Histogram of Gradient features as input. The line segment detector \cite{lsd} was used as the post processing step. Since the inputs of these two methods are individual patches, the CNN models lack the contextual information of the entire images. Hence the performance can be limited, especially for low-contrast images with cluttered background. More recent approaches \cite{related_work_rainesh_mandaan_2017,related_work_heng_zhang_2019,related_work_yan_li_2019,related_work_omer_emre_yetgin_2018,related_work_rabab_abdelfattah_2022,related_work_rabeea_haffari_2021} frame powerline detection as a pixel binary classification problems where each pixel is classified whether is belongs to the powerline other not. This type of problem can be undertaken by deep learning semantic segmentation networks. Madaan et al. \cite{related_work_rainesh_mandaan_2017} different dilated convolutional neural networks are experimented for segmenting powerlines. Yetgin et al. \cite{related_work_omer_emre_yetgin_2018} finetuned a CNN, which was pretrained on ImageNet \cite{deng2009imagenet}, with a newly initialized softmax layer that classifies the powerline existence. After that, features from immediate layers of the finetuned CNN are used to train another classifier to perform powerline segmentation. In \cite{related_work_yan_li_2019}, a CNN is introduced with two components: information fusion module and attention module. Information fusion module is in encoder-decoder structure, where decoding stages are combined with their corresponding same-scaled encoding stages to fused semantic and location information for accurate powerline segmentation. Abdelfattah et al. \cite{related_work_rabab_abdelfattah_2022} trained a generative adversarial network (GAN) to generate modified version of input images where the powerline are highlighted. A semantic decoder connecting to an immediate layer of the generator is also trained jointly in order to perform the actual segmentation task. These semantic segmenation methods have achived satisfying results, however, they require training data with pixel-level annotation, which can be laborious to obtain. Especially in the case of powerlines, which can often be quite slender yet span across images, more meticulousness is required in the annotating process. Choi et al. \cite{related_work_hyeyeon_choi_2021} tries to mitigate this burden by approximating pseudo segment maps, which are produced using Visualbackprop algorithm \cite{vbp} from a classification CNN. This classification CNN is trained only with patch labels. Lee et al. \cite{related_work_sang_jun_lee_2017} trained a CNN on images with only image-based label. During inference, this CNN is used on patches of high-resolution images and produces features map which can be combined for powerline localization. 
+Overall, deep learning can help alleviate the problems that traditional computer vision face. With enough data, deep learning solutions for classification and detection can generalize well to many practical scenarios. Pan et al. \cite{related_work_chaofeng_pan_2016} suggests training a convolutional neural network (CNN) that takes in edge features, which are produced by steerable filters, and classifies whether square patches from an input image contains a line or not. Then the Hough transform is used to detect the powerline segments. Similarly, Gubbi et al. \cite{related_work_jayavardhana_gubbi} also proposes using a CNN but, instead, uses Histogram of \commentM{Oriented} Gradient features as input. The line segment detector \cite{lsd} was used as a post processing step. Since the inputs of these two methods are individual patches, the CNN models lack the contextual information of the entire images. Hence the performance can be limited, especially for low-contrast images with cluttered background. More recent approaches \cite{related_work_rainesh_mandaan_2017,related_work_heng_zhang_2019,related_work_yan_li_2019,related_work_omer_emre_yetgin_2018,related_work_rabab_abdelfattah_2022,related_work_rabeea_haffari_2021} frame powerline detection as binary pixel-level classification problems where each pixel is classified whether is belongs to the powerline or not. This type of problem can be undertaken by deep learning semantic segmentation networks. 
+%Madaan et al. \cite{related_work_rainesh_mandaan_2017} different dilated convolutional neural networks are experimented for segmenting powerlines. 
+\commentM{Madaan et al. \cite{related_work_rainesh_mandaan_2017} investigate different dilated convolutional neural networks for segmenting powerlines. }
+Yetgin et al. \cite{related_work_omer_emre_yetgin_2018} finetuned a CNN, which was pretrained on ImageNet \cite{deng2009imagenet}, with a newly initialized softmax layer that classifies the powerline existence. After that, features from immediate layers of the finetuned CNN are used to train another classifier to perform powerline segmentation. In \cite{related_work_yan_li_2019}, a CNN is introduced with two components: an information fusion module and an attention module. The information fusion module is in encoder-decoder structure, where decoding stages are combined with their corresponding same-scaled encoding stages to fuse semantic and location information for accurate powerline segmentation. \commentM{Might make sense to briefly comment on the attention module here as well as you say it consists of two components but then just detail one of them.} Abdelfattah et al. \cite{related_work_rabab_abdelfattah_2022} trained a generative adversarial network (GAN) to generate modified versions of the input images where the powerlines are highlighted. A semantic decoder connected to an immediate layer of the generator is also trained jointly in order to perform the actual segmentation task. These semantic segmentation methods have achieved satisfying results, however, they require training data with pixel-level annotation, which can be laborious to obtain. Especially in the case of powerlines, which can often be quite slender yet span across images, more meticulousness is required in the annotating process. Choi et al. \cite{related_work_hyeyeon_choi_2021} tries to mitigate this burden by approximating pseudo segment maps, which are produced using the Visualbackprop algorithm \cite{vbp} from a classification CNN. This classification CNN is trained only with patch labels. Lee et al. \cite{related_work_sang_jun_lee_2017} on the other hand trained a CNN on images with only image-based labels. During inference, this CNN is used on patches of high-resolution images and produces feature maps which can be combined for powerline localization. 
 
 \commentM{Provide high-level overview of current powerline inspection approaches and LS-Net. Mention shortcomings}
 
@@ -679,118 +664,345 @@ In this dataset, the lines annotated includes conductors, guy wires and overhead
 
 \subsection{Implementation Details}
 
-The proposed LSNetv2 is implemented with Tensorflow. Each LSNetv2 model is trained on one NVIDIA RTX 3090 24GB. The model was initialized using Xavier methods and trained with batch size of 8 for 300 epochs. The Adam optimizer is used with learning rate of 0.0001, first momentum of 0.9 and second momentum of 0.99. The input image size is 512 x 512. Augmentation techniques include randomized applications of sharpening, blur, pixel dropouts and noises together with conventional random cropping and rotation. 
+The proposed LSNetv2 is implemented with Tensorflow. Each LSNetv2 model is trained on one NVIDIA RTX 3090 24GB. The model was initialized using Xavier initialization~\cite{REF} and trained with a batch size of 8 for 300 epochs. The Adam optimizer is used with learning rate of 0.0001, first momentum of 0.9 and second momentum of 0.99. The input image size is 512 x 512. During training, augmentation techniques applied include randomized occurences of sharpening, blur, color jittering, pixel dropouts and noises. After that randomized squared crops of varying size between 360 and 512 are taken from the input and then are scaled back to the input size of 512 x 512.
 
-% Please add the following required packages to your document preamble:
+\subsection{Evaluation Methods}
+
+For comparison purpose, we evaluate LSNetv2 in same manner as segmentation models.
+Similarly to \cite{Nguyen2020}, we adopt pixel-level averaged recall rate (ARR), averaged precision rate (APR) and $F_1$ Scores. In addition, we also use averaged $F_{\beta}$:
+\begin{equation}
+  F_{\beta} = \frac{1}{N} \sum_{i=1}^N  \frac{(1 + \beta^2)\text{Precision} \times \text{Recall}}{\beta_2 \times \text{Precision} + \text{Recall}} 
+\end{equation}
+where N is the number of test images and $\beta_2 = 0.3$ in order to place more emphasis on precision then conventional $F_1$. According to \cite{F03}, recall is not as relevant as precision since the recall rate of 1.0 can be achieved by predicting all pixel in the image as positive. Also, in the case of LSNet, higher recall rate can also be attributed to imprecise prediction of line segment endpoints as illustrated in Fig \ref{hirecall}. Thus $F_{\beta}$ score might a better measurement of LSNet performance than $F_1$. We also confirm the effectiveness of LSNetv2 via precision, recall and $F_1$ score of the classification branch as well as the regression loss of the regression branch.
+
+To produce the segmentation map, for each cell within the 31x31 output grid that was classified to contain segments of powerlines, we use OpenCV to generate visible white lines from the predicted pairs of endpoints. Specific line widths are chosen for each dataset to reach the highest $F_{\beta}$ scores. Particularly, we use the width of 9 pixels for PLDU dataset, 6 for PDLM dataset, 2 for TTPLA dataset and 5 for the proprierty dataset.
+
+The comparison is done with the previously proposed LSNet across the four datasets. In addition, we also examined other versions of LSNetv2 where the backbone are varied to encourage the use of ConvNext. In particular, we looked at the original backbone of LSNet, a truncated Resnet-50 \cite{resnet} and a truncated Efficientnetv2-M\cite{efficientnetv2}. The truncation is performed so that the outputs of the backbones have the size of $32 \times 32$ from the input size of $512 \times 512$. The detailed architecture are shown in Table \ref{backbone_arch}. Specifically for TTPLA dataset, we also view LSNetv2 together with the reported performance results from PLGAN paper \cite{related_work_rabab_abdelfattah_2022}, which proposes PLGAN as the state-of-the-art for TTPLA dataset, to verify the competitiveness of LSNetv2. The performance results we looked at are of PLGAN itself, three segmentation models: FPN \cite{fpn}, DeepLabv3+ \cite{deeplapv3} and UNET++ \cite{unetplusplus}; ass well three line segment detectors: AFM \cite{afm}, LCNN \cite{lcnn} and HAWP \cite{hawp}. Finally, ablation study is done to validate the newly proposed components. 
+
+\subsection{Results}
+
+\subsection{Ablation Study}
+
+
 
 \begin{table*}[]
-  \begin{tabular}{l|l|llll|lll|l}
-  \hline
-          & \multicolumn{1}{c|}{\multirow{2}{*}{Backbone}} & \multicolumn{4}{l|}{Segmentation metrics} & \multicolumn{3}{l|}{Classification metrics} & Regression metric \\ \cline{3-10} 
-          & \multicolumn{1}{c|}{}                          & APR      & ARR      & $F_1$       & $F_{\beta}$    & APR           & ARR          & F1           & $L_1$          \\ \hline
-  LSNet   & modified VGG                                   & 0.916    & 0.726    & 0.810       & 0.864          & 0.966         & 0.982        & 0.974        & 0.073          \\
-  LSNetv2 & modified VGG                                   & 0.818    & 0.793    & 0.805       & 0.812          & 0.755         & 0.990        & 0.857        & 0.242          \\
-  LSNetv2 & Resnet-50                                      & 0.918    & 0.731    & 0.814       & 0.867          & 0.953         & 0.905        & 0.929        & 0.220          \\
-  LSNetv2 & Efficientnetv2-M                               & 0.923    & 0.674    & 0.779       & 0.851          & 0.961         & 0.827        & 0.890        & 0.213          \\
-  LSNetv2 & ConvNext-Tiny                                  & 0.934    & 0.724    & 0.815       & 0.875          & 0.960         & 0.978        & 0.969        & 0.240            
-  \end{tabular}
-  \caption{\label{pldm_table}PLDM.}
+\begin{tabular}{lllll|llll|llll|llll}
+        & \multicolumn{4}{c|}{PLDU}           & \multicolumn{4}{c|}{PLDM}           & \multicolumn{4}{c|}{TTPLA}          & \multicolumn{4}{c}{Esmart}          \\ \cline{2-17} 
+        & APR   & ARR   & $F_1$ & $F_{\beta}$ & APR   & ARR   & $F_1$ & $F_{\beta}$ & APR   & ARR   & $F_1$ & $F_{\beta}$ & APR   & ARR   & $F_1$ & $F_{\beta}$ \\ \hline
+LSNet   & 0.914 & 0.662 & 0.767 & 0.840       & 0.916 & 0.726 & 0.810 & 0.864       & 0.579 & 0.525 & 0.551 & 0.565       & 0.726 & 0.812 & 0.766 & 0.744       \\
+LSNetv2 & 0.938 & 0.666 & 0.779 & 0.857       & 0.934 & 0.724 & 0.815 & 0.875       & 0.714 & 0.560 & 0.628 & 0.672       & 0.845 & 0.814 & 0.829 & 0.837      
+\end{tabular}
+\caption{\label{res1_table} Result 1}
 \end{table*}
 
 \begin{table*}[]
-  \begin{tabular}{l|l|llll|lll|l}
-  \hline
-          & \multicolumn{1}{c|}{\multirow{2}{*}{Backbone}} & \multicolumn{4}{l|}{Segmentation metrics} & \multicolumn{3}{l|}{Classification metrics} & Regression metric \\ \cline{3-10} 
-          & \multicolumn{1}{c|}{}                          & APR      & ARR      & $F_1$       & $F_{\beta}$    & APR           & ARR          & F1           & $L_1$          \\ \hline
-  LSNet   & modified VGG                                   & 0.914    & 0.662    & 0.767       & 0.840          & 0.951         & 0.951        & 0.951        & 0.086          \\
-  LSNetv2 & modified VGG                                   & 0.899    & 0.685    & 0.778       & 0.839          & 0.998         & 0.778        & 0.874        & 0.888          \\
-  LSNetv2 & Resnet-50                                      & 0.920    & 0.673    & 0.778       & 0.848          & 0.902         & 0.973        & 0.936        & 0.276          \\
-  LSNetv2 & Efficientnetv2-M                               & 0.907    & 0.645    & 0.754       & 0.829          & 0.838         & 0.931        & 0.882        & 0.287          \\
-  LSNetv2 & ConvNext-Tiny                                  & 0.938    & 0.666    & 0.779       & 0.857          & 0.967         & 0.944        & 0.956        & 0.272            
-  \end{tabular}
-  \caption{\label{pldu_table} PLDU.}
+\begin{tabular}{lllll|llll|llll|llll}
+                 & \multicolumn{4}{c|}{PLDU}           & \multicolumn{4}{c|}{PLDM}           & \multicolumn{4}{c|}{TTPLA}          & \multicolumn{4}{c}{Esmart}          \\ \cline{2-17} 
+Backbone         & APR   & ARR   & $F_1$ & $F_{\beta}$ & APR   & ARR   & $F_1$ & $F_{\beta}$ & APR   & ARR   & $F_1$ & $F_{\beta}$ & APR   & ARR   & $F_1$ & $F_{\beta}$ \\ \hline
+modified VGG     & 0.899 & 0.685 & 0.778 & 0.839       & 0.818 & 0.793 & 0.805 & 0.812       & 0.696 & 0.566 & 0.624 & 0.661       & 0.759 & 0.813 & 0.785 & 0.771       \\
+Resnet-50        & 0.920 & 0.673 & 0.778 & 0.848       & 0.918 & 0.731 & 0.814 & 0.867       & 0.643 & 0.635 & 0.639 & 0.641       & 0.794 & 0.809 & 0.802 & 0.798       \\
+Efficientnetv2-M & 0.907 & 0.645 & 0.754 & 0.829       & 0.923 & 0.674 & 0.779 & 0.851       & 0.573 & 0.355 & 0.438 & 0.502       & 0.747 & 0.796 & 0.771 & 0.758       \\
+ConvNext-Tiny    & 0.938 & 0.666 & 0.779 & 0.857       & 0.934 & 0.724 & 0.815 & 0.875       & 0.714 & 0.560 & 0.628 & 0.672       & 0.845 & 0.814 & 0.829 & 0.837      
+\end{tabular}
+\caption{\label{backbone_res_table} Backbone analysis}
 \end{table*}
 
-\begin{table*}[]
-  \begin{tabular}{l|l|llll|lll|l}
-  \hline
-          & \multicolumn{1}{c|}{\multirow{2}{*}{Backbone}} & \multicolumn{4}{l|}{Segmentation metrics} & \multicolumn{3}{l|}{Classification metrics} & Regression metric \\ \cline{3-10} 
-          & \multicolumn{1}{c|}{}                          & APR      & ARR      & $F_1$       & $F_{\beta}$    & APR           & ARR          & F1           & $L_1$          \\ \hline
-  AFM     & UNET                                           & 0.495    & 0.432    & 0.457       & 0.498          & -             & -            & -            & -              \\
-  LCNN    & Hourglass                                      & 0.541    & 0.464    & 0.315       & 0.498          & -             & -            & -            & -              \\
-  HAWP    & Hourglass                                      & 0.581    & 0.421    & 0.485       & 0.532          & -             & -            & -            & -              \\
-  UNET++  & Resnet-34                                      & 0.843    & 0.591    & 0.668       & 0.739          & -             & -            & -            & -              \\ 
-  PLGAN   & Resnet-6                                       & 0.863    & 0.577    & 0.687       & 0.769          & -             & -            & -            & -              \\ \hline
-  LSNet   & modified VGG                                   &     &     & 0.551        & 0.556          & 0.917         & 0.887        & 0.902        & 0.086          \\
-  LSNetv2 & modified VGG                                   & 0.686    & 0.429    & 0.528       & 0.603          & 0.723         & 0.964        & 0.827        & 0.224          \\
-  LSNetv2 & Resnet-50                                      & 0.643    & 0.635    & 0.639       & 0.641          & 0.790         & 0.943        & 0.860        & 0.230          \\
-  LSNetv2 & Efficientnetv2-M                               & 0.573    & 0.355    & 0.438       & 0.502          & 0.760         & 0.881        & 0.816        & 0.239          \\
-  LSNetv2 & ConvNext-Tiny                                  & 0.714    & 0.560    & 0.628       & 0.672          & 0.931         & 0.842        & 0.885        & 0.185            
-  \end{tabular}
-  \caption{\label{ttpla_table} TTPLA.}
-\end{table*}
 
-\begin{table*}[]
-  \begin{tabular}{l|l|llll|lll|l}
-  \hline
-          & \multicolumn{1}{c|}{\multirow{2}{*}{Backbone}} & \multicolumn{4}{l|}{Segmentation metrics} & \multicolumn{3}{l|}{Classification metrics} & Regression metric \\ \cline{3-10} 
-          & \multicolumn{1}{c|}{}                          & APR      & ARR      & $F_1$       & $F_{\beta}$    & APR           & ARR          & F1           & $L_1$          \\ \hline
-  LSNet   & modified VGG                                   & 0.726    & 0.812    & 0.766       & 0.744          & 0.943         & 0.909        & 0.926        & 0.087          \\
-  LSNetv2 & modified VGG                                   & 0.759    & 0.813    & 0.785       & 0.771          & 0.723         & 0.964        & 0.827        & 0.224          \\
-  LSNetv2 & Resnet-50                                      & 0.794    & 0.809    & 0.802       & 0.798          & 0.790         & 0.943        & 0.860        & 0.230          \\
-  LSNetv2 & Efficientnetv2-M                               & 0.747    & 0.796    & 0.771       & 0.758          & 0.760         & 0.881        & 0.816        & 0.239          \\
-  LSNetv2 & ConvNext-Tiny                                  & 0.845    & 0.814    & 0.829       & 0.837          & 0.963         & 0.896        & 0.929        & 0.256            
-  \end{tabular}
-  \caption{\label{esmart_table} Esmart.}
-\end{table*}
 
 \begin{table}[]
-  \begin{tabular}{lll|ll}
-  ConvNext          & Bipartite   & Ordered loss            & $F_1$ & $F_{\beta}$ \\ \hline
-                    &             &                         & 0.766 & 0.744       \\
-  \checkmark        &             &                         & 0.806 & 0.826       \\
-  \checkmark        & \checkmark  &                         & 0.823 & 0.824       \\
-                    & \checkmark  &                         & 0.764 & 0.753       \\
-                    & \checkmark  & \checkmark              & 0.785 & 0.771       \\
-  \checkmark        & \checkmark  & \checkmark              & 0.829 & 0.837  
+\begin{tabular}{l|l|llll|l}
+            & Backbone         & APR   & ARR   & $F_1$ & $F_{\beta}$ & param (M) \\ \hline
+FPN*        & Resnet-18        & 0.746 & 0.492 & 0.546 & 0.612       & 13.0      \\
+DeepLabv3+* & Resnet-18        & 0.784 & 0.510 & 0.573 & 0.645       & 12.3      \\
+UNET++*     & Resnet-34        & 0.843 & 0.591 & 0.668 & 0.739       & 15.9      \\
+PLGAN*      & Resnet-6         & 0.863 & 0.577 & 0.687 & 0.769       & 14.9      \\ \hline
+AFM         & UNET             & 0.495 & 0.432 & 0.457 & 0.498       & 44.0      \\
+LCNN        & Hourglass        & 0.541 & 0.464 & 0.315 & 0.498       & 10.9      \\
+HAWP        & Hourglass        & 0.581 & 0.421 & 0.485 & 0.532       & 11.6      \\ \hline
+LSNetv2     & modified VGG     & 0.696 & 0.566 & 0.624 & 0.661       & 10.0      \\
+LSNetv2     & Resnet-50        & 0.643 & 0.635 & 0.639 & 0.641       & 12.8      \\
+LSNetv2     & Efficientnetv2-M & 0.573 & 0.355 & 0.438 & 0.502       & 14.5      \\
+LSNetv2     & ConvNext-Tiny    & 0.714 & 0.560 & 0.628 & 0.672       & 13.9     
+\end{tabular}
+\caption{\label{ttpla_table} Comparison to TTPLA results.}
+\end{table}
+
+% \begin{table*}[]
+%   \begin{tabular}{l|l|llll|lll|l}
+%   \hline
+%           & \multicolumn{1}{c|}{\multirow{2}{*}{Backbone}} & \multicolumn{4}{l|}{Segmentation metrics} & \multicolumn{3}{l|}{Classification metrics} & Regression metric \\ \cline{3-10} 
+%           & \multicolumn{1}{c|}{}                          & APR      & ARR      & $F_1$       & $F_{\beta}$    & APR           & ARR          & F1           & $L_1$          \\ \hline
+%   LSNet   & modified VGG                                   & 0.916    & 0.726    & 0.810       & 0.864          & 0.966         & 0.982        & 0.974        & 0.073          \\
+%   LSNetv2 & modified VGG                                   & 0.818    & 0.793    & 0.805       & 0.812          & 0.755         & 0.990        & 0.857        & 0.242          \\
+%   LSNetv2 & Resnet-50                                      & 0.918    & 0.731    & 0.814       & 0.867          & 0.953         & 0.905        & 0.929        & 0.220          \\
+%   LSNetv2 & Efficientnetv2-M                               & 0.923    & 0.674    & 0.779       & 0.851          & 0.961         & 0.827        & 0.890        & 0.213          \\
+%   LSNetv2 & ConvNext-Tiny                                  & 0.934    & 0.724    & 0.815       & 0.875          & 0.960         & 0.978        & 0.969        & 0.240            
+%   \end{tabular}
+%   \caption{\label{pldm_table}PLDM.}
+% \end{table*}
+
+% \begin{table*}[]
+%   \begin{tabular}{l|l|llll|lll|l}
+%   \hline
+%           & \multicolumn{1}{c|}{\multirow{2}{*}{Backbone}} & \multicolumn{4}{l|}{Segmentation metrics} & \multicolumn{3}{l|}{Classification metrics} & Regression metric \\ \cline{3-10} 
+%           & \multicolumn{1}{c|}{}                          & APR      & ARR      & $F_1$       & $F_{\beta}$    & APR           & ARR          & F1           & $L_1$          \\ \hline
+%   LSNet   & modified VGG                                   & 0.914    & 0.662    & 0.767       & 0.840          & 0.951         & 0.951        & 0.951        & 0.086          \\
+%   LSNetv2 & modified VGG                                   & 0.899    & 0.685    & 0.778       & 0.839          & 0.998         & 0.778        & 0.874        & 0.888          \\
+%   LSNetv2 & Resnet-50                                      & 0.920    & 0.673    & 0.778       & 0.848          & 0.902         & 0.973        & 0.936        & 0.276          \\
+%   LSNetv2 & Efficientnetv2-M                               & 0.907    & 0.645    & 0.754       & 0.829          & 0.838         & 0.931        & 0.882        & 0.287          \\
+%   LSNetv2 & ConvNext-Tiny                                  & 0.938    & 0.666    & 0.779       & 0.857          & 0.967         & 0.944        & 0.956        & 0.272            
+%   \end{tabular}
+%   \caption{\label{pldu_table} PLDU.}
+% \end{table*}
+
+% \begin{table*}[]
+%   \begin{tabular}{l|l|llll|lll|l}
+%   \hline
+%           & \multicolumn{1}{c|}{\multirow{2}{*}{Backbone}} & \multicolumn{4}{l|}{Segmentation metrics} & \multicolumn{3}{l|}{Classification metrics} & Regression metric       \\ \cline{3-10} 
+%           & \multicolumn{1}{c|}{}                          & APR      & ARR      & $F_1$       & $F_{\beta}$    & APR           & ARR          & F1           & $L_1$          \\ \hline
+%   AFM*     & UNET                                           & 0.495    & 0.432    & 0.457       & 0.498          & -             & -            & -            & -              \\
+%   LCNN    & Hourglass                                      & 0.541    & 0.464    & 0.315       & 0.498          & -             & -            & -            & -              \\
+%   HAWP    & Hourglass                                      & 0.581    & 0.421    & 0.485       & 0.532          & -             & -            & -            & -              \\
+%   UNET++  & Resnet-34                                      & 0.843    & 0.591    & 0.668       & 0.739          & -             & -            & -            & -              \\ 
+%   PLGAN   & Resnet-6                                       & 0.863    & 0.577    & 0.687       & 0.769          & -             & -            & -            & -              \\ \hline
+%   LSNet   & modified VGG                                   & 0.579    & 0.525    & 0.551       & 0.565          & 0.917         & 0.887        & 0.902        & 0.086          \\
+%   LSNetv2 & modified VGG                                   & 0.696    & 0.566    & 0.624       & 0.661          & 0.723         & 0.964        & 0.827        & 0.224          \\
+%   LSNetv2 & Resnet-50                                      & 0.643    & 0.635    & 0.639       & 0.641          & 0.790         & 0.943        & 0.860        & 0.230          \\
+%   LSNetv2 & Efficientnetv2-M                               & 0.573    & 0.355    & 0.438       & 0.502          & 0.760         & 0.881        & 0.816        & 0.239          \\
+%   LSNetv2 & ConvNext-Tiny                                  & 0.714    & 0.560    & 0.628       & 0.672          & 0.931         & 0.842        & 0.885        & 0.185            
+%   \end{tabular}
+%   \caption{\label{ttpla_table} TTPLA.}
+% \end{table*}
+
+% \begin{table*}[]
+%   \begin{tabular}{l|l|llll|lll|l}
+%   \hline
+%           & \multicolumn{1}{c|}{\multirow{2}{*}{Backbone}} & \multicolumn{4}{l|}{Segmentation metrics} & \multicolumn{3}{l|}{Classification metrics} & Regression metric \\ \cline{3-10} 
+%           & \multicolumn{1}{c|}{}                          & APR      & ARR      & $F_1$       & $F_{\beta}$    & APR           & ARR          & F1           & $L_1$          \\ \hline
+%   AFM     & UNET                                           & 0.495    & 0.432    & 0.457       & 0.498          & -             & -            & -            & -              \\
+%   LCNN    & Hourglass                                      & 0.541    & 0.464    & 0.315       & 0.498          & -             & -            & -            & -              \\
+%   HAWP    & Hourglass                                      & 0.581    & 0.421    & 0.485       & 0.532          & -             & -            & -            & -              \\
+%   UNET++  & Resnet-34                                      & 0.843    & 0.591    & 0.668       & 0.739          & -             & -            & -            & -              \\ 
+%   PLGAN   & Resnet-6                                       & 0.863    & 0.577    & 0.687       & 0.769          & -             & -            & -            & -              \\ \hline
+%   LSNet   & modified VGG                                   & 0.579    & 0.525    & 0.551       & 0.565          & 0.917         & 0.887        & 0.902        & 0.086          \\
+%   LSNetv2 & modified VGG                                   & 0.696    & 0.566    & 0.624       & 0.661          & 0.723         & 0.964        & 0.827        & 0.224          \\
+%   LSNetv2 & Resnet-50                                      & 0.643    & 0.635    & 0.639       & 0.641          & 0.790         & 0.943        & 0.860        & 0.230          \\
+%   LSNetv2 & Efficientnetv2-M                               & 0.573    & 0.355    & 0.438       & 0.502          & 0.760         & 0.881        & 0.816        & 0.239          \\
+%   LSNetv2 & ConvNext-Tiny                                  & 0.714    & 0.560    & 0.628       & 0.672          & 0.931         & 0.842        & 0.885        & 0.185            
+%   \end{tabular}
+%   \caption{\label{ttpla_table} TTPLA.}
+% \end{table*}
+
+% \begin{table*}[]
+%   \begin{tabular}{l|l|llll|lll|l}
+%   \hline
+%           & \multicolumn{1}{c|}{\multirow{2}{*}{Backbone}} & \multicolumn{4}{l|}{Segmentation metrics} & \multicolumn{3}{l|}{Classification metrics} & Regression metric \\ \cline{3-10} 
+%           & \multicolumn{1}{c|}{}                          & APR      & ARR      & $F_1$       & $F_{\beta}$    & APR           & ARR          & F1           & $L_1$          \\ \hline
+%   LSNet   & modified VGG                                   & 0.726    & 0.812    & 0.766       & 0.744          & 0.943         & 0.909        & 0.926        & 0.087          \\
+%   LSNetv2 & modified VGG                                   & 0.759    & 0.813    & 0.785       & 0.771          & 0.723         & 0.964        & 0.827        & 0.224          \\
+%   LSNetv2 & Resnet-50                                      & 0.794    & 0.809    & 0.802       & 0.798          & 0.790         & 0.943        & 0.860        & 0.230          \\
+%   LSNetv2 & Efficientnetv2-M                               & 0.747    & 0.796    & 0.771       & 0.758          & 0.760         & 0.881        & 0.816        & 0.239          \\
+%   LSNetv2 & ConvNext-Tiny                                  & 0.845    & 0.814    & 0.829       & 0.837          & 0.963         & 0.896        & 0.929        & 0.256            
+%   \end{tabular}
+%   \caption{\label{esmart_table} Esmart.}
+% \end{table*}
+
+\begin{table}[]
+  \begin{tabular}{lll|llll}
+  ConvNext          & Bipartite   & Ordered loss            & APR & ARR & $F_1$ & $F_{\beta}$ \\ \hline
+                    &             &                         & 0.726 & 0.812 & 0.766 & 0.744       \\
+  \checkmark        &             &                         & 0.844 & 0.770 & 0.806 & 0.826       \\
+  \checkmark        & \checkmark  &                         & 0.825 & 0.820 & 0.823 & 0.824       \\
+                    & \checkmark  &                         & 0.743 & 0.787 & 0.764 & 0.753       \\
+                    & \checkmark  & \checkmark              & 0.759 & 0.813 & 0.785 & 0.771       \\
+  \checkmark        & \checkmark  & \checkmark              & 0.845 & 0.814 & 0.829 & 0.837  
   \end{tabular}
   \caption{\label{ablation_esmart} Esmart ablation.}
 \end{table}
 
 \begin{table}[]
-  \begin{tabular}{lll|ll}
-  ConvNext          & Bipartite   & Ordered loss            & $F_1$ & $F_{\beta}$ \\ \hline
-                    &             &                         & 0.551 & 0.556       \\
-  \checkmark        &             &                         & 0.641 & 0.632       \\
-  \checkmark        & \checkmark  &                         & 0.616 & 0.650       \\
-                    & \checkmark  &                         & 0.604 & 0.638       \\
-                    & \checkmark  & \checkmark              & 0.624 & 0.661       \\
-  \checkmark        & \checkmark  & \checkmark              & 0.628 & 0.672  
+  \begin{tabular}{lll|llll}
+  ConvNext          & Bipartite   & Ordered loss            & APR & ARR & $F_1$ & $F_{\beta}$ \\ \hline
+                    &             &                         & 0.579 & 0.525 & 0.551 & 0.565       \\
+  \checkmark        &             &                         & 0.624 & 0.660 & 0.641 & 0.632       \\
+  \checkmark        & \checkmark  &                         & 0.651 & 0.664 & 0.616 & 0.650       \\
+                    & \checkmark  &                         & 0.671 & 0.550 & 0.604 & 0.638       \\
+                    & \checkmark  & \checkmark              & 0.696 & 0.566 & 0.624 & 0.661       \\
+  \checkmark        & \checkmark  & \checkmark              & 0.714 & 0.560 & 0.628 & 0.672  
   \end{tabular}
-  \caption{\label{ablation_esmart} Esmart ablation.}
+  \caption{\label{ablation_esmart} TTPLA ablation.}
 \end{table}
 
+\newcommand\resone{
+    1 \times 1 \text{ maxpool, s=2 } \\
+    \schema{
+    \schemabox{$2 \times$}
+    }
+    {
+    \schemabox{
+    $1 \times 1, 64$ \\
+    $3 \times 3, 64$ \\
+    $1 \times 3, 64$ \\
+    }
+    }
+}
 
+\newcommand\effone{
+    3 \times 3, 24 \text{, s=2 } \\
+    \schema{
+    \schemabox{$3 \times$}
+    }
+    {
+    \schemabox{
+    $3 \times 3, 24$\\
+    }
+    } \\
+}
+\newcommand\efftwo{
+$3 \times 3, 96 \text{, s=2}$\\
+$1 \times 1, 48$ \\
+\schema{
+    
+    \schemabox{$4 \times$}
+    }
+    {
+    \schemabox{
+    $3 \times 3, 192$\\
+    $1 \times 1, 48$
+    }
+    } \\
+}
 
+\newcommand\effthree{
+$3 \times 3, 192 \text{, s=2}$\\
+$1 \times 1, 80$ \\
+\schema{
+    
+    \schemabox{$4 \times$}
+    }
+    {
+    \schemabox{
+    $3 \times 3, 320$\\
+    $1 \times 1, 80$
+    }
+    } \\
+}
 
+\newcommand\efffour{
+$1 \times 1, 320$ \\
+$\text{dw } 3 \times 3, 320, s=2$\\
+SE-Block(ratio=0.25) \\
+$1 \times 1, 160$ \\
+ \schema{
+\schemabox{$6 \times$}
+}
+{
+\schemabox{
+$1 \times 1, 640$ \\
+$\text{dw } 3 \times 3, 640$\\
+SE-Block(ratio=0.25) \\
+$1 \times 1, 160$ \\
+}
+} \\
+}
+
+\newcommand\efffive{
+$1 \times 1, 960$ \\
+$\text{dw } 3 \times 3, 960$\\
+SE-Block(ratio=0.25) \\
+$1 \times 1, 176$ \\
+ \schema{
+\schemabox{$13 \times$}
+}
+{
+\schemabox{
+$1 \times 1, 1056$ \\
+$\text{dw } 3 \times 3, 1056$\\
+SE-Block(ratio=0.25) \\
+$1 \times 1, 176$ \\
+}
+} \\
+$1 \times 1, 1056$ \\
+}
+
+\newcommand\convnextone{
+    4 \times 4, 96 \text{, s=4 } \\
+}
+
+\newcommand\convnexttwo{
+    \schema{
+    \schemabox{$3 \times$}
+    }
+    {
+    \schemabox{
+    $7 \times 7, 96$\\
+    $1 \times 1, 384$ \\
+    $1 \times 1, 96$ \\
+    }
+    } \\
+    2 \times 2, 192, \text{ s=2}
+    
+}
+
+\newcommand\convnextthree{
+    \schema{
+    \schemabox{$3 \times$}
+    }
+    {
+    \schemabox{
+    dw $7 \times 7, 192$\\
+    $1 \times 1, 768$ \\
+    $1 \times 1, 192$ \\
+    }
+    } \\
+    2 \times 2, 384, \text{ s=2}
+    
+}
+
+\newcommand\convnextfour{
+    \schema{
+    \schemabox{$9 \times$}
+    }
+    {
+    \schemabox{
+    dw $7 \times 7, 384$\\
+    $1 \times 1, 1536$ \\
+    $1 \times 1, 384$ \\
+    }
+    }
+}
 
 \begin{table*}[]
-  \centering
-  \begin{tabular}{llllll}
-  \hline
-                    & Backbone        & APR   & ARR       & $F_1$ & $F_\beta$ \\ \hline
-  AFM               & UNET            & 0.495 & 0.432     & 0.457 & 0.498     \\
-  LCNN              & Hourglass       & 0.541 & 0.464     & 0.315 & 0.498     \\
-  HAWP              & Hourglass       & 0.581 & 0.421     & 0.485 & 0.532     \\
-  UNET++            & Resnet-34       & 0.843 & 0.591     & 0.668 & 0.739     \\ 
-  PLGAN             & Resnet-6        & 0.863 & 0.577     & 0.687 & 0.769     \\ \hline
-  LSNet             & modified VGG    & 0.471 & 0.337     & 0.393 & 0.431     \\ 
-  LSNetv2           & modified VGG    & 0.623 & 0.650     & 0.636 & 0.629     \\
-  LSNetv2           & Resnet-50       & 0.604 & 0.605     & 0.605 & 0.604     \\
-  LSNetv2           & Efficientnetv2M & 0.508 & 0.592     & 0.546 & 0.524     \\
-  LSNetv2           & ConvNext-Tiny   & 0.717 & 0.608     & 0.658 & 0.688     \\
-  \end{tabular}
+\begin{tabular}{l|l|l|l|l|l}
+Stage & Output size & Modified VGG & Resnet-50 & EfficientnetV2-M & ConvNext-Tiny \\ \hline
+1     & 256 x 256   &              &     & \makecell{\effone} &               \\ \hline
+2     & 128 x 128   &              & \makecell{\resone}  & \makecell{\efftwo}  & \makecell{\convnextone} \\ \hline
+3     & 64 x 64     &              &           & \makecell{\effthree} & \makecell{\convnexttwo}   \\ \hline
+4     & 32 x 32     &              &           & \makecell{\efffour}  & \makecell{\convnextthree}  \\ \hline
+5     & 32 x 32     &              &           & \makecell{\efffive}  & \makecell{\convnextfour}   \\ \hline
+6     &             &              &           &                  &               \\ \hline
+7     &             &              &           &                  &              
+\end{tabular}
+\caption{\label{backbone_arch} Backbone architecture.}
 \end{table*}
+
+% \begin{table*}[]
+%   \centering
+%   \begin{tabular}{llllll}
+%   \hline
+%                     & Backbone        & APR   & ARR       & $F_1$ & $F_\beta$ \\ \hline
+%   AFM               & UNET            & 0.495 & 0.432     & 0.457 & 0.498     \\
+%   LCNN              & Hourglass       & 0.541 & 0.464     & 0.315 & 0.498     \\
+%   HAWP              & Hourglass       & 0.581 & 0.421     & 0.485 & 0.532     \\
+%   UNET++            & Resnet-34       & 0.843 & 0.591     & 0.668 & 0.739     \\ 
+%   PLGAN             & Resnet-6        & 0.863 & 0.577     & 0.687 & 0.769     \\ \hline
+%   LSNet             & modified VGG    & 0.471 & 0.337     & 0.393 & 0.431     \\ 
+%   LSNetv2           & modified VGG    & 0.623 & 0.650     & 0.636 & 0.629     \\
+%   LSNetv2           & Resnet-50       & 0.604 & 0.605     & 0.605 & 0.604     \\
+%   LSNetv2           & Efficientnetv2M & 0.508 & 0.592     & 0.546 & 0.524     \\
+%   LSNetv2           & ConvNext-Tiny   & 0.717 & 0.608     & 0.658 & 0.688     \\
+%   \end{tabular}
+% \end{table*}
 
 % \begin{table}[]
 %   \begin{tabular}{lllllll}
@@ -893,16 +1105,9 @@ The proposed LSNetv2 is implemented with Tensorflow. Each LSNetv2 model is train
   \caption{4 x 4}
 \end{figure*}
 
-\subsection{Evaluation Metrics}
 
-For comparison purpose, we evaluate LSNetv2 in same manner as as segmenation models. To produce the segmentation map, for each cell within the 31x31 output grid that was classified to contain segments of powerlines, we use OpenCV to generate visible white lines from the predicted pairs of endpoints. Different segmentation maps were produced using varying line width for deeper analysis.
-Similarly to \cite{Nguyen2020}, we adopt pixel-level averaged recall rate (ARR), averaged precision rate (APR) and $F_1$ Scores. In addition, we also use averaged $F_{\beta}$:
-\begin{equation}
-  F_{\beta} = \frac{1}{N} \sum_{i=1}^N  \frac{(1 + \beta^2)\text{Precision} \times \text{Recall}}{\beta_2 \times \text{Precision} + \text{Recall}} 
-\end{equation}
-where N is the number of test images and $\beta_2 = 0.3$ in order to place more emphasis on precision then conventional $F_1$. According to \cite{F03}, recall is not as relevant as precision since the recall rate of 1.0 can be achieved by predicting all pixel in the image as positive. Also, in the case of LSNet, higher recall rate can also be attributed to imprecise prediction of line segment endpoints as illustrated in Fig \ref{hirecall}. Thus $F_{\beta}$ score might a better measurement of LSNet performance than $F_1$. We also confirm the effectiveness of LSNetv2 via precision, recall and $F_1$ score of the classification branch as well as the regression loss of the regression branch.
 
-\subsection{Results}
+
 
 
  
