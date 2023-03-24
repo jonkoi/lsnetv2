@@ -609,11 +609,12 @@ Powerline detection share some similarity with the wireframe parsing problem whe
 \subsection{Preliminaries: LS-Net}
 LS-Net \cite{Nguyen2020} was proposed as a single-shot line-segment detector inspired by SSD \cite{SSD} and YOLO \cite{YOLO}. 
 
-\textcolor{red}{LS-Net reduces the need for pixel-level annotated data ground truth, which can be laborious to obtain. Especially in the case of powerlines, which can often be quite slender yet span across images, more meticulousness is required in the annotating process.} Instead, LS-Net relies only on polyline annotation that trace along the powerline. Polyline annotation is much less effort and arguably more robust to labelling inaccuracy allowing more ground truth to be acquired facilitate better deep learning models. 
+\textcolor{red}{LS-Net reduces the need for pixel-level annotated data ground truth, which can be laborious to obtain. Especially in the case of powerlines, which can often be quite slender yet span across images, more meticulousness is required in the annotating process.} Instead, LS-Net relies only on polyline annotation that trace along the powerline. Polyline annotation requires much less effort and is arguably more robust to labelling inaccuracy allowing more ground truth images to be acquired and facilitating better deep learning models. 
 
-LS-Net breaks down the problem of powerline detection into detecting and locating line segments in four overlapping grids, which are superimposed onto the input image. In each cell of the grids,  LS-Net detect whether there exists parts of powerlines within its borders and provides the coordinates of the line segment endpoints. Theses divided results can be combined to produce a complete segment map of powerlines. The four-grid approach was proposed as opposed to one-grid approach, such as SSD \cite{SSD} and YOLO \cite{YOLO}, in order to encourage more thorough detection and localization of powerlines and combat the problem of discontinuities at grid cell borders and corners. This is illustrated in \ref{}. 
+LS-Net breaks down the problem of powerline detection into detecting and locating line segments in four overlapping grids, which are superimposed onto the input image. In each cell of the grids,  LS-Net detects whether there exist parts of powerlines within its borders and provides the coordinates of the line segment endpoints. Theses divided results can be combined to produce a complete segment map of powerlines. The four-grid approach was proposed as opposed to the one-grid approach, commonly found in models such as SSD \cite{SSD} and YOLO \cite{YOLO}, in order to encourage more thorough detection and localization of powerlines and combat the problem of discontinuities at grid cell borders and corners. This is illustrated in \ref{}. 
 
-To perform line segment detection, the architecture of LS-Net involves a fully convolutional feature extractor which branches out into a classifier module and a regressor module as shown in \ref{lsnet_architecture}. The modules is to detect line segment existence and line segment endpoint coordinates respectively. The feature extractor of the original LS-Net was proposed to be a version of VGG-16 network \cite{VGG16} which was modified to include Group Normalization \cite{group_norm} before activations and replace max pooling layer with stride 2 for convolutional layer. The classifier module uses the feature map from the extractor and follows up with a 2 x 2 convolutional layer with stride 1 resulting in four sets of 512-channeled feature maps, in which each element in the feature map correspond to a cell of the respective grid. Finally, a 1 x 1 convolutional layer reduces the feature maps to a 2-channeled output. The channels correspond to the classes "line segment exists" and "line segment does not exist". The regressor module follows almost the identical design but ultimately produces a 4-channeled output instead, corresponding to the xy-coordinates of the predicted line segment endpoints. A detailed configuration of LS-Net is shown in \ref{lsnet_config}.
+To perform line segment detection, the architecture of LS-Net involves a fully convolutional feature extractor which branches out into a classifier module and a regressor module as shown in \ref{lsnet_architecture}. These two modules aim to detect the presence of a line segment and the line segment endpoint coordinates respectively. The feature extractor of the original LS-Net was proposed to be a version of VGG-16 network \cite{VGG16} which was modified to include Group Normalization \cite{group_norm} before activations and replace max pooling layer with stride 2 for convolutional layer. The classifier module uses the feature map from the extractor and follows up with a 2 x 2 convolutional layer with stride 1 resulting in four sets of 512-channeled feature maps, in which each element in the feature map correspond to a cell of the respective grid. Finally, a 1 x 1 convolutional layer reduces the feature maps to a 2-channeled output. The channels correspond to the classes "line segment exists" and "line segment does not exist". The regressor module follows almost the identical design but ultimately produces a 4-channeled output instead, corresponding to the xy-coordinates of the predicted line segment endpoints. A detailed configuration of LS-Net is shown in \ref{lsnet_config}.
+\commentM{These are a bit too many details for the beginning of the methodology section. It could be sufficient to say that it builds on a modified version of VGG-16 with a classification and regression head.}
 
 Loss ???
 
@@ -622,17 +623,17 @@ Loss ???
 
 \commentM{Then dive into the individual components (subsections), again starting from a motivation perspective}
 
-\textcolor{green}{It has been shown that LS-Net has been successful for cases included in the dataset \cite{}, which consists mostly images of powerlines being captured from a relatively close distance and the visibility of the powerlines throughout the span of the image. These cases might resembles distance of footage from autonomous line following drones flying in proximity with the powerline. However, in reality, images such as those used for visual inspection can be taken from further away making the some segments of powerlines appear really thin and/or blended with the background. If we follow the grid-based approach of LS-Net, the detection performance of powerline in each cell may depend on the information of areas around it. However, according to \textcolor{red}{this calculation} the theoretic receptive field of LS-Net is only four times the cell size (? as calculated by torchscan \cite{torchscan}), which LS-Net is unable to aggregate global context for the cell inference. Furthermore, the design of the first LS-Net is based on the assumption that only one power line segment is present for each division cell and thus only one segment is to be detected. This does not apply in practice where there exist powerlines appearing in close proximity and appearing to intersect each other (Figure \ref{}).}
+\textcolor{green}{It has been shown that LS-Net has been successful for cases included in the dataset \cite{}, which consists mostly of images of powerlines being captured from a relatively close distance and the visibility of the powerlines throughout the span of the image. These cases might resembles distance of footage from autonomous line following drones flying in proximity with the powerline. However, in reality, images such as those used for visual inspection can be taken from further away making the segments of powerlines appear really thin and/or blended with the background. If we follow the grid-based approach of LS-Net, the detection performance of powerlines in each cell may depend on the information of areas around it. However, according to \textcolor{red}{this calculation} the theoretic receptive field of LS-Net is only four times the cell size (? as calculated by torchscan \cite{torchscan}), which LS-Net is unable to aggregate global context for the cell inference. Furthermore, the design of the first LS-Net is based on the assumption that only one powerline segment is present for each division cell and thus only one segment is to be detected. This does not apply in practice where there exist powerlines appearing in close proximity and appearing to intersect each other (Figure \ref{}).}
 
 \textcolor{green}{To alleviate these limitations of LS-Net, we propose a new version of LS-Net, called LS-Netv2. In order to tackle the thin powerline problem, the first change we made is to increase the input size from 512 to 1536 (3x). This is to cater to the visual inspection pipeline of powerlines which has to often deal with high resolution images from far away. We discovered that resizing these high resolution images to 1536 is the sweet spot where the trade-off between powerline visibility and model efficiency. Using the same compression ratio, the size of each grid cell becomes 96.}
 
-\textcolor{green}{As mentioned, the VGG-inspired backbone design results in a receptive field of about four times the cell size. Furthermore, VGG architecture family has been quite obsolete and . Thus, we updated the backbone with a variant of the state-of-the-art ConvNeXt \cite{convnext}. ConvNeXt was recently introduced as a modernized version of ResNet \cite{resnet} which is equipped with recent properties of the hierarchical vision transformer Swin \cite{swin}. Modifications were made on the macro scale, such as the change in the ratios between stages, the use of depthwise convolution in similar manner to ResNeXt \cite{resnext}, enlarging kernel size to 7, etc.; and on the micro scale, such as the switch from batch normalization \cite{batchnorm} to layer normalization \cite{layernorm}, from ReLU \cite{relu} to GELU \cite{gelu}, etc. These changes allow ConvNeXt to compete favorably with other architectures, including Swin, which is among the state-of-the-art for deep vision tasks.}
+\textcolor{green}{As mentioned, the VGG-inspired backbone design results in a receptive field of about four times the cell size. Furthermore, VGG architecture family has been quite obsolete and . \commentM{Try not to motivate it with it is old. This way, it sounds like you just take a new backbone and that is what you propose.} Thus, we updated the backbone with a variant of the state-of-the-art ConvNeXt \cite{convnext}. ConvNeXt was recently introduced as a modernized version of ResNet \cite{resnet} which is equipped with recent properties of the hierarchical vision transformer Swin \cite{swin}. Modifications were made on the macro scale, such as the change in the ratios between stages, the use of depthwise convolution in similar manner to ResNeXt \cite{resnext}, enlarging kernel size to 7, etc.; and on the micro scale, such as the switch from batch normalization \cite{batchnorm} to layer normalization \cite{layernorm}, from ReLU \cite{relu} to GELU \cite{gelu}, etc. These changes allow ConvNeXt to compete favorably with other architectures, including Swin, which is among the state-of-the-art for deep vision tasks.}
 
-\textcolor{green}{We use an altered version of ConvNeXt-Tiny, which is most compact and efficient ConvNeXt type. ConvNeXt-Tiny starts with the stem block that reduce the input image to a feature map 1/4th the original size. The stem block is then followed by has four downsampling stages, each of which ends with a compression convolutional layer with reduction factor of 2. Thus we use a ConvNeXt-Tiny, which is truncted at before the compression layer of the 3rd stage, as the new backbone. The output of the truncated model reduces would have the size of 96x96x384. The modified ConvNeXt model is concatenated with two additional convolutional layers to reduce the feature maps to size 31x31x256. With this design, the receptive field is increased to 1240, which is almost the size of the input (1536).}
+\textcolor{green}{We use an altered version of ConvNeXt-Tiny, which is most compact and efficient ConvNeXt type. ConvNeXt-Tiny starts with the stem block that reduce the input image to a feature map 1/4th the original size. The stem block is then followed by has four downsampling stages, each of which ends with a compression convolutional layer with reduction factor of 2. Thus we use a ConvNeXt-Tiny, which is truncted at before the compression layer of the 3rd stage, as the new backbone. The output of the truncated model reduces would have the size of 96x96x384. The modified ConvNeXt model is concatenated with two additional convolutional layers to reduce the feature maps to size 31x31x256. With this design, the theoretical receptive field is increased to 1096.}
 
 \textcolor{green}{We take a step further by adding three vision transformer encoder blocks \cite{16x16, attention} to allow for global aggregation of information. Originally, the input of transformer encoder are flattened patches of images, which are added with positional embeddings to convey location information of each patch to the model. In LS-Netv2, the image patches are replaced with 1x1x256 feature segments from the 31x31x256 feature maps. This design is similar to the object detector DETR \cite{DETR}, where a CNN is used to produce a compact feature map first then a transformer is used in the later stage. The CNN provide inductive bias that allow the model to be trained easier with smaller data. A pure transformer model would have more generalizability \cite{?} but would rely on huge amount of data, which we do not have in our case, to achieve high performance. The benefit of this design will be shown using \textcolor{red}{ablation study}.}
 
-\textcolor{green}{LS-Netv2 has the capability to detect multiple lines per cell by performing fixed number of inferences N, which is chosen to be larger than the maximum number of line segments exists in the cell. From our experiments, 10 is a safe choice. The ground truth $y$ of each cell, which contains $m$ actual line segments, is also perceived to contain N line segments $y=\{y_i\}^N_{i-1}$. However, the ground truth is now padded with $N-m$ negative classification. Inspired by DETR \cite{DETR}, we line segment detection within each cell as a direct set prediction problem. In our loss computation step, we include an optimal bipartite matching between the N predictions an N ground truths.}
+\textcolor{green}{LS-Netv2 has the capability to detect multiple lines per cell by performing fixed number of inferences N, which is chosen to be larger than the maximum number of line segments exists in the cell. From our experiments, 10 is a safe choice. The ground truth $y$ of each cell, which contains $m$ actual line segments, is also perceived to contain N line segments $y=\{y_i\}^N_{i-1}$. However, the ground truth is now padded with $N-m$ negative classification. Inspired by DETR \cite{DETR}, we line segment detection within each cell as a direct set prediction problem. In our loss computation step, we include an optimal bipartite matching between the N predictions an N ground truths.} \commentM{I would suggest you start this section with this novelty. It is more "novel" than using another backbone and nicely fits the motivation of the line crossings..}
 
 \textcolor{green}{Let $\hat{y}=\{\hat{y}_i\}^N_{i-1}$ be the set of $N$ predictions. The optimal bipartite matching between the $N$ predictions an $N$ ground truths, which is done using Hungarian algorithm, produces a permutation $\hat{\sigma} \in \mathfrak{S}$} that satisfies:
 
@@ -643,7 +644,8 @@ Loss ???
 where $\mathcal{L}_{match} (y_i, \hat{y}_{\sigma(i)})$ is the loss when pairing $y_i$ and $\hat{y}_{\sigma(i)}$, which is reordered via permutation $\sigma(i)$. The loss considers both the classification loss and regression loss. Similarly to \cite{DETR}, this loss is defined as $-\hat{p}_{\sigma(i)}(c_i) + \mathds{1}_{\{c_i=\text{positive}\}}\mathcal{L}_{reg}(b_i, \hat{b}_{\sigma(i)})$, where $b_i$ and $\hat{b}_{\sigma(i)}$ are line segment endpoint ground truth and permutated prediction at index $i$ respectively. $\mathcal{L}_{reg}(.)$ is the regression loss and $\hat{p}_{\sigma(i)}(c_i)$ is the predicted probability of class $c_i$, which is the classification ground truth at index $i$.
 
 
-We propose a new version of LS-Net, called LS-Netv2. This version is updated with recent advancement in the deep learning space. Specifically, the feature extractor is altered with the state-of-the-art ConvNext model. Furthermore, inspired by DETR \cite{DETR}. LS-Netv2 possess the ability to detect and locate multiple line-segments within each grid cell via multi-guess bipartite matching.  \textcolor{red}{Also, we propose the addition of a context module built from multi-head attentions layers, whose effectiveness in extracting global information has been proven}. Finally, \textcolor{red}{adjustments are made to the losses so that the training is more stable and requires less time to achieve plateau performance}.
+We propose a new version of LS-Net, called LS-Netv2. This version is updated with recent advancement in the deep learning space. \commentM{Again, here it sounds like you "just" leverage a new backbone and other new things. Motivate it instead from the problem and then the solution is a method that incorporates new components.}
+Specifically, the feature extractor is altered with the state-of-the-art ConvNext model. Furthermore, inspired by DETR \cite{DETR}. LS-Netv2 possess the ability to detect and locate multiple line-segments within each grid cell via multi-guess bipartite matching.  \textcolor{red}{Also, we propose the addition of a context module built from multi-head attentions layers, whose effectiveness in extracting global information has been proven}. Finally, \textcolor{red}{adjustments are made to the losses so that the training is more stable and requires less time to achieve plateau performance}.
 
 \section{Experiments}
 The procedure and results of experiments are presented. Comparisons to state-of-the-art are also conducted.
@@ -679,13 +681,20 @@ where N is the number of test images and $\beta_2 = 0.3$ in order to place more 
 
 To produce the segmentation map, for each cell within the 31x31 output grid that was classified to contain segments of powerlines, we use OpenCV to generate visible white lines from the predicted pairs of endpoints. Specific line widths are chosen for each dataset to reach the highest $F_{\beta}$ scores. Particularly, we use the width of 9 pixels for PLDU dataset, 6 for PDLM dataset, 2 for TTPLA dataset and 5 for the proprierty dataset.
 
-The comparison is done with the previously proposed LSNet across the four datasets. In addition, we also examined other versions of LSNetv2 where the backbone are varied to encourage the use of ConvNext. In particular, we looked at the original backbone of LSNet, a truncated Resnet-50 \cite{resnet} and a truncated Efficientnetv2-M\cite{efficientnetv2}. The truncation is performed so that the outputs of the backbones have the size of $32 \times 32$ from the input size of $512 \times 512$. The detailed architecture are shown in Table \ref{backbone_arch}. Specifically for TTPLA dataset, we also view LSNetv2 together with the reported performance results from PLGAN paper \cite{related_work_rabab_abdelfattah_2022}, which proposes PLGAN as the state-of-the-art for TTPLA dataset, to verify the competitiveness of LSNetv2. The performance results we looked at are of PLGAN itself, three segmentation models: FPN \cite{fpn}, DeepLabv3+ \cite{deeplapv3} and UNET++ \cite{unetplusplus}; ass well three line segment detectors: AFM \cite{afm}, LCNN \cite{lcnn} and HAWP \cite{hawp}. Finally, ablation study is done to validate the newly proposed components. 
+The comparison is done with the previously proposed LSNet across the four datasets. In addition, we also examined other versions of LSNetv2 where the backbone are varied to encourage the use of ConvNext. In particular, we looked at the original backbone of LSNet, a truncated Resnet-50 \cite{resnet} and a truncated Efficientnetv2-M\cite{efficientnetv2}. The truncation is performed so that the outputs of the backbones have the size of $32 \times 32$ from the input size of $512 \times 512$. The detailed architecture are shown in Table \ref{backbone_arch}. We also compare LsNetv2 with HAWPv2 by training the model, whose code is provided by the original author \cite{hawpv2code}, the output of HAWPv2 model is rasterized into segmentation maps, from which APR, ARR, $F_1$ and $F_\beta$ score are calculated. Finally, ablation study is done to validate the newly proposed components. 
+
+% Specifically for TTPLA dataset, we also view LSNetv2 together with the reported performance results from PLGAN paper \cite{related_work_rabab_abdelfattah_2022}, which proposes PLGAN as the state-of-the-art for TTPLA dataset, to verify the competitiveness of LSNetv2. The performance results we looked at are of PLGAN itself, three segmentation models: FPN \cite{fpn}, DeepLabv3+ \cite{deeplapv3} and UNET++ \cite{unetplusplus}; ass well three line segment detectors: AFM \cite{afm}, LCNN \cite{lcnn} and HAWP \cite{hawp}.
 
 \subsection{Results}
 
-Table results in \ref{res1_table} shows that LSNetv2 consistently surpasses LSNet across all dataset considered. The difference are, in general, mainly on the APR, which enlarge the performance gap when considering $F_{\beta}$ metric. The performance gap is small for PLDU and PLDM datasets since these datasets are subjectively less difficult than the remaining two.  There are no explicit crossing found in the test set and in cases where there are parallel powerline in close proximity, the four-grid design of LSNet may help compensate for when a line segment is not detected by one of the four grid. However, as shown in Fig \ref{PLDU_example}-\ref{PLDM_example}, the missing line segment problem is not eradicated with LSNet leading to the eventual miss-detection of the entire powerline. Furthermore, close line segments may confuse LSNet resulting in imprecise localization of endpoints implied by the visual fillings in the gaps between powerlines. This might cause further complication for potential downstream instance segmentation tasks. LSNetv2 is more robust to such close-proximity cases and can produce output mask with less missing segments and clearer and precise division between powerlines, which may play a part in improving the APR. The last row of Fig \ref{PLDU_example} shows that LSNet maybe susceptible to confusion by background lines. LSNetv2 seems to be more resistant to that, which might be attributed to the increased kernel size of ConvNext to mimic the non-local self-attention mechanism of Visual Transformer \cite{visual_transformer} and help gather more global information helping LSNetv2 better differentiate between semantic line segments.
+ Results in Table~\ref{res1_table} show that LSNetv2 consistently outperforms LSNet across all datasets considered. The difference are, in general, mainly on the APR, which enlarge the performance gap when considering $F_{\beta}$ metric. The performance gap is small for PLDU and PLDM datasets since these datasets are subjectively less difficult than the remaining two.  There are no explicit crossing found in the test set and in cases where there are parallel powerline in close proximity, the four-grid design of LSNet may help compensate for when a line segment is not detected by one of the four grid. However, as shown in Fig \ref{PLDU_example}-\ref{PLDM_example}, the missing line segment problem is not eradicated with LSNet leading to the eventual miss-detection of the entire powerline. Furthermore, close line segments may confuse LSNet resulting in imprecise localization of endpoints implied by the occasional fillings in the gaps between powerlines, such as shown in the first column of Fig \ref{PLDU_example}. This might cause further complication for potential downstream instance segmentation tasks. LSNetv2 is more robust to such close-proximity cases and can produce output mask with less missing segments and clearer and precise division between powerlines, which may play a part in improving the APR. The last row of Fig \ref{PLDU_example} shows that LSNet maybe susceptible to confusion by background lines. LSNetv2 seems to be more resistant to that, which might be attributed to the increased kernel size of ConvNext to mimic the non-local self-attention mechanism of Visual Transformer \cite{visual_transformer} and help gather more global information helping LSNetv2 better differentiate between semantic line segments.
 
-The performance gap is larger for TTPLA and Esmart dataset as they are subjectively more complex. Similarly to two previous cases, the improvement lies mainly in the APR metric. From Fig \ref{ttpla_example_0}-\ref{ttpla_example_1}, we can see that TTPLA dataset contains many images of semi-parallel powerlined in large quantity and close to each other, which showcases the effectiveness of LSNetv2 to a larger degree leading to the biggest performance gap among four datasets. LSNetv2 is able to both detect more true positive line segments and true positive semantic powerline. As aforementioned, due to the needs to also detect guy wires, each image in Esmart dataset usually contain at least one visual crossing. As shown in Fig \ref{esmart_example_0}, LSNet, by design, can not detect the two line segments at the crossing but LsNetv2 are able to perform the task quite well. Also, apparently LsNetv2 is also better than LSNet in general one-line-segment-per-cell cases, especially when the visibility of the line segments are limited due to camera angle making the line segments thin and/or background blending. This can be due to ConvNext having bigger kernel and receptive field.
+The performance gap is larger for the TTPLA and Esmart datasets as they are subjectively more complex. Similarly to the two previous cases, the improvement lies mainly in the APR metric. From Fig \ref{ttpla_example_0}, we can see that the TTPLA dataset contains many images of semi-parallel powerlines in large quantity and close to each other, which showcases the effectiveness of LSNetv2 to a larger degree leading to the biggest performance gap among four datasets. LSNetv2 is able to both detect more true positive line segments and true positive semantic powerline. As aforementioned, due to the needs to also detect guy wires, each image in Esmart dataset usually contain at least one visual crossing. As shown in Fig \ref{esmart_example_0}, LSNet, by design, can not detect the two line segments at the crossing but LsNetv2 are able to perform the task quite well. Also, apparently LsNetv2 is also better than LSNet in general one-line-segment-per-cell cases, especially when the visibility of the line segments are limited due to camera angle making the line segments thin and/or background blending. This can be due to ConvNext having bigger kernel and receptive field.
+
+Table \ref{res1_table} also shows the metric results of HAWPv2. \commentM{As we observed that HAWPv2 performance was heavily dependent on different evaluation choices, we considered ...}
+Different choices of line width and score threshold, which is used to filter out inconfident line segments from HAWPv2 outputs, can lead to different values. For completion, we reported the best $F_1$ score and $F_\beta$ scores with their corresponding remaining values. Table \ref{hawp_prop} shows the configuration choices, at which these metric values are achieved for each dataset. In overall, the best values are achieved at line widths similar to those used to calculate metrics for LSNet and LSNetv2. In addition, high score threshold leads to higher APR and $F_\beta$ at the expense of ARR, which is expected. In general, LsNetv2 are able to beat the best $F_1$ score and $F_\beta$ score across all datasets. Fig \ref{} - \ref{} show that HAWPv2 are able to detect entire powerlines consistently, however, false positive and false negative regions are often larger than those occur in LsNetv2. This can be attributed to the 4-overlapping-grid design, where missing line segments in each cell can be compensated by its neighbors and, since each cell is only responsible for a small region, false positive occur in one cell does not make significant impact. Another interesting insight is that HAWPv2 has higher performance than LsNet for TTPLA and Esmart dataset, especially when we look at the metric values surrounding the best $F_1$ score. The reverse is found for PLDU and PLDM dataset.
+
+% However, for PLDM, the highest $F_1$ and $F_\beta$ scores are achieved from the same low score threshold yet different widths. Further inspection shows that even when setting the threshold as low as 0.1, HAWPv2 trained for PLDM does not results in large number of false positive. HAWPv2 has mostly high performance with PLDM. However, even at this low score threshold, there are instances where HAWPv2 misses large powerline portion or even complete the powerlines, as shown in Fig \ref{PLDM_example}.
 
 
 
@@ -897,36 +906,6 @@ Stage & Output size & Modified VGG & Resnet-50 & EfficientnetV2-M & ConvNext-Tin
 \caption{\label{backbone_arch} Backbone architecture.}
 \end{table*}
 
-% \begin{table*}[]
-%   \centering
-%   \begin{tabular}{llllll}
-%   \hline
-%                     & Backbone        & APR   & ARR       & $F_1$ & $F_\beta$ \\ \hline
-%   AFM               & UNET            & 0.495 & 0.432     & 0.457 & 0.498     \\
-%   LCNN              & Hourglass       & 0.541 & 0.464     & 0.315 & 0.498     \\
-%   HAWP              & Hourglass       & 0.581 & 0.421     & 0.485 & 0.532     \\
-%   UNET++            & Resnet-34       & 0.843 & 0.591     & 0.668 & 0.739     \\ 
-%   PLGAN             & Resnet-6        & 0.863 & 0.577     & 0.687 & 0.769     \\ \hline
-%   LSNet             & modified VGG    & 0.471 & 0.337     & 0.393 & 0.431     \\ 
-%   LSNetv2           & modified VGG    & 0.623 & 0.650     & 0.636 & 0.629     \\
-%   LSNetv2           & Resnet-50       & 0.604 & 0.605     & 0.605 & 0.604     \\
-%   LSNetv2           & Efficientnetv2M & 0.508 & 0.592     & 0.546 & 0.524     \\
-%   LSNetv2           & ConvNext-Tiny   & 0.717 & 0.608     & 0.658 & 0.688     \\
-%   \end{tabular}
-% \end{table*}
-
-% \begin{table}[]
-%   \begin{tabular}{lllllll}
-%   \hline
-%                              & Backbone                       & APR                        & ARR                        & F1                         & Fbeta                      & param \\ \hline
-%   \multicolumn{1}{l|}{AFM}   & \multicolumn{1}{l|}{UNET}      & \multicolumn{1}{l|}{0.495} & \multicolumn{1}{l|}{0.432} & \multicolumn{1}{l|}{0.457} & \multicolumn{1}{l|}{0.498} & 44.0  \\ \hline
-%   \multicolumn{1}{l|}{LCNN}  & \multicolumn{1}{l|}{Hourglass} & \multicolumn{1}{l|}{0.541} & \multicolumn{1}{l|}{0.464} & \multicolumn{1}{l|}{0.315} & \multicolumn{1}{l|}{0.498} & 10,9  \\ \hline
-%   \multicolumn{1}{l|}{HAWP}  & \multicolumn{1}{l|}{Hourglass} & \multicolumn{1}{l|}{0.581} & \multicolumn{1}{l|}{0.421} & \multicolumn{1}{l|}{0.485} & \multicolumn{1}{l|}{0.532} & 11.6  \\ \hline
-%   \multicolumn{1}{l|}{PLGAN} & \multicolumn{1}{l|}{Resnet-6}  & \multicolumn{1}{l|}{0.863} & \multicolumn{1}{l|}{0.577} & \multicolumn{1}{l|}{0.687} & \multicolumn{1}{l|}{0.769} & 14.9  \\ \hline
-%   LSNetv2                    & ConvNext-Tiny                  & 0.717                      & 0.6079904                  & 0.658                      & 0.688                      & 20.2  \\ \hline
-%   \end{tabular}
-%   \end{table}
-
 % \begin{figure*}
 %   \begin{tabularx}{\textwidth}{cccc}
 %   \centering
@@ -963,32 +942,44 @@ Stage & Output size & Modified VGG & Resnet-50 & EfficientnetV2-M & ConvNext-Tin
 % \end{figure*}
 
 \begin{figure*}
-  \begin{tabularx}{\textwidth}{cccc}
+  \addtolength{\tabcolsep}{-5pt} 
+  \begin{tabularx}{\textwidth}{ccccc}
   \centering
-  \subfloat{\includegraphics[width = 1.65in]{imgs/pldu_base_imgs/355.jpg}} &
-  \subfloat{\includegraphics[width = 1.65in]{imgs/pldu_base_imgs/481.jpg}} &
-  \subfloat{\includegraphics[width = 1.65in]{imgs/pldu_base_imgs/250.jpg}} &
-  \subfloat{\includegraphics[width = 1.65in]{imgs/pldu_base_imgs/637.jpg}}\\
-  \subfloat{\includegraphics[width = 1.65in]{imgs/pldu_gt/355.png}} &
-  \subfloat{\includegraphics[width = 1.65in]{imgs/pldu_gt/481.png}} &
-  \subfloat{\includegraphics[width = 1.65in]{imgs/pldu_gt/250.png}} &
-  \subfloat{\includegraphics[width = 1.65in]{imgs/pldu_gt/637.png}}\\
-  % \subfloat{\includegraphics[width = 1.65in]{imgs/pldu_base_imgs/358.jpg}} &
-  % \subfloat{\includegraphics[width = 1.65in]{imgs/pldu_gt/358.png}} &
-  % \subfloat{\includegraphics[width = 1.65in]{imgs/pldu_old/358.png}} &
-  % \subfloat{\includegraphics[width = 1.65in]{imgs/pldu_new/358.png}}\\
-  \subfloat{\includegraphics[width = 1.65in]{imgs/pldu_old/355.png}} &
-  \subfloat{\includegraphics[width = 1.65in]{imgs/pldu_old/481.png}} &
-  \subfloat{\includegraphics[width = 1.65in]{imgs/pldu_old/250.png}} &
-  \subfloat{\includegraphics[width = 1.65in]{imgs/pldu_old/637.png}}\\
-  \subfloat{\includegraphics[width = 1.65in]{imgs/hawp/pldu_ha/355.png}} &
-  \subfloat{\includegraphics[width = 1.65in]{imgs/hawp/pldu_ha/481.png}} &
-  \subfloat{\includegraphics[width = 1.65in]{imgs/hawp/pldu_ha/250.png}} &
-  \subfloat{\includegraphics[width = 1.65in]{imgs/hawp/pldu_ha/637.png}}\\
-  \subfloat{\includegraphics[width = 1.65in]{imgs/pldu_new/355.png}} &
-  \subfloat{\includegraphics[width = 1.65in]{imgs/pldu_new/481.png}} &
-  \subfloat{\includegraphics[width = 1.65in]{imgs/pldu_new/250.png}} &
-  \subfloat{\includegraphics[width = 1.65in]{imgs/pldu_new/637.png}}\\
+  \subfloat{\includegraphics[width = 1.40in]{imgs/pldu_base_imgs/355.jpg}} &
+  \subfloat{\includegraphics[width = 1.40in]{imgs/pldu_gt/355.png}} &
+  \subfloat{\includegraphics[width = 1.40in]{imgs/hawp/pldu_ha/355.png}} &
+  \subfloat{\includegraphics[width = 1.40in]{imgs/pldu_old/355.png}} &
+  \subfloat{\includegraphics[width = 1.40in]{imgs/pldu_new/355.png}} \\
+  \subfloat{\includegraphics[width = 1.40in]{imgs/pldu_base_imgs/637.jpg}} &
+  \subfloat{\includegraphics[width = 1.40in]{imgs/pldu_gt/637.png}} &
+  \subfloat{\includegraphics[width = 1.40in]{imgs/hawp/pldu_ha/637.png}} &
+  \subfloat{\includegraphics[width = 1.40in]{imgs/pldu_old/637.png}} &
+  \subfloat{\includegraphics[width = 1.40in]{imgs/pldu_new/637.png}} \\
+  \subfloat{\includegraphics[width = 1.40in]{imgs/pldu_base_imgs/250.jpg}} &
+  \subfloat{\includegraphics[width = 1.40in]{imgs/pldu_gt/250.png}} &
+  \subfloat{\includegraphics[width = 1.40in]{imgs/hawp/pldu_ha/250.png}} &
+  \subfloat{\includegraphics[width = 1.40in]{imgs/pldu_old/250.png}} &
+  \subfloat{\includegraphics[width = 1.40in]{imgs/pldu_new/250.png}} \\
+  \subfloat{\includegraphics[width = 1.40in]{imgs/pldu_base_imgs/510.jpg}} &
+  \subfloat{\includegraphics[width = 1.40in]{imgs/pldu_gt/510.png}} &
+  \subfloat{\includegraphics[width = 1.40in]{imgs/hawp/pldu_ha/510.png}} &
+  \subfloat{\includegraphics[width = 1.40in]{imgs/pldu_old/510.png}} &
+  \subfloat{\includegraphics[width = 1.40in]{imgs/pldu_new/510.png}} \\
+  \subfloat{\includegraphics[width = 1.40in]{imgs/pldu_base_imgs/409.jpg}} &
+  \subfloat{\includegraphics[width = 1.40in]{imgs/pldu_gt/409.png}} &
+  \subfloat{\includegraphics[width = 1.40in]{imgs/hawp/pldu_ha/409.png}} &
+  \subfloat{\includegraphics[width = 1.40in]{imgs/pldu_old/409.png}} &
+  \subfloat{\includegraphics[width = 1.40in]{imgs/pldu_new/409.png}} \\
+  \subfloat{\includegraphics[width = 1.40in]{imgs/pldu_base_imgs/481.jpg}} &
+  \subfloat{\includegraphics[width = 1.40in]{imgs/pldu_gt/481.png}} &
+  \subfloat{\includegraphics[width = 1.40in]{imgs/hawp/pldu_ha/481.png}} &
+  \subfloat{\includegraphics[width = 1.40in]{imgs/pldu_old/481.png}} &
+  \subfloat{\includegraphics[width = 1.40in]{imgs/pldu_new/481.png}}\\
+  % \subfloat{\includegraphics[width = 265in]{imgs/pldu_base_imgs/358.jpg}} &
+  % \subfloat{\includegraphics[width = 265in]{imgs/pldu_gt/358.png}} &
+  % \subfloat{\includegraphics[width = 265in]{imgs/pldu_old/358.png}} &
+  % \subfloat{\includegraphics[width = 265in]{imgs/pldu_new/358.png}}\\
+  
 
   % Add caption row
   Image & Ground truth & LSNet & LSNetv2
@@ -998,120 +989,205 @@ Stage & Output size & Modified VGG & Resnet-50 & EfficientnetV2-M & ConvNext-Tin
 \end{figure*}
 
 \begin{figure*}
-  \begin{tabularx}{\textwidth}{cccc}
+  \addtolength{\tabcolsep}{-5pt} 
+  \begin{tabularx}{\textwidth}{ccccc}
   \centering
-  \subfloat{\includegraphics[width = 1.65in]{imgs/pldm_base_imgs/4.jpg}} &
-  \subfloat{\includegraphics[width = 1.65in]{imgs/pldm_gt/4.png}} &
-  \subfloat{\includegraphics[width = 1.65in]{imgs/pldm_old/4.png}} &
-  \subfloat{\includegraphics[width = 1.65in]{imgs/pldm_new/4.png}}\\
-  \subfloat{\includegraphics[width = 1.65in]{imgs/pldm_base_imgs/24.jpg}} &
-  \subfloat{\includegraphics[width = 1.65in]{imgs/pldm_gt/24.png}} &
-  \subfloat{\includegraphics[width = 1.65in]{imgs/pldm_old/24.png}} &
-  \subfloat{\includegraphics[width = 1.65in]{imgs/pldm_new/24.png}}\\
-  \subfloat{\includegraphics[width = 1.65in]{imgs/pldm_base_imgs/18.jpg}} &
-  \subfloat{\includegraphics[width = 1.65in]{imgs/pldm_gt/18.png}} &
-  \subfloat{\includegraphics[width = 1.65in]{imgs/pldm_old/18.png}} &
-  \subfloat{\includegraphics[width = 1.65in]{imgs/pldm_new/18.png}}\\
+  \subfloat{\includegraphics[width = 1.40in]{imgs/pldm_base_imgs/18.jpg}} &
+  \subfloat{\includegraphics[width = 1.40in]{imgs/pldm_gt/18.png}} &
+  \subfloat{\includegraphics[width = 1.40in]{imgs/hawp/pldm_ha/18.png}} &
+  \subfloat{\includegraphics[width = 1.40in]{imgs/pldm_old/18.png}} &
+  \subfloat{\includegraphics[width = 1.40in]{imgs/pldm_new/18.png}} \\
+  \subfloat{\includegraphics[width = 1.40in]{imgs/pldm_base_imgs/4.jpg}} &
+  \subfloat{\includegraphics[width = 1.40in]{imgs/pldm_gt/4.png}} &
+  \subfloat{\includegraphics[width = 1.40in]{imgs/hawp/pldm_ha/4.png}} &
+  \subfloat{\includegraphics[width = 1.40in]{imgs/pldm_old/4.png}} &
+  \subfloat{\includegraphics[width = 1.40in]{imgs/pldm_new/4.png}} \\
+  \subfloat{\includegraphics[width = 1.40in]{imgs/pldm_base_imgs/24.jpg}} &
+  \subfloat{\includegraphics[width = 1.40in]{imgs/pldm_gt/24.png}} &
+  \subfloat{\includegraphics[width = 1.40in]{imgs/hawp/pldm_ha/24.png}} &
+  \subfloat{\includegraphics[width = 1.40in]{imgs/pldm_old/24.png}} &
+  \subfloat{\includegraphics[width = 1.40in]{imgs/pldm_new/24.png}} \\
+  \subfloat{\includegraphics[width = 1.40in]{imgs/pldm_base_imgs/124.jpg}} &
+  \subfloat{\includegraphics[width = 1.40in]{imgs/pldm_gt/124.png}} &
+  \subfloat{\includegraphics[width = 1.40in]{imgs/hawp/pldm_ha/124.png}} &
+  \subfloat{\includegraphics[width = 1.40in]{imgs/pldm_old/124.png}} &
+  \subfloat{\includegraphics[width = 1.40in]{imgs/pldm_new/124.png}} \\
 
   % Add caption row
-  Image & Ground truth & LSNet & LSNetv2
   % \subfloat[caption]{\includegraphics[width = 1.5in]{something}}\\
   \end{tabularx}
   \caption{\label{PLDM_example}Example test results of LSNet and LSNetv2 on test images in PLDM dataset. The columns from left to right contain: original images, ground truth segment map, outputs of LSNet and outputs of LSNetv2}
 \end{figure*}
 
+\begin{table}[]
+\begin{tabular}{lll|ll|ll|ll}
+               & \multicolumn{2}{l|}{PLDU}    & \multicolumn{2}{l|}{PLDM}    & \multicolumn{2}{l|}{TTPLA}   & \multicolumn{2}{l}{Esmart}   \\ \cline{2-9} 
+               & line width & score threshold & line width & score threshold & line width & score threshold & line width & score threshold \\ \hline
+Best $F_1$     & 7          & 0.8             & 7          & 0.2             & 2          & 0.2             & 5          & 0.1             \\
+Best $F_\beta$ & 7          & 0.1             & 3          & 0.3             & 2          & 0.7             & 5          & 0.4             \\ \hline
+\end{tabular}
+\caption{\label{hawp_prop} Properties}
+\end{table}
+
 \begin{figure*}
-  \begin{tabularx}{\textwidth}{cccc}
+  \addtolength{\tabcolsep}{-5pt} 
+  \begin{tabularx}{\textwidth}{ccccc}
   \centering
-  \subfloat{\includegraphics[width = 1.65in]{imgs/ttpla_base_imgs/107_1410_2.jpg}} &
-  \subfloat{\includegraphics[width = 1.65in]{imgs/ttpla_gt/107_1410_2.png}} &
-  \subfloat{\includegraphics[width = 1.65in]{imgs/ttpla_old/107_1410_2.png}} &
-  \subfloat{\includegraphics[width = 1.65in]{imgs/ttpla_new/107_1410_2.png}}\\
-  \subfloat{\includegraphics[width = 1.65in]{imgs/ttpla_base_imgs/110_0_1.jpg}} &
-  \subfloat{\includegraphics[width = 1.65in]{imgs/ttpla_gt/110_0_1.png}} &
-  \subfloat{\includegraphics[width = 1.65in]{imgs/ttpla_old/110_0_1.png}} &
-  \subfloat{\includegraphics[width = 1.65in]{imgs/ttpla_new/110_0_1.png}}\\
-  \subfloat{\includegraphics[width = 1.65in]{imgs/ttpla_base_imgs/14_00486_2.jpg}} &
-  \subfloat{\includegraphics[width = 1.65in]{imgs/ttpla_gt/14_00486_2.png}} &
-  \subfloat{\includegraphics[width = 1.65in]{imgs/ttpla_old/14_00486_2.png}} &
-  \subfloat{\includegraphics[width = 1.65in]{imgs/ttpla_new/14_00486_2.png}}\\
-  \subfloat{\includegraphics[width = 1.65in]{imgs/ttpla_base_imgs/23_00706_2.jpg}} &
-  \subfloat{\includegraphics[width = 1.65in]{imgs/ttpla_gt/23_00706_2.png}} &
-  \subfloat{\includegraphics[width = 1.65in]{imgs/ttpla_old/23_00706_2.png}} &
-  \subfloat{\includegraphics[width = 1.65in]{imgs/ttpla_new/23_00706_2.png}}\\
-  \subfloat{\includegraphics[width = 1.65in]{imgs/ttpla_base_imgs/25_00272_1.jpg}} &
-  \subfloat{\includegraphics[width = 1.65in]{imgs/ttpla_gt/25_00272_1.png}} &
-  \subfloat{\includegraphics[width = 1.65in]{imgs/ttpla_old/25_00272_1.png}} &
-  \subfloat{\includegraphics[width = 1.65in]{imgs/ttpla_new/25_00272_1.png}}\\
+  \subfloat{\includegraphics[width = 1.40in]{imgs/ttpla_base_imgs/107_1410_2.jpg}} &
+  \subfloat{\includegraphics[width = 1.40in]{imgs/ttpla_gt/107_1410_2.png}} &
+  \subfloat{\includegraphics[width = 1.40in]{imgs/hawp/ttpla_ha/107_1410_2.png}} &
+  \subfloat{\includegraphics[width = 1.40in]{imgs/ttpla_old/107_1410_2.png}} &
+  \subfloat{\includegraphics[width = 1.40in]{imgs/ttpla_new/107_1410_2.png}} \\
+  \subfloat{\includegraphics[width = 1.40in]{imgs/ttpla_base_imgs/25_00272_1.jpg}} &
+  \subfloat{\includegraphics[width = 1.40in]{imgs/ttpla_gt/25_00272_1.png}} &
+  \subfloat{\includegraphics[width = 1.40in]{imgs/hawp/ttpla_ha/25_00272_1.png}} &
+  \subfloat{\includegraphics[width = 1.40in]{imgs/ttpla_old/25_00272_1.png}} &
+  \subfloat{\includegraphics[width = 1.40in]{imgs/ttpla_new/25_00272_1.png}} \\
+  % \subfloat{\includegraphics[width = 1.40in]{imgs/ttpla_base_imgs/14_00486_2.jpg}} &
+  % \subfloat{\includegraphics[width = 1.40in]{imgs/ttpla_gt/14_00486_2.png}} &
+  % \subfloat{\includegraphics[width = 1.40in]{imgs/hawp/ttpla_ha/14_00486_2.png}} &
+  % \subfloat{\includegraphics[width = 1.40in]{imgs/ttpla_old/14_00486_2.png}} &
+  % \subfloat{\includegraphics[width = 1.40in]{imgs/ttpla_new/14_00486_2.png}} \\
+  \subfloat{\includegraphics[width = 1.40in]{imgs/ttpla_base_imgs/23_00706_2.jpg}}&
+  \subfloat{\includegraphics[width = 1.40in]{imgs/ttpla_gt/23_00706_2.png}}&
+  \subfloat{\includegraphics[width = 1.40in]{imgs/hawp/ttpla_ha/23_00706_2.png}}&
+  \subfloat{\includegraphics[width = 1.40in]{imgs/ttpla_old/23_00706_2.png}}&
+  \subfloat{\includegraphics[width = 1.40in]{imgs/ttpla_new/23_00706_2.png}}\\
+
+  \subfloat{\includegraphics[width = 1.40in]{imgs/ttpla_base_imgs/110_0_1.jpg}}&
+  \subfloat{\includegraphics[width = 1.40in]{imgs/ttpla_gt/110_0_1.png}}&
+  \subfloat{\includegraphics[width = 1.40in]{imgs/hawp/ttpla_ha/110_0_1.png}}&
+  \subfloat{\includegraphics[width = 1.40in]{imgs/ttpla_old/110_0_1.png}}&
+  \subfloat{\includegraphics[width = 1.40in]{imgs/ttpla_new/110_0_1.png}}\\
+  \subfloat{\includegraphics[width = 1.40in]{imgs/ttpla_base_imgs/25_00667_2.jpg}}&
+  \subfloat{\includegraphics[width = 1.40in]{imgs/ttpla_gt/25_00667_2.png}}&
+  \subfloat{\includegraphics[width = 1.40in]{imgs/hawp/ttpla_ha/25_00667_2.png}}&
+  \subfloat{\includegraphics[width = 1.40in]{imgs/ttpla_old/25_00667_2.png}}&
+  \subfloat{\includegraphics[width = 1.40in]{imgs/ttpla_new/25_00667_2.png}}\\
+  \subfloat{\includegraphics[width = 1.40in]{imgs/ttpla_base_imgs/42_00551_1.jpg}}&
+  \subfloat{\includegraphics[width = 1.40in]{imgs/ttpla_gt/42_00551_1.png}}&
+  \subfloat{\includegraphics[width = 1.40in]{imgs/hawp/ttpla_ha/42_00551_1.png}}&
+  \subfloat{\includegraphics[width = 1.40in]{imgs/ttpla_old/42_00551_1.png}}&
+  \subfloat{\includegraphics[width = 1.40in]{imgs/ttpla_new/42_00551_1.png}}\\
+  
+  % \subfloat{\includegraphics[width = 1.65in]{imgs/ttpla_base_imgs/25_00272_1.jpg}} &
+  % \subfloat{\includegraphics[width = 1.65in]{imgs/ttpla_gt/25_00272_1.png}} &
+  % \subfloat{\includegraphics[width = 1.65in]{imgs/ttpla_old/25_00272_1.png}} &
+  % \subfloat{\includegraphics[width = 1.65in]{imgs/ttpla_new/25_00272_1.png}}\\
 
   % Add caption row
-  Image & Ground truth & LSNet & LSNetv2
+  Image & Ground truth & HAWPv2 & LSNet & LSNetv2
   % \subfloat[caption]{\includegraphics[width = 1.5in]{something}}\\
   \end{tabularx}
   \caption{\label{ttpla_example_0}First five example test results of LSNet and LSNetv2 on test images in PLDU dataset. The columns from left to right contain: original images, ground truth segment map, outputs of LSNet and outputs of LSNetv2}
 \end{figure*}
 
+% \begin{figure*}
+%   \begin{tabularx}{\textwidth}{cccc}
+%   \centering
+%   \subfloat{\includegraphics[width = 1.65in]{imgs/ttpla_base_imgs/25_00667_2.jpg}} &
+%   \subfloat{\includegraphics[width = 1.65in]{imgs/ttpla_base_imgs/33_7545_1.jpg}} &
+%   \subfloat{\includegraphics[width = 1.65in]{imgs/ttpla_base_imgs/42_00551_1.jpg}} &
+%   \subfloat{\includegraphics[width = 1.65in]{imgs/ttpla_base_imgs/47_00101_1.jpg}}\\
+%   \subfloat{\includegraphics[width = 1.65in]{imgs/ttpla_gt/25_00667_2.png}} &
+%   \subfloat{\includegraphics[width = 1.65in]{imgs/ttpla_gt/33_7545_1.png}} &
+%   \subfloat{\includegraphics[width = 1.65in]{imgs/ttpla_gt/42_00551_1.png}} &
+%   \subfloat{\includegraphics[width = 1.65in]{imgs/ttpla_gt/47_00101_1.png}}\\
+%   \subfloat{\includegraphics[width = 1.65in]{imgs/hawp/ttpla_ha/25_00667_2.png}} &
+%   \subfloat{\includegraphics[width = 1.65in]{imgs/hawp/ttpla_ha/33_7545_1.png}} &
+%   \subfloat{\includegraphics[width = 1.65in]{imgs/hawp/ttpla_ha/42_00551_1.png}} &
+%   \subfloat{\includegraphics[width = 1.65in]{imgs/hawp/ttpla_ha/47_00101_1.png}}\\
+%   \subfloat{\includegraphics[width = 1.65in]{imgs/ttpla_old/25_00667_2.png}} &
+%   \subfloat{\includegraphics[width = 1.65in]{imgs/ttpla_old/33_7545_1.png}} &
+%   \subfloat{\includegraphics[width = 1.65in]{imgs/ttpla_old/42_00551_1.png}} &
+%   \subfloat{\includegraphics[width = 1.65in]{imgs/ttpla_old/47_00101_1.png}}\\
+%   \subfloat{\includegraphics[width = 1.65in]{imgs/ttpla_new/25_00667_2.png}} &
+%   \subfloat{\includegraphics[width = 1.65in]{imgs/ttpla_new/33_7545_1.png}} &
+%   \subfloat{\includegraphics[width = 1.65in]{imgs/ttpla_new/42_00551_1.png}} &
+%   \subfloat{\includegraphics[width = 1.65in]{imgs/ttpla_new/47_00101_1.png}}\\
+%   % \subfloat{\includegraphics[width = 1.65in]{imgs/ttpla_base_imgs/57_00141_2.jpg}} &
+%   % \subfloat{\includegraphics[width = 1.65in]{imgs/ttpla_gt/57_00141_2.png}} &
+%   % \subfloat{\includegraphics[width = 1.65in]{imgs/ttpla_old/57_00141_2.png}} &
+%   % \subfloat{\includegraphics[width = 1.65in]{imgs/ttpla_new/57_00141_2.png}}\\
+%   % \subfloat[caption]{\includegraphics[width = 1.5in]{something}}\\
+%   \end{tabularx}
+%   \caption{\label{ttpla_example_1}Second five example test results of LSNet and LSNetv2 on test images in PLDU dataset. The columns from left to right contain: original images, ground truth segment map, outputs of LSNet and outputs of LSNetv2}
+% \end{figure*}
+
+% \begin{figure*}
+%   \begin{tabularx}{\textwidth}{ccccc}
+%   \centering
+%   \subfloat{\includegraphics[width = 1.65in]{imgs/ttpla_base_imgs/110_0_1.jpg}} &
+%   \subfloat{\includegraphics[width = 1.65in]{imgs/ttpla_base_imgs/57_00141_2.jpg}}\\
+%   \subfloat{\includegraphics[width = 1.65in]{imgs/ttpla_gt/110_0_1.png}} &
+%   \subfloat{\includegraphics[width = 1.65in]{imgs/ttpla_gt/57_00141_2.png}}\\
+%   \subfloat{\includegraphics[width = 1.65in]{imgs/hawp/ttpla_ha/110_0_1.png}} &
+%   \subfloat{\includegraphics[width = 1.65in]{imgs/hawp/ttpla_ha/57_00141_2.png}}\\
+%   \subfloat{\includegraphics[width = 1.65in]{imgs/ttpla_old/110_0_1.png}} &
+%   \subfloat{\includegraphics[width = 1.65in]{imgs/ttpla_old/57_00141_2.png}}\\
+%   \subfloat{\includegraphics[width = 1.65in]{imgs/ttpla_new/110_0_1.png}} &
+%   \subfloat{\includegraphics[width = 1.65in]{imgs/ttpla_new/57_00141_2.png}}\\
+%   \end{tabularx}
+%   \caption{\label{ttpla_example_1}Second five example test results of LSNet and LSNetv2 on test images in PLDU dataset. The columns from left to right contain: original images, ground truth segment map, outputs of LSNet and outputs of LSNetv2}
+% \end{figure*}
+
+
+
+
 \begin{figure*}
-  \begin{tabularx}{\textwidth}{cccc}
-  \centering
-  \subfloat{\includegraphics[width = 1.65in]{imgs/ttpla_base_imgs/25_00667_2.jpg}} &
-  \subfloat{\includegraphics[width = 1.65in]{imgs/ttpla_gt/25_00667_2.png}} &
-  \subfloat{\includegraphics[width = 1.65in]{imgs/ttpla_old/25_00667_2.png}} &
-  \subfloat{\includegraphics[width = 1.65in]{imgs/ttpla_new/25_00667_2.png}}\\
-  \subfloat{\includegraphics[width = 1.65in]{imgs/ttpla_base_imgs/33_7545_1.jpg}} &
-  \subfloat{\includegraphics[width = 1.65in]{imgs/ttpla_gt/33_7545_1.png}} &
-  \subfloat{\includegraphics[width = 1.65in]{imgs/ttpla_old/33_7545_1.png}} &
-  \subfloat{\includegraphics[width = 1.65in]{imgs/ttpla_new/33_7545_1.png}}\\
-  \subfloat{\includegraphics[width = 1.65in]{imgs/ttpla_base_imgs/42_00551_1.jpg}} &
-  \subfloat{\includegraphics[width = 1.65in]{imgs/ttpla_gt/42_00551_1.png}} &
-  \subfloat{\includegraphics[width = 1.65in]{imgs/ttpla_old/42_00551_1.png}} &
-  \subfloat{\includegraphics[width = 1.65in]{imgs/ttpla_new/42_00551_1.png}}\\
-  \subfloat{\includegraphics[width = 1.65in]{imgs/ttpla_base_imgs/47_00101_1.jpg}} &
-  \subfloat{\includegraphics[width = 1.65in]{imgs/ttpla_gt/47_00101_1.png}} &
-  \subfloat{\includegraphics[width = 1.65in]{imgs/ttpla_old/47_00101_1.png}} &
-  \subfloat{\includegraphics[width = 1.65in]{imgs/ttpla_new/47_00101_1.png}}\\
-  \subfloat{\includegraphics[width = 1.65in]{imgs/ttpla_base_imgs/57_00141_2.jpg}} &
-  \subfloat{\includegraphics[width = 1.65in]{imgs/ttpla_gt/57_00141_2.png}} &
-  \subfloat{\includegraphics[width = 1.65in]{imgs/ttpla_old/57_00141_2.png}} &
-  \subfloat{\includegraphics[width = 1.65in]{imgs/ttpla_new/57_00141_2.png}}\\
-
-  % Add caption row
-  Image & Ground truth & LSNet & LSNetv2
-  % \subfloat[caption]{\includegraphics[width = 1.5in]{something}}\\
-  \end{tabularx}
-  \caption{\label{ttpla_example_1}Second five example test results of LSNet and LSNetv2 on test images in PLDU dataset. The columns from left to right contain: original images, ground truth segment map, outputs of LSNet and outputs of LSNetv2}
-\end{figure*}
-
-
-
-
-\begin{figure*}
-  \begin{tabularx}{\textwidth}{cccc}
-  \centering
-  \subfloat{\includegraphics[width = 1.65in]{imgs/esmart_base_imgs/Alta__4ba599e9-bf87-4283-aa2c-8d0bdd9b4e6e.JPG}} &
-  \subfloat{\includegraphics[width = 1.65in]{imgs/esmart_gt/Alta__4ba599e9-bf87-4283-aa2c-8d0bdd9b4e6e.png}} &
-  \subfloat{\includegraphics[width = 1.65in]{imgs/esmart_old/Alta__4ba599e9-bf87-4283-aa2c-8d0bdd9b4e6e.png}} &
-  \subfloat{\includegraphics[width = 1.65in]{imgs/esmart_new/Alta__4ba599e9-bf87-4283-aa2c-8d0bdd9b4e6e.png}}\\
-  \subfloat{\includegraphics[width = 1.65in]{imgs/esmart_base_imgs/Alta__05ceb653-bdc2-78a8-0747-a63831e3ebc9.JPG}} &
-  \subfloat{\includegraphics[width = 1.65in]{imgs/esmart_gt/Alta__05ceb653-bdc2-78a8-0747-a63831e3ebc9.png}} &
-  \subfloat{\includegraphics[width = 1.65in]{imgs/esmart_old/Alta__05ceb653-bdc2-78a8-0747-a63831e3ebc9.png}} &
-  \subfloat{\includegraphics[width = 1.65in]{imgs/esmart_new/Alta__05ceb653-bdc2-78a8-0747-a63831e3ebc9.png}}\\
-  \subfloat{\includegraphics[width = 1.65in]{imgs/esmart_base_imgs/Alta__6a6a5379-a993-4be1-9d79-236991f70d38.JPG}} &
-  \subfloat{\includegraphics[width = 1.65in]{imgs/esmart_gt/Alta__6a6a5379-a993-4be1-9d79-236991f70d38.png}} &
-  \subfloat{\includegraphics[width = 1.65in]{imgs/esmart_old/Alta__6a6a5379-a993-4be1-9d79-236991f70d38.png}} &
-  \subfloat{\includegraphics[width = 1.65in]{imgs/esmart_new/Alta__6a6a5379-a993-4be1-9d79-236991f70d38.png}}\\
-  \subfloat{\includegraphics[width = 1.65in]{imgs/esmart_base_imgs/Alta__9abf75f2-84d8-490d-9a2e-ae77606bcd02.JPG}} &
-  \subfloat{\includegraphics[width = 1.65in]{imgs/esmart_gt/Alta__9abf75f2-84d8-490d-9a2e-ae77606bcd02.png}} &
-  \subfloat{\includegraphics[width = 1.65in]{imgs/esmart_old/Alta__9abf75f2-84d8-490d-9a2e-ae77606bcd02.png}} &
-  \subfloat{\includegraphics[width = 1.65in]{imgs/esmart_new/Alta__9abf75f2-84d8-490d-9a2e-ae77606bcd02.png}}\\
-  % \subfloat{\includegraphics[width = 1.65in]{imgs/esmart_base_imgs/Alta__9d9d2fa1-7cb0-4cd7-bb92-64aee15e2b70.JPG}} &
-  % \subfloat{\includegraphics[width = 1.65in]{imgs/esmart_gt/Alta__9d9d2fa1-7cb0-4cd7-bb92-64aee15e2b70.png}} &
-  % \subfloat{\includegraphics[width = 1.65in]{imgs/esmart_old/Alta__9d9d2fa1-7cb0-4cd7-bb92-64aee15e2b70.png}} &
-  % \subfloat{\includegraphics[width = 1.65in]{imgs/esmart_new/Alta__9d9d2fa1-7cb0-4cd7-bb92-64aee15e2b70.png}}\\
-  \subfloat{\includegraphics[width = 1.65in]{imgs/esmart_base_imgs/Alta__98d795b2-512d-e740-2b9c-dfb9b6b40696.JPG}} &
-  \subfloat{\includegraphics[width = 1.65in]{imgs/esmart_gt/Alta__98d795b2-512d-e740-2b9c-dfb9b6b40696.png}} &
-  \subfloat{\includegraphics[width = 1.65in]{imgs/esmart_old/Alta__98d795b2-512d-e740-2b9c-dfb9b6b40696.png}} &
-  \subfloat{\includegraphics[width = 1.65in]{imgs/esmart_new/Alta__98d795b2-512d-e740-2b9c-dfb9b6b40696.png}}\\
+  \addtolength{\tabcolsep}{-5pt} 
+  \begin{tabularx}{\textwidth}{ccccc}
+  \centering 
+  % \subfloat{\includegraphics[width = 1.40in]{imgs/esmart_base_imgs/Alta__4ba599e9-bf87-4283-aa2c-8d0bdd9b4e6e.JPG}} &
+  % \subfloat{\includegraphics[width = 1.40in]{imgs/esmart_gt/Alta__4ba599e9-bf87-4283-aa2c-8d0bdd9b4e6e.png}} &
+  % \subfloat{\includegraphics[width = 1.40in]{imgs/hawp/esmart_ha/Alta__4ba599e9-bf87-4283-aa2c-8d0bdd9b4e6e.png}} &
+  % \subfloat{\includegraphics[width = 1.40in]{imgs/esmart_old/Alta__4ba599e9-bf87-4283-aa2c-8d0bdd9b4e6e.png}} &
+  % \subfloat{\includegraphics[width = 1.40in]{imgs/esmart_new/Alta__4ba599e9-bf87-4283-aa2c-8d0bdd9b4e6e.png}} \\
+  \subfloat{\includegraphics[width = 1.40in]{imgs/esmart_base_imgs/Alta__6a6a5379-a993-4be1-9d79-236991f70d38.JPG}} &
+  \subfloat{\includegraphics[width = 1.40in]{imgs/esmart_gt/Alta__6a6a5379-a993-4be1-9d79-236991f70d38.png}} &
+  \subfloat{\includegraphics[width = 1.40in]{imgs/hawp/esmart_ha/Alta__6a6a5379-a993-4be1-9d79-236991f70d38.png}} &
+  \subfloat{\includegraphics[width = 1.40in]{imgs/esmart_old/Alta__6a6a5379-a993-4be1-9d79-236991f70d38.png}} &
+  \subfloat{\includegraphics[width = 1.40in]{imgs/esmart_new/Alta__6a6a5379-a993-4be1-9d79-236991f70d38.png}} \\
+  \subfloat{\includegraphics[width = 1.40in]{imgs/esmart_base_imgs/Alta__05ceb653-bdc2-78a8-0747-a63831e3ebc9.JPG}} &
+  \subfloat{\includegraphics[width = 1.40in]{imgs/esmart_gt/Alta__05ceb653-bdc2-78a8-0747-a63831e3ebc9.png}} &
+  \subfloat{\includegraphics[width = 1.40in]{imgs/hawp/esmart_ha/Alta__05ceb653-bdc2-78a8-0747-a63831e3ebc9.png}} &
+  \subfloat{\includegraphics[width = 1.40in]{imgs/esmart_old/Alta__05ceb653-bdc2-78a8-0747-a63831e3ebc9.png}} &
+  \subfloat{\includegraphics[width = 1.40in]{imgs/esmart_new/Alta__05ceb653-bdc2-78a8-0747-a63831e3ebc9.png}} \\
+  \subfloat{\includegraphics[width = 1.40in]{imgs/esmart_base_imgs/Dalane__Dalane+IA__DAT_7909.JPG}} &
+  \subfloat{\includegraphics[width = 1.40in]{imgs/esmart_gt/Dalane__Dalane+IA__DAT_7909.png}} &
+  \subfloat{\includegraphics[width = 1.40in]{imgs/hawp/esmart_ha/Dalane__Dalane+IA__DAT_7909.png}} &
+  \subfloat{\includegraphics[width = 1.40in]{imgs/esmart_old/Dalane__Dalane+IA__DAT_7909.png}} &
+  \subfloat{\includegraphics[width = 1.40in]{imgs/esmart_new/Dalane__Dalane+IA__DAT_7909.png}}\\
+  
+  \subfloat{\includegraphics[width = 1.40in]{imgs/esmart_base_imgs/Alta__bbbc763d-c6c4-4ab9-0b9b-9e0307a872ae.JPG}} &
+  \subfloat{\includegraphics[width = 1.40in]{imgs/esmart_gt/Alta__bbbc763d-c6c4-4ab9-0b9b-9e0307a872ae.png}} &
+  \subfloat{\includegraphics[width = 1.40in]{imgs/hawp/esmart_ha/Alta__bbbc763d-c6c4-4ab9-0b9b-9e0307a872ae.png}} &
+  \subfloat{\includegraphics[width = 1.40in]{imgs/esmart_old/Alta__bbbc763d-c6c4-4ab9-0b9b-9e0307a872ae.png}} &
+  \subfloat{\includegraphics[width = 1.40in]{imgs/esmart_new/Alta__bbbc763d-c6c4-4ab9-0b9b-9e0307a872ae.png}} \\
+  \subfloat{\includegraphics[width = 1.40in]{imgs/esmart_base_imgs/Alta__cf519095-8e39-35eb-448d-1cd731af29b1.JPG}} &
+  \subfloat{\includegraphics[width = 1.40in]{imgs/esmart_gt/Alta__cf519095-8e39-35eb-448d-1cd731af29b1.png}} &
+  \subfloat{\includegraphics[width = 1.40in]{imgs/hawp/esmart_ha/Alta__cf519095-8e39-35eb-448d-1cd731af29b1.png}} &
+  \subfloat{\includegraphics[width = 1.40in]{imgs/esmart_old/Alta__cf519095-8e39-35eb-448d-1cd731af29b1.png}} &
+  \subfloat{\includegraphics[width = 1.40in]{imgs/esmart_new/Alta__cf519095-8e39-35eb-448d-1cd731af29b1.png}} \\
+  \subfloat{\includegraphics[width = 1.40in]{imgs/esmart_base_imgs/Haugaland__Haugaland+Opptrening__Helikopterbilder+2011___DSC0539.JPG}} &
+  \subfloat{\includegraphics[width = 1.40in]{imgs/esmart_gt/Haugaland__Haugaland+Opptrening__Helikopterbilder+2011___DSC0539.png}} &
+  \subfloat{\includegraphics[width = 1.40in]{imgs/hawp/esmart_ha/Haugaland__Haugaland+Opptrening__Helikopterbilder+2011___DSC0539.png}} &
+  \subfloat{\includegraphics[width = 1.40in]{imgs/esmart_old/Haugaland__Haugaland+Opptrening__Helikopterbilder+2011___DSC0539.png}} &
+  \subfloat{\includegraphics[width = 1.40in]{imgs/esmart_new/Haugaland__Haugaland+Opptrening__Helikopterbilder+2011___DSC0539.png}} \\
+  % \subfloat{\includegraphics[width = 1.65in]{imgs/esmart_base_imgs/Alta__6a6a5379-a993-4be1-9d79-236991f70d38.JPG}} &
+  % \subfloat{\includegraphics[width = 1.65in]{imgs/esmart_base_imgs/Alta__9abf75f2-84d8-490d-9a2e-ae77606bcd02.JPG}}\\
+  % \subfloat{\includegraphics[width = 1.65in]{imgs/esmart_gt/Alta__6a6a5379-a993-4be1-9d79-236991f70d38.png}} &
+  % \subfloat{\includegraphics[width = 1.65in]{imgs/esmart_gt/Alta__9abf75f2-84d8-490d-9a2e-ae77606bcd02.png}}\\
+  % \subfloat{\includegraphics[width = 1.65in]{imgs/hawp/esmart_ha/Alta__6a6a5379-a993-4be1-9d79-236991f70d38.png}} &
+  % \subfloat{\includegraphics[width = 1.65in]{imgs/hawp/esmart_ha/Alta__9abf75f2-84d8-490d-9a2e-ae77606bcd02.png}}\\
+  % \subfloat{\includegraphics[width = 1.65in]{imgs/esmart_old/Alta__6a6a5379-a993-4be1-9d79-236991f70d38.png}} &
+  % \subfloat{\includegraphics[width = 1.65in]{imgs/esmart_old/Alta__9abf75f2-84d8-490d-9a2e-ae77606bcd02.png}}\\
+  % \subfloat{\includegraphics[width = 1.65in]{imgs/esmart_new/Alta__6a6a5379-a993-4be1-9d79-236991f70d38.png}} &
+  % \subfloat{\includegraphics[width = 1.65in]{imgs/esmart_new/Alta__9abf75f2-84d8-490d-9a2e-ae77606bcd02.png}}\\
+  % \subfloat{\includegraphics[width = 1.65in]{imgs/esmart_base_imgs/Alta__98d795b2-512d-e740-2b9c-dfb9b6b40696.JPG}} &
+  % \subfloat{\includegraphics[width = 1.65in]{imgs/esmart_gt/Alta__98d795b2-512d-e740-2b9c-dfb9b6b40696.png}} &
+  % \subfloat{\includegraphics[width = 1.65in]{imgs/esmart_old/Alta__98d795b2-512d-e740-2b9c-dfb9b6b40696.png}} &
+  % \subfloat{\includegraphics[width = 1.65in]{imgs/esmart_new/Alta__98d795b2-512d-e740-2b9c-dfb9b6b40696.png}}\\
 
   % Add caption row
   Image & Ground truth & LSNet & LSNetv2
@@ -1120,60 +1196,70 @@ Stage & Output size & Modified VGG & Resnet-50 & EfficientnetV2-M & ConvNext-Tin
   \caption{\label{esmart_example_0}Example test results of LSNet and LSNetv2 on test images in Esmart dataset. The columns from left to right contain: original images, ground truth segment map, outputs of LSNet and outputs of LSNetv2}
 \end{figure*}
 
-\begin{figure*}
-  \begin{tabularx}{\textwidth}{cccc}
-  \centering
-  \subfloat{\includegraphics[width = 1.65in]{imgs/esmart_base_imgs/Alta__a1cf5776-0454-4ef6-8726-ad25b0023293.JPG}} &
-  \subfloat{\includegraphics[width = 1.65in]{imgs/esmart_gt/Alta__a1cf5776-0454-4ef6-8726-ad25b0023293.png}} &
-  \subfloat{\includegraphics[width = 1.65in]{imgs/esmart_old/Alta__a1cf5776-0454-4ef6-8726-ad25b0023293.png}} &
-  \subfloat{\includegraphics[width = 1.65in]{imgs/esmart_new/Alta__a1cf5776-0454-4ef6-8726-ad25b0023293.png}}\\
-  \subfloat{\includegraphics[width = 1.65in]{imgs/esmart_base_imgs/Alta__bbbc763d-c6c4-4ab9-0b9b-9e0307a872ae.JPG}} &
-  \subfloat{\includegraphics[width = 1.65in]{imgs/esmart_gt/Alta__bbbc763d-c6c4-4ab9-0b9b-9e0307a872ae.png}} &
-  \subfloat{\includegraphics[width = 1.65in]{imgs/esmart_old/Alta__bbbc763d-c6c4-4ab9-0b9b-9e0307a872ae.png}} &
-  \subfloat{\includegraphics[width = 1.65in]{imgs/esmart_new/Alta__bbbc763d-c6c4-4ab9-0b9b-9e0307a872ae.png}}\\
-  \subfloat{\includegraphics[width = 1.65in]{imgs/esmart_base_imgs/Alta__cf519095-8e39-35eb-448d-1cd731af29b1.JPG}} &
-  \subfloat{\includegraphics[width = 1.65in]{imgs/esmart_gt/Alta__cf519095-8e39-35eb-448d-1cd731af29b1.png}} &
-  \subfloat{\includegraphics[width = 1.65in]{imgs/esmart_old/Alta__cf519095-8e39-35eb-448d-1cd731af29b1.png}} &
-  \subfloat{\includegraphics[width = 1.65in]{imgs/esmart_new/Alta__cf519095-8e39-35eb-448d-1cd731af29b1.png}}\\
-  \subfloat{\includegraphics[width = 1.65in]{imgs/esmart_base_imgs/Dalane__Dalane+IA__DAT_6749.JPG}} &
-  \subfloat{\includegraphics[width = 1.65in]{imgs/esmart_gt/Dalane__Dalane+IA__DAT_6749.png}} &
-  \subfloat{\includegraphics[width = 1.65in]{imgs/esmart_old/Dalane__Dalane+IA__DAT_6749.png}} &
-  \subfloat{\includegraphics[width = 1.65in]{imgs/esmart_new/Dalane__Dalane+IA__DAT_6749.png}}\\
-  \subfloat{\includegraphics[width = 1.65in]{imgs/esmart_base_imgs/Dalane__Dalane+IA__DAT_7559.JPG}} &
-  \subfloat{\includegraphics[width = 1.65in]{imgs/esmart_gt/Dalane__Dalane+IA__DAT_7559.png}} &
-  \subfloat{\includegraphics[width = 1.65in]{imgs/esmart_old/Dalane__Dalane+IA__DAT_7559.png}} &
-  \subfloat{\includegraphics[width = 1.65in]{imgs/esmart_new/Dalane__Dalane+IA__DAT_7559.png}}\\
+% \begin{figure*}
+%   \begin{tabularx}{\textwidth}{cccc}
+%   \centering
+%   \subfloat{\includegraphics[width = 1.65in]{imgs/esmart_base_imgs/Alta__a1cf5776-0454-4ef6-8726-ad25b0023293.JPG}} &
+%   \subfloat{\includegraphics[width = 1.65in]{imgs/esmart_base_imgs/Alta__bbbc763d-c6c4-4ab9-0b9b-9e0307a872ae.JPG}} &
+%   \subfloat{\includegraphics[width = 1.65in]{imgs/esmart_base_imgs/Dalane__Dalane+IA__DAT_7559.JPG}} &
+%   \subfloat{\includegraphics[width = 1.65in]{imgs/esmart_base_imgs/Dalane__Dalane+IA__DAT_6749.JPG}}\\
+%   \subfloat{\includegraphics[width = 1.65in]{imgs/esmart_gt/Alta__a1cf5776-0454-4ef6-8726-ad25b0023293.png}} &
+%   \subfloat{\includegraphics[width = 1.65in]{imgs/esmart_gt/Alta__bbbc763d-c6c4-4ab9-0b9b-9e0307a872ae.png}} &
+%   \subfloat{\includegraphics[width = 1.65in]{imgs/esmart_gt/Dalane__Dalane+IA__DAT_7559.png}} &
+%   \subfloat{\includegraphics[width = 1.65in]{imgs/esmart_gt/Dalane__Dalane+IA__DAT_6749.png}}\\
+%   \subfloat{\includegraphics[width = 1.65in]{imgs/hawp/esmart_ha/Alta__a1cf5776-0454-4ef6-8726-ad25b0023293.png}} &
+%   \subfloat{\includegraphics[width = 1.65in]{imgs/hawp/esmart_ha/Alta__bbbc763d-c6c4-4ab9-0b9b-9e0307a872ae.png}} &
+%   \subfloat{\includegraphics[width = 1.65in]{imgs/hawp/esmart_ha/Dalane__Dalane+IA__DAT_7559.png}} &
+%   \subfloat{\includegraphics[width = 1.65in]{imgs/hawp/esmart_ha/Dalane__Dalane+IA__DAT_6749.png}}\\
+%   \subfloat{\includegraphics[width = 1.65in]{imgs/esmart_old/Alta__a1cf5776-0454-4ef6-8726-ad25b0023293.png}} &
+%   \subfloat{\includegraphics[width = 1.65in]{imgs/esmart_old/Alta__bbbc763d-c6c4-4ab9-0b9b-9e0307a872ae.png}} &
+%   \subfloat{\includegraphics[width = 1.65in]{imgs/esmart_old/Dalane__Dalane+IA__DAT_7559.png}} &
+%   \subfloat{\includegraphics[width = 1.65in]{imgs/esmart_old/Dalane__Dalane+IA__DAT_6749.png}}\\
+%   \subfloat{\includegraphics[width = 1.65in]{imgs/esmart_new/Alta__a1cf5776-0454-4ef6-8726-ad25b0023293.png}} &
+%   \subfloat{\includegraphics[width = 1.65in]{imgs/esmart_new/Alta__cf519095-8e39-35eb-448d-1cd731af29b1.png}} &
+%   \subfloat{\includegraphics[width = 1.65in]{imgs/esmart_new/Dalane__Dalane+IA__DAT_7559.png}} &
+%   \subfloat{\includegraphics[width = 1.65in]{imgs/esmart_new/Dalane__Dalane+IA__DAT_6749.png}}\\
+%   % \subfloat{\includegraphics[width = 1.65in]{imgs/esmart_base_imgs/Alta__bbbc763d-c6c4-4ab9-0b9b-9e0307a872ae.JPG}} &
+%   % \subfloat{\includegraphics[width = 1.65in]{imgs/esmart_gt/Alta__bbbc763d-c6c4-4ab9-0b9b-9e0307a872ae.png}} &
+%   % \subfloat{\includegraphics[width = 1.65in]{imgs/esmart_old/Alta__bbbc763d-c6c4-4ab9-0b9b-9e0307a872ae.png}} &
+%   % \subfloat{\includegraphics[width = 1.65in]{imgs/esmart_new/Alta__bbbc763d-c6c4-4ab9-0b9b-9e0307a872ae.png}}\\
   
-  % Add caption row
-  Image & Ground truth & LSNet & LSNetv2
-  % \subfloat[caption]{\includegraphics[width = 1.5in]{something}}\\
-  \end{tabularx}
-  \caption{4 x 4}
-\end{figure*}
+%   % Add caption row
+%   Image & Ground truth & LSNet & LSNetv2
+%   % \subfloat[caption]{\includegraphics[width = 1.5in]{something}}\\
+%   \end{tabularx}
+%   \caption{4 x 4}
+% \end{figure*}
 
 
-\begin{figure*}
-  \begin{tabularx}{\textwidth}{cccc}
-  \centering
-  \subfloat{\includegraphics[width = 1.65in]{imgs/esmart_base_imgs/Dalane__Dalane+IA__DAT_7909.JPG}} &
-  \subfloat{\includegraphics[width = 1.65in]{imgs/esmart_gt/Dalane__Dalane+IA__DAT_7909.png}} &
-  \subfloat{\includegraphics[width = 1.65in]{imgs/esmart_old/Dalane__Dalane+IA__DAT_7909.png}} &
-  \subfloat{\includegraphics[width = 1.65in]{imgs/esmart_new/Dalane__Dalane+IA__DAT_7909.png}}\\
-  \subfloat{\includegraphics[width = 1.65in]{imgs/esmart_base_imgs/Haugaland__Haugaland+Opptrening__Helikopterbilder+2011___DSC0539.JPG}} &
-  \subfloat{\includegraphics[width = 1.65in]{imgs/esmart_gt/Haugaland__Haugaland+Opptrening__Helikopterbilder+2011___DSC0539.png}} &
-  \subfloat{\includegraphics[width = 1.65in]{imgs/esmart_old/Haugaland__Haugaland+Opptrening__Helikopterbilder+2011___DSC0539.png}} &
-  \subfloat{\includegraphics[width = 1.65in]{imgs/esmart_new/Haugaland__Haugaland+Opptrening__Helikopterbilder+2011___DSC0539.png}}\\
-  \subfloat{\includegraphics[width = 1.65in]{imgs/esmart_base_imgs/SFE__SFE+Opptrening__Dag+8+-+Heggjebygda+til+Eid__DJI_0025.JPG}} &
-  \subfloat{\includegraphics[width = 1.65in]{imgs/esmart_gt/SFE__SFE+Opptrening__Dag+8+-+Heggjebygda+til+Eid__DJI_0025.png}} &
-  \subfloat{\includegraphics[width = 1.65in]{imgs/esmart_old/SFE__SFE+Opptrening__Dag+8+-+Heggjebygda+til+Eid__DJI_0025.png}} &
-  \subfloat{\includegraphics[width = 1.65in]{imgs/esmart_new/SFE__SFE+Opptrening__Dag+8+-+Heggjebygda+til+Eid__DJI_0025.png}}\\
-
-  % Add caption row
-  Image & Ground truth & LSNet & LSNetv2
-  % \subfloat[caption]{\includegraphics[width = 1.5in]{something}}\\
-  \end{tabularx}
-  \caption{4 x 4}
-\end{figure*}
+% \begin{figure*}
+%   \begin{tabularx}{\textwidth}{cccc}
+%   \centering
+%   \subfloat{\includegraphics[width = 1.65in]{imgs/esmart_base_imgs/Dalane__Dalane+IA__DAT_7909.JPG}} &
+%   \subfloat{\includegraphics[width = 1.65in]{imgs/esmart_base_imgs/Haugaland__Haugaland+Opptrening__Helikopterbilder+2011___DSC0539.JPG}} &
+%   \subfloat{\includegraphics[width = 1.65in]{imgs/esmart_base_imgs/Alta__98d795b2-512d-e740-2b9c-dfb9b6b40696.JPG}} &
+%   \subfloat{\includegraphics[width = 1.65in]{imgs/esmart_base_imgs/SFE__SFE+Opptrening__Dag+8+-+Heggjebygda+til+Eid__DJI_0025.JPG}}\\
+%   \subfloat{\includegraphics[width = 1.65in]{imgs/esmart_gt/Dalane__Dalane+IA__DAT_7909.png}} &
+%   \subfloat{\includegraphics[width = 1.65in]{imgs/esmart_gt/Haugaland__Haugaland+Opptrening__Helikopterbilder+2011___DSC0539.png}} &
+%   \subfloat{\includegraphics[width = 1.65in]{imgs/esmart_gt/Alta__98d795b2-512d-e740-2b9c-dfb9b6b40696.png}} &
+%   \subfloat{\includegraphics[width = 1.65in]{imgs/esmart_gt/SFE__SFE+Opptrening__Dag+8+-+Heggjebygda+til+Eid__DJI_0025.png}}\\  
+%   \subfloat{\includegraphics[width = 1.65in]{imgs/hawp/esmart_ha/Dalane__Dalane+IA__DAT_7909.png}} &
+%   \subfloat{\includegraphics[width = 1.65in]{imgs/hawp/esmart_ha/Haugaland__Haugaland+Opptrening__Helikopterbilder+2011___DSC0539.png}} &
+%   \subfloat{\includegraphics[width = 1.65in]{imgs/hawp/esmart_ha/Alta__98d795b2-512d-e740-2b9c-dfb9b6b40696.png}} &
+%   \subfloat{\includegraphics[width = 1.65in]{imgs/hawp/esmart_ha/SFE__SFE+Opptrening__Dag+8+-+Heggjebygda+til+Eid__DJI_0025.png}}\\  
+%   \subfloat{\includegraphics[width = 1.65in]{imgs/esmart_old/Dalane__Dalane+IA__DAT_7909.png}} &
+%   \subfloat{\includegraphics[width = 1.65in]{imgs/esmart_old/Haugaland__Haugaland+Opptrening__Helikopterbilder+2011___DSC0539.png}} &
+%   \subfloat{\includegraphics[width = 1.65in]{imgs/esmart_old/Alta__98d795b2-512d-e740-2b9c-dfb9b6b40696.png}} &
+%   \subfloat{\includegraphics[width = 1.65in]{imgs/esmart_old/SFE__SFE+Opptrening__Dag+8+-+Heggjebygda+til+Eid__DJI_0025.png}}\\  
+%   \subfloat{\includegraphics[width = 1.65in]{imgs/esmart_new/Dalane__Dalane+IA__DAT_7909.png}} &
+%   \subfloat{\includegraphics[width = 1.65in]{imgs/esmart_new/Haugaland__Haugaland+Opptrening__Helikopterbilder+2011___DSC0539.png}} &
+%   \subfloat{\includegraphics[width = 1.65in]{imgs/esmart_new/Alta__98d795b2-512d-e740-2b9c-dfb9b6b40696.png}} &
+%   \subfloat{\includegraphics[width = 1.65in]{imgs/esmart_new/SFE__SFE+Opptrening__Dag+8+-+Heggjebygda+til+Eid__DJI_0025.png}}\\  
+%   % Add caption row
+%   % \subfloat[caption]{\includegraphics[width = 1.5in]{something}}\\
+%   \end{tabularx}
+%   \caption{4 x 4}
+% \end{figure*}
 
 
 
