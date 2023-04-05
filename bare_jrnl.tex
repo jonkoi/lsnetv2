@@ -609,27 +609,19 @@ LS-Net \cite{Nguyen2020} was proposed as a single-shot line-segment detector ins
 
 \textcolor{red}{LS-Net reduces the need for pixel-level annotated data ground truth, which can be laborious to obtain. Especially in the case of powerlines, which can often be quite slender yet span across images, more meticulousness is required in the annotating process.} Instead, LS-Net relies only on polyline annotation that trace along the powerline. Polyline annotation requires much less effort and is arguably more robust to labelling inaccuracy allowing more ground truth images to be acquired and facilitating better deep learning models. 
 
-LS-Net breaks down the problem of powerline detection into detecting and locating line segments in four overlapping grids, which are superimposed onto the input image. In each cell of the grids,  LS-Net detects whether there exist parts of powerlines within its borders and provides the coordinates of the line segment endpoints. Theses divided results can be combined to produce a complete segment map of powerlines. The four-grid approach was proposed as opposed to the one-grid approach, commonly found in models such as SSD \cite{SSD} and YOLO \cite{YOLO}, in order to encourage more thorough detection and localization of powerlines and combat the problem of discontinuities at grid cell borders and corners. This is illustrated in \ref{}. 
+LS-Net breaks down the problem of powerline detection into detecting and locating line segments in four overlapping grids, which are superimposed onto the input image. This results in $31 \times 31$ grid cells, each of which overlooks an area of size $32 \times 32$. In each cell of the grids,  LS-Net detects whether there exist parts of powerlines within its borders and provides the coordinates of the line segment endpoints. Theses divided results can be combined to produce a complete segment map of powerlines. The four-grid approach was proposed as opposed to the one-grid approach, commonly found in models such as SSD \cite{SSD} and YOLO \cite{YOLO}, in order to encourage more thorough detection and localization of powerlines and combat the problem of discontinuities at grid cell borders and corners. This is illustrated in \ref{}. 
 
-To perform line segment detection, the architecture of LS-Net involves a fully convolutional feature extractor which branches out into a classifier module and a regressor module as shown in \ref{lsnet_architecture}. These two modules aim to detect the presence of a line segment and the line segment endpoint coordinates respectively. The feature extractor of the original LS-Net was proposed to be a version of VGG-16 network \cite{VGG16} which was modified to include Group Normalization \cite{group_norm} before activations and replace max pooling layer with stride 2 for convolutional layer. The classifier module uses the feature map from the extractor and follows up with a 2 x 2 convolutional layer with stride 1 resulting in four sets of 512-channeled feature maps, in which each element in the feature map correspond to a cell of the respective grid. Finally, a 1 x 1 convolutional layer reduces the feature maps to a 2-channeled output. The channels correspond to the classes "line segment exists" and "line segment does not exist". The regressor module follows almost the identical design but ultimately produces a 4-channeled output instead, corresponding to the xy-coordinates of the predicted line segment endpoints. A detailed configuration of LS-Net is shown in \ref{lsnet_config}.
+To perform line segment detection, the architecture of LS-Net involves a fully convolutional feature extractor which branches out into a classifier module and a regressor module as shown in \ref{lsnet_architecture}. These two modules aim to detect the presence of a line segment and the line segment endpoint coordinates respectively. The feature extractor of the original LS-Net was proposed to be a version of VGG-16 network \cite{VGG16} which was modified to include Group Normalization \cite{group_norm} before activations and replace max pooling layer with stride 2 for convolutional layer. \textcolor{red}{The classifier module and regressor module shared similar design and have the output of shape $B \times 31 \times 31 \times 2$ and $B \times 31 \times 31 \times 4$ respectively, with $B$ being the batch size. The $B \times 31 \times 31$ vectors from the classification module determine if line segments exist in their corresponding cell and the $B \times 31 \times 31$ vectors from the regression module determine the xy-coordinates of the endpoints of the line segments. In the current design. LsNet can only detect the existence and location one line segment per cell and, thus, may not be effective in many cases of powerlines appearing to be in close vincinity or cross each other, and, thus, results in more than one line segment existing in a few cells.}
+
+% The classifier module uses the feature map from the extractor and follows up with a 2 x 2 convolutional layer with stride 1 resulting in four sets of 512-channeled feature maps, in which each element in the feature map correspond to a cell of the respective grid. Finally, a 1 x 1 convolutional layer reduces the feature maps to a 2-channeled output. The channels correspond to the classes "line segment exists" and "line segment does not exist". The regressor module follows almost the identical design but ultimately produces a 4-channeled output instead, corresponding to the xy-coordinates of the predicted line segment endpoints. A detailed configuration of LS-Net is shown in \ref{lsnet_config}.
 \commentM{These are a bit too many details for the beginning of the methodology section. It could be sufficient to say that it builds on a modified version of VGG-16 with a classification and regression head.}
-
-Loss ???
 
 \subsection{LS-Netv2}
 \commentM{Instead of mentioning what we propose, we need to motivate it. Start from the problem (overlapping power lines) and use it to motivate the solution. Have a figure illustrating the whole pipeline and briefly describe the high-level method.}
 
 \commentM{Then dive into the individual components (subsections), again starting from a motivation perspective}
 
-It has been shown that LS-Net has been successful for cases where images of powerlines being captured from a relatively close distance and the visibility of the powerlines throughout the span of the image is clear \cite{Nguyen2020}. These cases might resembles distance of footage from autonomous line following drones flying in proximity with the powerline. However, in reality, images such as those used for visual inspection can be taken from further away making the segments of powerlines appear really thin and/or blended with the background. If we follow the grid-based approach of LS-Net, the detection performance of powerlines in each cell may depend on the information of areas around it. However, according to \textcolor{red}{this calculation} the theoretic receptive field of LS-Net is only four times the cell size (91 as calculated by \texttt{receptive\_field\_analysis\_toolbox} \cite{receptive_field_analysis_toolbox}), which LS-Net is unable to aggregate global context for the cell inference. Furthermore, the design of the first LS-Net is based on the assumption that only one powerline segment is present for each division cell and thus only one segment is to be detected. This does not apply in practice where there exist powerlines appearing in close proximity and appearing to intersect each other (Figure \ref{}).
-
-As mentioned, the VGG-inspired backbone design results in a receptive field of about four times the cell size. \commentM{Try not to motivate it with it is old. This way, it sounds like you just take a new backbone and that is what you propose.} Thus, we updated the backbone with a variant of the state-of-the-art ConvNeXt \cite{convnext}. ConvNeXt was recently introduced as a modernized version of ResNet \cite{resnet} which is equipped with recent properties of the hierarchical vision transformer Swin \cite{swin}. Modifications were made on the macro scale, such as the change in the ratios between stages, the use of depthwise convolution in similar manner to ResNeXt \cite{resnext}, enlarging kernel size to 7, etc.; and on the micro scale, such as the switch from batch normalization \cite{batchnorm} to layer normalization \cite{layernorm}, from ReLU \cite{relu} to GELU \cite{gelu}, etc. These changes allow ConvNeXt to compete favorably with other architectures, including Swin, which is among the state-of-the-art for deep vision tasks.
-
-We use an altered version of ConvNeXt-Tiny, which is most compact and efficient ConvNeXt type. ConvNeXt-Tiny starts with the stem block that reduce the input image to a feature map 1/4th the original size. The stem block is then followed by has four downsampling stages, each of which ends with a compression convolutional layer with reduction factor of 2. Thus we use a ConvNeXt-Tiny, which is truncted at before the compression layer of the 3rd stage, as the new backbone. The output of the truncated model reduces would have the size of 32x32x384.
-
-We take a step further by adding three vision transformer encoder blocks \cite{16x16, attention} to allow for global aggregation of information. Originally, the input of transformer encoder are flattened patches of images, which are added with positional embeddings to convey location information of each patch to the model. In LS-Netv2, the image patches are replaced with 1x1x256 feature segments from the 31x31x256 feature maps. This design is similar to the object detector DETR \cite{DETR}, where a CNN is used to produce a compact feature map first then a transformer is used in the later stage. The CNN provide inductive bias that allow the model to be trained easier with smaller data. A pure transformer model would have more generalizability \cite{} but would rely on huge amount of data, which we do not have in our case, to achieve high performance. The benefit of this design will be shown using \textcolor{red}{ablation study}.
-
-LS-Netv2 has the capability to detect multiple lines per cell by performing fixed number of inferences N, which is chosen to be larger than the maximum number of line segments exists in the cell. From our experiments, 10 is a safe choice. The ground truth $y$ of each cell, which contains $m$ actual line segments, is also perceived to contain N line segments $y=\{y_i\}^N_{i-1}$. However, the ground truth is now padded with $N-m$ negative classification. Inspired by DETR \cite{DETR}, we frame the line segment detection within each cell as a direct set prediction problem. In our loss computation step, we include an optimal bipartite matching between the N predictions an N ground truths. \commentM{I would suggest you start this section with this novelty. It is more "novel" than using another backbone and nicely fits the motivation of the line crossings..}
+LS-Netv2 has the capability to detect multiple lines per cell by performing fixed number of inferences N, which is chosen to be larger than the maximum number of line segments exists in the cell. From our experiments, 10 is a safe choice. This results in the output of the classification and regression being in the shape of $B \times 31 \times 31 \times N \times 2$ and $B \times 31 \times 31 \times N \times 4$ respectively. \textcolor{red}{To avoid complicated indexing, we now focus the scope of our discussion to an individual cell.} The ground truth $y$ of each cell, which contains $m$ actual line segments, is also perceived to contain N line segments $y=\{y_i\}^N_{i-1}$. However, the ground truth is now padded with $N-m$ negative classification. Inspired by DETR \cite{DETR}, we frame the line segment detection within each cell as a direct set prediction problem. In our loss computation step, we include an optimal bipartite matching between the N predictions an N ground truths. \commentM{I would suggest you start this section with this novelty. It is more "novel" than using another backbone and nicely fits the motivation of the line crossings..}
 
 Let $\hat{y}=\{\hat{y}_i\}^N_{i-1}$ be the set of $N$ predictions. The optimal bipartite matching between the $N$ predictions an $N$ ground truths, which is done using Hungarian algorithm, produces a permutation $\hat{\sigma} \in \mathfrak{S}$ that satisfies:
 
@@ -637,11 +629,58 @@ Let $\hat{y}=\{\hat{y}_i\}^N_{i-1}$ be the set of $N$ predictions. The optimal b
 \hat{\sigma} = \mathop{\arg \min}\limits_{\sigma \in \mathfrak{S}} \sum_i^N \mathcal{L}_{match} (y_i, \hat{y}_{\sigma(i)})
 \end{equation}
 
-where $\mathcal{L}_{match} (y_i, \hat{y}_{\sigma(i)})$ is the loss when pairing $y_i$ and $\hat{y}_{\sigma(i)}$, which is reordered via permutation $\sigma(i)$. The loss considers both the classification loss and regression loss. Similarly to \cite{DETR}, this loss is defined as $-\hat{p}_{\sigma(i)}(c_i) + \mathds{1}_{\{c_i=\text{positive}\}}L_1(b_i, \hat{b}_{\sigma(i)})$, where $b_i$ and $\hat{b}_{\sigma(i)}$ are line segment endpoint ground truth and permutated prediction at index $i$ respectively. $L_1(.)$ is the $L_1$ loss and $\hat{p}_{\sigma(i)}(c_i)$ is the predicted probability of class $c_i$, which is the classification ground truth at index $i$.
+where $\mathcal{L}_{match} (y_i, \hat{y}_{\sigma(i)})$ is the loss when pairing $y_i = (c_i, b_i)$ and $\hat{y}_{\sigma(i)} = (\hat{p}_{\sigma(i)}, \hat{b}_{\sigma(i)})$, which is reordered via permutation $\sigma(i)$. The loss considers both the classification loss and regression loss. Similarly to \cite{DETR}, this loss is defined as $-\hat{p}_{\sigma(i)}(c_i) + \mathds{1}_{\{c_i=\text{positive}\}}L_1(b_i, \hat{b}_{\sigma(i)})$, where $b_i$ and $\hat{b}_{\sigma(i)}$ are line segment endpoint ground truth and permutated prediction at index $i$ respectively. $L_1(.)$ is the $L_1$ loss and $\hat{p}_{\sigma(i)}(c_i)$ is the predicted probability of class $c_i$, which is the classification ground truth at index $i$. The permutation $\hat{\sigma}$ is found by solving the linear sum assigment problem with a modified Jonker-Volgenant algorithm \cite{7738348}, which is implemented in the library \texttt{scipy}.
+
+\textcolor{red}{After bipartite matching has been done, the model can be trained with a multitask loss, $\mathcal{L}$, to simultaneously train the classification and regression module:}
+
+\begin{equation} \label{multitask_training_loss}
+\mathcal{L} = \sum_i^N\mathcal{L}_{\text{cls}}(y_i, \hat{y}_i) + \lambda \sum_i^N\mathds{1}_{\{c_i=\text{positive}\}}\mathcal{L}_\text{reg}(y_i, \hat{y}_i) 
+\end{equation}
+
+where $\hat{y}_i = \hat{y}_{\hat{\sigma}(i)}$ is one of $N$ prediction at an arbitrary cell after bipartite matching. $\mathcal{L}_{\text{cls}}$ is a Focal loss \cite{focal_loss}:
+\begin{equation}
+  \mathcal{L}_{\text{cls}} =
+    \begin{cases}
+      -\alpha (1 - p)^\gamma \log(p) \text{  ,  } c_i=\text{positive} \\
+      -(1 - \alpha)p^\gamma \log(1-p) \text{  , otherwise} 
+    \end{cases}       
+\end{equation}
+
+where $p=\hat{p}_{\hat{\sigma}(i)}(\text{positive})$, $\gamma \geq 0$ and $\alpha \in [0, 1]$ are tunable hyperparamemters that adjust the the weight on uncommon class and misclassified examples respectively. This loss is used in the original use Focal Loss to tackle the imbalance problem between cells with line segments and cell without. In LSNetv2, we continue to use this loss to train the classification module.
+
+The regression module is trained using Wing loss \cite{wing_loss} so that the training is more sensitive to small errors and robust against outliers. The loss is defined as:
+
+\begin{equation}
+  \mathcal{L}_{\text{reg}} =
+    \begin{cases}
+      w \text{ln} (1 + \frac{d}{\epsilon}) \text{  , if  } d < w \\
+      d - C \text{  , otherwise}
+    \end{cases}       
+\end{equation}
+
+where $w$ is used to constrain the range of the nonlinaer behavior of the loss to $(-w, w)$, $\epsilon$ controls the growth of loss as regression error increases and the curvature of the nonlinear part, $C = w - w\text{ln}(1 + w / \epsilon)$ is used to smoothen the linear and nonlinear parts of the loss, and $d$ is the distance error. With $b_i = (b_i^{x_1}, b_i^{y_1}, b_i^{x_2}, b_i^{y_2})$ and $\hat{b}_i = \hat{b}_{\hat{\sigma}(i)} = (\hat{b}_i^{x_1}, \hat{b}_i^{y_1}, \hat{b}_i^{x_2}, \hat{b}_i^{y_2})$, the distance error $d$ for the original LSNet is defined as:
+
+\begin{equation}
+  d(b_i, \hat{b}_i) = \min(\sum (|b_i - \hat{b}_i|), \sum(|b_i - \text{swap}(\hat{b}_i)|))
+\end{equation}
+
+where $\text{swap}(\hat{b}_i) = (\hat{b}_i^{x_2}, \hat{b}_i^{y_2}, \hat{b}_i^{x_1}, \hat{b}_i^{y_1})$.
+
+For LSNetv2, however, we propose the change of 
 
 
-We propose a new version of LS-Net, called LS-Netv2. This version is updated with recent advancement in the deep learning space. \commentM{Again, here it sounds like you "just" leverage a new backbone and other new things. Motivate it instead from the problem and then the solution is a method that incorporates new components.}
-Specifically, the feature extractor is altered with the state-of-the-art ConvNext model. Furthermore, inspired by DETR \cite{DETR}. LS-Netv2 possess the ability to detect and locate multiple line-segments within each grid cell via multi-guess bipartite matching.  \textcolor{red}{Also, we propose the addition of a context module built from multi-head attentions layers, whose effectiveness in extracting global information has been proven}. Finally, \textcolor{red}{adjustments are made to the losses so that the training is more stable and requires less time to achieve plateau performance}.
+
+
+\textcolor{brown}{We propose a new version of LS-Net, called LS-Netv2. This version is updated with recent advancement in the deep learning space. \commentM{Again, here it sounds like you "just" leverage a new backbone and other new things. Motivate it instead from the problem and then the solution is a method that incorporates new components.}
+Specifically, the feature extractor is altered with the state-of-the-art ConvNext model. Furthermore, inspired by DETR \cite{DETR}. LS-Netv2 possess the ability to detect and locate multiple line-segments within each grid cell via multi-guess bipartite matching.  \textcolor{red}{Also, we propose the addition of a context module built from multi-head attentions layers, whose effectiveness in extracting global information has been proven}. Finally, \textcolor{red}{adjustments are made to the losses so that the training is more stable and requires less time to achieve plateau performance}.}
+
+It has been shown that LS-Net has been successful for cases where images of powerlines being captured from a relatively close distance and the visibility of the powerlines throughout the span of the image is clear \cite{Nguyen2020}. These cases might resembles distance of footage from autonomous line following drones flying in proximity with the powerline. However, in reality, images such as those used for visual inspection can be taken from further away making the segments of powerlines appear really thin and/or blended with the background. If we follow the grid-based approach of LS-Net, the detection performance of powerlines in each cell may depend on the information of areas around it. However, according to \textcolor{red}{this calculation} the theoretic receptive field of LS-Net is only four times the cell size (91 as calculated by \texttt{receptive\_field\_analysis\_toolbox} \cite{receptive_field_analysis_toolbox}), which LS-Net is unable to aggregate global context for the cell inference. Furthermore, the design of the first LS-Net is based on the assumption that only one powerline segment is present for each division cell and thus only one segment is to be detected. This does not apply in practice where there exist powerlines appearing in close proximity and appearing to intersect each other (Figure \ref{}).
+
+As mentioned, the VGG-inspired backbone design results in a receptive field of about four times the cell size. \commentM{Try not to motivate it with it is old. This way, it sounds like you just take a new backbone and that is what you propose.} Thus, we updated the backbone with a variant of the state-of-the-art ConvNeXt \cite{convnext}. ConvNeXt was recently introduced as a modernized version of ResNet \cite{resnet} which is equipped with recent properties of the hierarchical vision transformer Swin \cite{swin}. Modifications were made on the macro scale, such as the change in the ratios between stages, the use of depthwise convolution in similar manner to ResNeXt \cite{resnext}, enlarging kernel size to 7, etc.; and on the micro scale, such as the switch from batch normalization \cite{batchnorm} to layer normalization \cite{layernorm}, from ReLU \cite{relu} to GELU \cite{gelu}, etc. These changes allow ConvNeXt to compete favorably with other architectures, including Swin, which is among the state-of-the-art for deep vision tasks.
+
+We use an altered version of ConvNeXt-Tiny, which is most compact and efficient ConvNeXt type. ConvNeXt-Tiny starts with the stem block that reduce the input image to a feature map 1/4th the original size. The stem block is then followed by has four downsampling stages, each of which ends with a compression convolutional layer with reduction factor of 2. Thus we use a ConvNeXt-Tiny, which is truncted at before the compression layer of the 3rd stage, as the new backbone. The output of the truncated model reduces would have the size of 32x32x384.
+
+
 
 \section{Experiments}
 The procedure and results of experiments are presented. Comparisons to state-of-the-art are also conducted.
@@ -1311,7 +1350,11 @@ Best $F_\beta$ & 7          & 0.6             & 5          & 0.1             & 2
 
 
 \section{Conclusion}
-The conclusion goes here.
+We presented LSNetv2, an improved version of LSNet with better performance and capability to detect multiple line segments per divided grid cell. This capability is brought about by using multiple outputs trained with bipartite matching. Furthermore, we proposed a new loss, where the order of the detected enpoints is fixed, to train the regression branch. By using this new loss, the endpoint with smaller x-coordinate is always inferred by the same element pairs in the output matrix and the remaining endpoint is inferred with the same remaining element pair. In addition, we updated the backbone to the state-of-the-art family of ConvNext, which inherited well-proven designed elements from ResNet and Visual Transformer, in order to increase the overall performance.
+
+LSNetv2 were able outperform its predecessor and its competitor HAWPv2 across all datasets evaluated. Through ablation study, each component has a role to play in enhacing the effectiveness pf LSNetv2. Analysis of different backbones also validated the choice of ConvNext-Tiny.
+
+
 
 
 
@@ -1332,21 +1375,11 @@ The conclusion goes here.
 %
 
 
-\appendices
-\section{Proof of the First Zonklar Equation}
-Appendix one text goes here.
-
-% you can choose not to have a title for an appendix
-% if you want by leaving the argument blank
-\section{}
-Appendix two text goes here.
-
 
 % use section* for acknowledgment
 \section*{Acknowledgment}
 
-
-The authors would like to thank... \cite{IEEEhowto:IEEEtranpage}
+We would like to extend our appreciation towards eSmart Systems and UiT Machine Learning Group for their support to realize this paper. This work was backed by the Research Council of Norway.
 
 
 % Can use something like this to put references on a page
