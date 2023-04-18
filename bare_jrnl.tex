@@ -163,6 +163,7 @@
 \usepackage{multirow}
 \usepackage{schemata}
 \usepackage{makecell}
+\usepackage{pbox}
 % A popular package from the American Mathematical Society that provides
 % many useful and powerful commands for dealing with mathematics.
 %
@@ -379,14 +380,14 @@
 % was not built to handle multiple paragraphs
 %
 
-\author{Michael~Shell,~\IEEEmembership{Member,~IEEE,}
-        John~Doe,~\IEEEmembership{Fellow,~OSA,}
-        and~Jane~Doe,~\IEEEmembership{Life~Fellow,~IEEE}% <-this % stops a space
-\thanks{M. Shell was with the Department
-of Electrical and Computer Engineering, Georgia Institute of Technology, Atlanta,
-GA, 30332 USA e-mail: (see http://www.michaelshell.org/contact.html).}% <-this % stops a space
-\thanks{J. Doe and J. Doe are with Anonymous University.}% <-this % stops a space
-\thanks{Manuscript received April 19, 2005; revised August 26, 2015.}}
+% \author{Michael~Shell,~\IEEEmembership{Member,~IEEE,}
+%         John~Doe,~\IEEEmembership{Fellow,~OSA,}
+%         and~Jane~Doe,~\IEEEmembership{Life~Fellow,~IEEE}% <-this % stops a space
+% \thanks{M. Shell was with the Department
+% of Electrical and Computer Engineering, Georgia Institute of Technology, Atlanta,
+% GA, 30332 USA e-mail: (see http://www.michaelshell.org/contact.html).}% <-this % stops a space
+% \thanks{J. Doe and J. Doe are with Anonymous University.}% <-this % stops a space
+% \thanks{Manuscript received April 19, 2005; revised August 26, 2015.}}
 
 % note the % following the last \IEEEmembership and also \thanks - 
 % these prevent an unwanted space from occurring between the last author name
@@ -468,6 +469,13 @@ Line segment detection, Power line detection, Power line inspection, Deep learni
 
 
 \section{Introduction}
+
+\begin{figure*}[hbt!]
+  \includegraphics[width=\linewidth]{imgs/others/examples.png}
+  \caption{Zoomed in xamples of images captured for visual inspection of powerlines. The first two images from the left are from the TTPLA dataset. The last two are among those aggregated by eSmart Systems. There are many instances of powerlines being in close proximity or crossing each other visually.}
+  \label{crossing_examples}
+\end{figure*}
+
 % The very first letter is a 2 line initial drop letter followed
 % by the rest of the first word in caps.
 % 
@@ -484,17 +492,17 @@ Line segment detection, Power line detection, Power line inspection, Deep learni
 % Here we have the typical use of a "T" for an initial drop letter
 % and "HIS" in caps to complete the first word.
 
-Electricity is the lifeblood of modern society, thus, it is essential to ensure stable electrical power supply across the nations. Hence, it is of utmost importance for utilities to inspect and maintain their electrical facilities on a regular basis. These tasks were conventionally done by human inspectors manually following, observing and assessing the power grid. Recently, Unmanned Aerial
-Vehicles (UAVs) have been deployed to produce more quality and efficient observations due to their superior speed and ability to access higher altitude and more hazardous environments. To further boost the effectiveness and efficiency of inspection and maintenance tasks, the assessment step can be done automatically from the observations of UAVs, which, in many cases, are RGB images from cameras. Many automatic assessment solutions have recently been proposed, many of which are fueled by the power of artificial intelligence and deep learning. Examples of such tasks are the detection of electrical components (insulators, cable suspension clamps, etc.) and the diagnosis of defects (pole breakage, insulator contamination, etc.) \cite{nhan_examples, insulator_examples,detect_component_examples}. Among these tasks, cable, wire or powerline recognition and localization is very crucial as powerlines are one of the most essential elements in any utility infrastructures as they are directly responsible for electricity transmission. Accurate detection of powerlines can facilitate better analysis of faults (Tears, kinking, bird caging, etc...) and identification of hazards (vegetation encroachment, etc,) on the powerlines. These tasks are extremely vital as their failure can lead to catastrophic and fatal consequences \cite{pge_bankruptcy}. Furthermore, the ability to detect powerlines is imperative for UAVs, and other forms of low-altitude flights, to navigate safely.
+Electricity is the lifeblood of modern society, thus, it is essential to ensure a stable electrical power supply across the nations. Hence, it is of utmost importance for utility companies to inspect and maintain their electrical facilities regularly. While these tasks were conventionally done by human inspectors manually following, observing, and assessing the power grid, recently Unmanned Aerial
+Vehicles (UAVs) have been deployed to produce higher quality and more efficient observations due to their superior speed and ability to access higher altitudes and more hazardous environments. Additionally, to enhance the effectiveness and efficiency of inspection and maintenance tasks, there has been an increased focus on automating the assessment step of the observations obtained by the UAVs, which, in many cases, are RGB camera images. Towards this goal, several automatic assessment solutions have recently been proposed, many of which being fueled by the power of artificial intelligence and deep learning. Examples of such tasks are the detection of electrical components (insulators, cable suspension clamps, etc.) and the diagnosis of defects (pole breakage, insulator contamination, etc.) \cite{nhan_examples, insulator_examples,detect_component_examples}. Among these tasks, cable, wire, or powerline recognition and localization are very crucial as powerlines are one of the most essential elements in any utility infrastructure as they are directly responsible for electricity transmission. Accurate detection of powerlines can facilitate better analysis of faults (tears, kinking, bird caging, etc.) and identification of hazards (vegetation encroachment, etc.) on the powerlines. These tasks are extremely vital as their failure can lead to catastrophic and fatal consequences \cite{pge_bankruptcy}. Furthermore, the ability to detect powerlines is imperative for UAVs, and other forms of low-altitude flights, to navigate safely.
 
-However, it is nontrivial to detect powerlines due to their inconspicuous appearances. The powerline can be very thin and might be missed by approximity sensors on UAVs. On camera images, the width of powerlines can be as thin as 1 pixel. Furthermore, cluttered backgrounds and hindered powerline visibility and same-colored background, such as snow and white coating, can cause the powerlines to be imperceptible. Other conditions, such as fog and lighting, can also negatively affect the discernability of powerlines on images. 
+However, it is nontrivial to detect powerlines due to their inconspicuous appearances. Powerlines can be very thin and might be missed by proximity sensors on UAVs. Similarly, on camera images, the width of powerlines may only be a single pixel. Furthermore, cluttered backgrounds, occlusion, and same-colored backgrounds, such as white coating on snow, can cause the powerlines to be imperceptible. Other conditions, such as fog and lighting, can also negatively affect the discernability of powerlines on images. 
 
-Relying on the assumption of clear visibility and straight line appearance of powerlines. Early methods utilizes popular classical line segment detection methods \cite{} -\cite{}. These methods requires intricate post processing steps to distinguish between spurious lines and powerlines. Also, they are quite inaccurate and slow. Many recent deep learning approaches frame the powerline task as semantic segmentation \cite{} - \cite{}. These methods can achieve quite competitive performance. However, gathering pixel-level annotation for these approaches is a big challenge, especially for objects with long and thin appearance like powerlines. In order to reach a generalized powerline detector that is effective and robust across all settings of input images (different lighting condition, scene variations, distances, powerline types, utility infrastructures, etc.) large amount of data should be procured. However, the difficulty of producing pixel-level ground truth can be a problem. We argue that it is sufficient to use polylines that trace the powerlines as ground truth. The polyline annotations can generated at considerable higher efficiency. The lack of width information in the ground truth will result in the detection method inferring no or imprecise width estimation of the powerlines. However, from our observation, the prediction of polylines or line segments tracing the powerlines is sufficient for solutions of downstream tasks to focus the correct location.
+Relying on the assumption of clear visibility and straight line appearance of powerlines. Early methods utilize popular classical line segment detection methods \cite{related_work_kasturi_2002, related_work_guanjian_yan_2007, related_work_li_zhenrong_2010, related_work_candamo_2009, related_work_golightly_2005, related_work_zhengrong_li_2008, related_work_boris_alpatov_2016}. These methods require intricate post-processing steps to distinguish between spurious lines and powerlines. Also, they are quite inaccurate and slow. More recently, several deep learning approaches have been proposed that frame the powerline task as semantic segmentation \cite{related_work_rainesh_mandaan_2017,related_work_heng_zhang_2019,related_work_yan_li_2019,related_work_rabab_abdelfattah_2022,related_work_rabeea_haffari_2021}. These methods can achieve quite competitive performance, however, gathering the pixel-level annotations required for these approaches is a big challenge, especially for objects with long and thin appearances like powerlines. In order to reach a powerline detector that is effective and robust across all settings of input images (different lighting conditions, scene variations, distances, powerline types, utility infrastructures, etc.) large amount of data should be procured. However, the difficulty of producing pixel-level ground truth can be a problem. 
+We argue that it is sufficient to use polylines that trace the powerlines as ground truth. The polyline annotations can be generated at considerably higher efficiency. The lack of width information in the ground truth will result in the detection method inferring no or imprecise width estimation of the powerlines. However, from our observation, the prediction of polylines or line segments tracing the powerlines is sufficient for solutions of downstream tasks to focus on the correct location.
 
-\textcolor{red}{LSNet \cite{Nguyen2020} was a model proposed using this cheaper type of annotations. It is a CNN single-shot line segment detector where the images were divided into overlapping grids. The detector has two output branches. The first of which is trained to classify whether each cell grid has a line segment belonging to a powerline. The other is a line
-segment regressor to locate the endpoints of the line segments. However, LsNet has a major constraints where only one line segment is detected and located in each grid cell. In reality, depending on how the powerlines were arranged and how the images were taken, the powerline can appear visually to be of very close proximities or to cross each other. This results in instances where there are multiple line segments appear in each grid cell under LSNet formulation. ? Talk about VGG having small receptive field?}
+LSNet \cite{Nguyen2020} proposed to leverage this cheaper type of annotations. It is a CNN single-shot line segment detector where the images were divided into overlapping grids. The detector has two output branches, where the first is trained to classify whether each cell grid has a line segment belonging to a powerline. The other is a line segment regressor to locate the endpoints of these line segments. However, LSNet has a major constraint where only one line segment is detected and located in each grid cell. In reality, depending on how the powerlines were arranged and how the images were taken, the powerline can appear visually to be of very close proximity or to cross each other resulting in cases where there are multiple line segments in a single cell and, thus, LSNet can be less effective. In addition, the backbone of LSNet has a relatively small receptive field, which is not effective in gathering non-local semantics across the entire input image to help in detecting more concealed line segments.
 
-In this paper we proposed an improved version of LSNet, aptly named LSNetv2. The main contribution of this paper is the introduction of the multi-line segment detection capability by allowing the model to have multiple guesses on each divided cell location and learn with the help of bipartite matching loss. We also modified the loss for the regression branch of LSNet that allows LSNetv2 to achieve higher performance. In a addition, we replace the backbone from the original modified-VGG16 \cite{vgg} to a model from the state-of-the-art ConvNext family \cite{convnext}
+In this paper, we propose an improved version of LSNet, aptly named LSNetv2. The main contribution of this paper is the introduction of the multi-line segment detection capability by allowing the model to have multiple guesses on each divided cell location and learn with the help of bipartite matching loss. We also modified the loss for the regression branch of LSNet that allows LSNetv2 to achieve higher performance. In addition, we replace the backbone from the original modified-VGG16 \cite{vgg} to a model from the state-of-the-art ConvNext family \cite{convnext}
 
 
 % An example of a floating figure using the graphicx package.
@@ -590,15 +598,17 @@ In this paper we proposed an improved version of LSNet, aptly named LSNetv2. The
 % Note that, LaTeX2e, unlike IEEE journals/conferences, places
 % footnotes above bottom floats. This can be corrected via the
 % \fnbelowfloat command of the stfloats package.
+
+
+
 \section{Related Work}
 
-The problem of powerline detection has been tackled with traditioncal computer vision and more recently with deep learning approaches. An notable early attempt was proposed by Kasturi et al. \cite{related_work_kasturi_2002}, where Steger's method \cite{related_work_steger_1998} was used to extract features, which are then filtered using the Hough transform to exclude short lines. Yan et al. \cite{related_work_guanjian_yan_2007} proposes to leverage Radon transform to generate line segments, group these segments by slope and distance thresholding, and then finally use Kalman filters as a post-processing step. Li et al. \cite{related_work_li_zhenrong_2010} removes clutter and noise in the background using a pulse coupled neural filter before using Hough transforms and K-means clustering to detect and combine line segments. The aforementioned solutions and some others \cite{related_work_candamo_2009, related_work_golightly_2005, related_work_zhengrong_li_2008, related_work_boris_alpatov_2016} hold the strict assumptions that powerlines appear straight and in parallel orientations, and thus, do not always apply in reality. Song et al. \cite{related_work_biqin_song_2014} was able to detect curved powerlines by using a normalized graph cut model to link line segments, which were produced from the responses of a match filter and first-order derivative of a Gaussian. However, the performance of all the methods above are affected by the conditions that the input images were taken in. Any differences in camera settings, environment, lighting, and view angle can lead to the hyper-parameters of these methods to be re-defined, which in turn may requires specialist expertise.
+The problem of powerline detection has been tackled with traditional computer vision and more recently with deep learning approaches. 
+A notable early attempt was proposed by Kasturi et al. \cite{related_work_kasturi_2002}, where Steger's method \cite{related_work_steger_1998} was used to extract features, which are then filtered using the Hough transform to exclude short lines. Yan et al. \cite{related_work_guanjian_yan_2007} proposes instead to leverage the Radon transform to generate line segments, group these segments by slope and distance thresholding, and then finally use Kalman filters as a post-processing step. Li et al. \cite{related_work_li_zhenrong_2010} remove clutter and noise in the background using a pulse coupled neural filter before using Hough transforms and K-means clustering to detect and combine line segments. However, the aforementioned solutions and similar works~\cite{related_work_candamo_2009, related_work_golightly_2005, related_work_zhengrong_li_2008, related_work_boris_alpatov_2016} hold the strict assumptions that powerlines appear straight and have parallel orientations, and thus, do not always apply in reality. Song et al. \cite{related_work_biqin_song_2014} aimed to address this problem and were able to detect curved powerlines by using a normalized graph cut model to link line segments, which were produced from the responses of a matched filter and first-order derivative of a Gaussian. However, all of these traditional approaches are severely affected by the conditions in which the input images were taken in. Any differences in camera settings, environment, lighting, and view angle requires extensive tuning of hyper-parameters of these methods and require specialist expertise.
 
-Overall, deep learning can help alleviate the problems that traditional computer vision face. With enough data, deep learning solutions for classification and detection can generalize well to many practical scenarios. Pan et al. \cite{related_work_chaofeng_pan_2016} suggests training a convolutional neural network (CNN) that takes in edge features, which are produced by steerable filters, and classifies whether square patches from an input image contains a line or not. Then the Hough transform is used to detect the powerline segments. Similarly, Gubbi et al. \cite{related_work_jayavardhana_gubbi} also proposes using a CNN but, instead, uses Histogram of Oriented Gradient features as input. The line segment detector \cite{lsd} was used as a post processing step. Since the inputs of these two methods are individual patches, the CNN models lack the contextual information of the entire images. Hence the performance can be limited, especially for low-contrast images with cluttered background. More recent approaches \cite{related_work_rainesh_mandaan_2017,related_work_heng_zhang_2019,related_work_yan_li_2019,related_work_omer_emre_yetgin_2018,related_work_rabab_abdelfattah_2022,related_work_rabeea_haffari_2021} frame powerline detection as binary pixel-level classification problems where each pixel is classified whether is belongs to the powerline or not. This type of problem can be undertaken by deep learning semantic segmentation networks. 
-%Madaan et al. \cite{related_work_rainesh_mandaan_2017} different dilated convolutional neural networks are experimented for segmenting powerlines. 
-Madaan et al. \cite{related_work_rainesh_mandaan_2017} investigate different dilated convolutional neural networks for segmenting powerlines. Yetgin et al. \cite{related_work_omer_emre_yetgin_2018} finetuned a CNN, which was pretrained on ImageNet \cite{deng2009imagenet}, with a newly initialized softmax layer that classifies the powerline existence. After that, features from immediate layers of the finetuned CNN are used to train another classifier to perform powerline segmentation. In \cite{related_work_yan_li_2019}, a CNN is introduced with two components: an information fusion module and an attention module. The information fusion module is in encoder-decoder structure, where decoding stages are combined with their corresponding same-scaled encoding stages to fuse semantic and location information for accurate powerline segmentation. The attention module produces, from the last feature map of the encoder, a weight map, which is multiplied elementwise with the decoder output to increase more focus on regions with powerlines. Abdelfattah et al. \cite{related_work_rabab_abdelfattah_2022} trained a generative adversarial network (GAN) to generate modified versions of the input images where the powerlines are highlighted. A semantic decoder connected to an immediate layer of the generator is also trained jointly in order to perform the actual segmentation task. These semantic segmentation methods have achieved satisfying results, however, they require training data with pixel-level annotation, which can be laborious to obtain. Especially in the case of powerlines, which can often be quite slender yet span across images, more meticulousness is required in the annotating process. Choi et al. \cite{related_work_hyeyeon_choi_2021} tries to mitigate this burden by approximating pseudo segment maps, which are produced using the Visualbackprop algorithm \cite{vbp} from a classification CNN. This classification CNN is trained only with patch labels. Lee et al. \cite{related_work_sang_jun_lee_2017} on the other hand trained a CNN on images with only image-based labels. During inference, this CNN is used on patches of high-resolution images and produces feature maps which can be combined for powerline localization. 
+Overall, deep learning can help alleviate the problems that traditional computer vision faces. With enough data, deep learning solutions for classification and detection can generalize well to different acquisition conditions. Pan et al. \cite{related_work_chaofeng_pan_2016} suggest training a convolutional neural network (CNN) that takes in edge features, which are produced by steerable filters, and classifies whether square patches from an input image contains a line or not. Then the Hough transform is used to detect the powerline segments. Similarly, Gubbi et al. \cite{related_work_jayavardhana_gubbi} also propose using a CNN but, instead, use Histogram of Oriented Gradient features as input. The line segment detector proposed in \cite{lsd} was used as a post-processing step. Since the inputs of these two methods are individual patches, the CNN models lack the contextual information of the entire images. Hence the performance can be limited, especially for low-contrast images with a cluttered background. Yetgin et al. \cite{related_work_omer_emre_yetgin_2018} finetuned a CNN, which was pretrained on ImageNet \cite{deng2009imagenet} via two methods. One is with a newly initialized linear layer with softmax that classifies the powerline existence and is trained jointly with the feature extractor. The other method is to use dimension-reduced features from immediate layers of the pre-trained CNN to train a classifier separately. However, these two proposed methods only detect the existence of powerline for real-time warning systems without localization. More recent approaches \cite{related_work_rainesh_mandaan_2017,related_work_heng_zhang_2019,related_work_yan_li_2019,related_work_rabab_abdelfattah_2022,related_work_rabeea_haffari_2021} frame powerline detection as binary pixel-level classification problems where each pixel is classified whether is belongs to the powerline or not. This type of problem can be undertaken by deep learning semantic segmentation networks. Madaan et al. \cite{related_work_rainesh_mandaan_2017} investigate different dilated convolutional neural networks for segmenting powerlines. Zhang et al. \cite{related_work_heng_zhang_2019} produce segmentation by fusing hierarchical feature maps from each layers of a VGG-16 model \cite{vgg} as well as structure features, such as powerline length, width and orientation. In \cite{related_work_yan_li_2019}, a CNN is introduced with two components: an information fusion module and an attention module. The information fusion module is in an encoder-decoder structure, where decoding stages are combined with their corresponding same-scaled encoding stages to fuse semantic and location information for accurate powerline segmentation. The attention module produces, from the last feature map of the encoder, a weight map, which is multiplied elementwise with the decoder output to increase more focus on regions with powerlines. Abdelfattah et al. \cite{related_work_rabab_abdelfattah_2022} trained a generative adversarial network (GAN) to generate modified versions of the input images where the powerlines are highlighted. A semantic decoder connected to an immediate layer of the generator is also trained jointly in order to perform the actual segmentation task. Jaffari et al. \cite{related_work_rabeea_haffari_2021} introduce a new type of focal loss based on Phi coefficient \cite{phi_coeff} to improve powerline segmentation performance of U-Net\cite{unet}-based architectures. These semantic segmentation methods have achieved satisfying results, however, they require training data with pixel-level annotation, which can be laborious to obtain. Especially in the case of powerlines, which can often be quite slender yet span across images, more meticulousness is required in the annotating process. Choi et al. \cite{related_work_hyeyeon_choi_2021} try to mitigate this burden by approximating pseudo segmentation maps, which are produced using the Visualbackprop algorithm \cite{vbp} from a classification CNN trained with only patch labels. From these pseudo ground truth, another fully convolutional network is trained to perform segmentation. Lee et al. \cite{related_work_sang_jun_lee_2017} trained a CNN to classify the existence of powerline segment in patches of input images. Visualization of positive patches is performed to achieve localization. The visualization is done by multiplying scaled-up feature maps of different layers.
 
-Powerline detection share some similarity with the wireframe parsing problem where the aim is to find the boundary of objects, structures and regions in the form of line segments and corresponding end-points for geometric reasoning. L-CNN \cite{lcnn} infer the endpoints in the end-to-end manner. From these points, proposed line segments are sampled and verified with a line of interest pooling layer (LoiPooling) that took inspiration from RoIPool \cite{fastrcnn} and RoIAlign \cite{maskrcnn} layers from the object detection. HAWP \cite{hawp} transforms the original line segment labels into holistic attraction fields (HAT) where each pixel is parameterize based on its position in relation to its closest line segments. A model is trained to approximate these fields, from which line segments can be derived. HAWPv2 \cite{hawpv2} combined the strengths of LoiPooling and HAT, along with some new techniques, to improve the performance. 
+Powerline detection shares some similarities with the wireframe parsing problem where the aim is to find the boundary of objects, structures, and regions in the form of line segments and corresponding end-points for geometric reasoning. L-CNN \cite{lcnn} infer the endpoints in an end-to-end manner. From these points, proposed line segments are sampled and verified with a line of interest pooling layer (LoiPooling) that took inspiration from RoIPool \cite{fastrcnn} and RoIAlign \cite{maskrcnn} layers from the object detection. HAWP \cite{hawp} transforms the original line segment labels into holistic attraction fields (HAT) where each pixel is parameterized based on its position in relation to its closest line segments. A model is trained to approximate these fields, from which line segments can be derived. HAWPv2 \cite{hawpv2} combined the strengths of LoiPooling and HAT, along with some new techniques, to improve the performance.  
 
 \commentM{Provide high-level overview of current powerline inspection approaches and LSNet. Mention shortcomings}
 
@@ -607,31 +617,37 @@ Powerline detection share some similarity with the wireframe parsing problem whe
 \subsection{Preliminaries: LSNet}
 LSNet \cite{Nguyen2020} was proposed as a single-shot line-segment detector inspired by SSD \cite{SSD} and YOLO \cite{YOLO}. 
 
-\textcolor{red}{LSNet reduces the need for pixel-level annotated data ground truth, which can be laborious to obtain. Especially in the case of powerlines, which can often be quite slender yet span across images, more meticulousness is required in the annotating process.} Instead, LSNet relies only on polyline annotation that trace along the powerline. Polyline annotation requires much less effort and is arguably more robust to labelling inaccuracy allowing more ground truth images to be acquired and facilitating better deep learning models. 
+LSNet reduces the need for pixel-level annotated data ground truth, which can be laborious to obtain. Especially in the case of powerlines, which can often be quite slender yet span across images, more meticulousness is required in the pixel annotating process. Instead, LSNet relies only on polyline annotation that traces along the powerline. Polyline annotation requires much less effort and is arguably more robust to labeling inaccuracy allowing more ground-truth images to be acquired and facilitating better deep learning models. 
 
-LSNet breaks down the problem of powerline detection into detecting and locating line segments in four overlapping grids, which are superimposed onto the input image. This results in $31 \times 31$ grid cells, each of which overlooks an area of size $32 \times 32$. In each cell of the grids,  LSNet detects whether there exist parts of powerlines within its borders and provides the coordinates of the line segment endpoints. Theses divided results can be combined to produce a complete segment map of powerlines. The four-grid approach was proposed as opposed to the one-grid approach, commonly found in models such as SSD \cite{SSD} and YOLO \cite{YOLO}, in order to encourage more thorough detection and localization of powerlines and combat the problem of discontinuities at grid cell borders and corners. This is illustrated in \ref{}. 
+LSNet breaks down the problem of powerline detection into detecting and locating line segments in four overlapping grids, which are superimposed onto the input image. For the case of input images having the size of $512 \times 512$, this results in $31 \times 31$ grid cells, each of which overlooks an area of size $32 \times 32$. In each cell of the grids,  LSNet detects whether there exist parts of powerlines within its borders and provides the coordinates of the line segment endpoints. These divided results can be combined to produce a complete segment map of powerlines. The four-grid approach was proposed as opposed to the one-grid approach, commonly found in models such as SSD \cite{SSD} and YOLO \cite{YOLO}, in order to encourage more thorough detection and localization of powerlines and combat the problem of discontinuities at grid cell borders and corners. This is illustrated in Fig. \ref{4grid}. 
 
-To perform line segment detection, the architecture of LSNet involves a fully convolutional feature extractor which branches out into a classifier module and a regressor module as shown in \ref{lsnet_architecture}. These two modules aim to detect the presence of a line segment and the line segment endpoint coordinates respectively. The feature extractor of the original LSNet was proposed to be a version of VGG-16 network \cite{VGG16} which was modified to include Group Normalization \cite{group_norm} before activations and replace max pooling layer with stride 2 for convolutional layer. \textcolor{red}{The classifier module and regressor module shared similar design and have the output of shape $B \times 31 \times 31 \times 2$ and $B \times 31 \times 31 \times 4$ respectively, with $B$ being the batch size. The $B \times 31 \times 31$ vectors from the classification module determine if line segments exist in their corresponding cell and the $B \times 31 \times 31$ vectors from the regression module determine the xy-coordinates of the endpoints of the line segments. In the current design. LsNet can only detect the existence and location one line segment per cell and, thus, may not be effective in many cases of powerlines appearing to be in close vincinity or cross each other, and, thus, results in more than one line segment existing in a few cells.}
+To perform line segment detection, the architecture of LSNet involves a fully convolutional feature extractor (backbone) which branches out into a classifier module and a regressor module. These two modules aim to detect the presence of a line segment and the line segment endpoint coordinates respectively. The feature extractor of the original LSNet was proposed to be a version of VGG-16 network \cite{vgg} which was modified to include Group Normalization \cite{group_norm} before activations and replace max pooling layer with stride 2 for the convolutional layer. The classifier module and regressor module shared a similar design and have the output of shape $B \times 31 \times 31 \times 2$ and $B \times 31 \times 31 \times 4$ respectively, with $B$ being the batch size. The $B \times 31 \times 31$ vectors from the classification module determine if line segments exist in their corresponding cells and the $B \times 31 \times 31$ vectors from the regression module determine the xy-coordinates of the endpoints of the line segments. In the current design, LsNet can only detect the existence and location of one line segment per cell and, thus, may not be effective in many cases of powerlines appearing to be in close vicinity or cross each other, and, thus, results in more than one line segment existing in a few cells.
 
-% The classifier module uses the feature map from the extractor and follows up with a 2 x 2 convolutional layer with stride 1 resulting in four sets of 512-channeled feature maps, in which each element in the feature map correspond to a cell of the respective grid. Finally, a 1 x 1 convolutional layer reduces the feature maps to a 2-channeled output. The channels correspond to the classes "line segment exists" and "line segment does not exist". The regressor module follows almost the identical design but ultimately produces a 4-channeled output instead, corresponding to the xy-coordinates of the predicted line segment endpoints. A detailed configuration of LSNet is shown in \ref{lsnet_config}.
-\commentM{These are a bit too many details for the beginning of the methodology section. It could be sufficient to say that it builds on a modified version of VGG-16 with a classification and regression head.}
+\begin{figure}
+  \includegraphics[width=\linewidth]{imgs/others/4grid.png}
+  \caption{Depiction of the for-grid approach. With one grid like the first column, LSNet face the problem of disconnection at the border and corner of cells. By utilizing additional three grids (second column), the gaps can be close and LSNet can provide more complete detections of powerlines. This image is originally from \cite{Nguyen2020}}
+  \label{4grid}
+\end{figure}
+
 
 \subsection{LSNetv2}
-\commentM{Instead of mentioning what we propose, we need to motivate it. Start from the problem (overlapping power lines) and use it to motivate the solution. Have a figure illustrating the whole pipeline and briefly describe the high-level method.}
+As aforementioned, in practice, images captured for inspection commonly have powerlines visually intersecting or being in close proximity to each other. Even though, with LSNet, images are well divided into cells, it is expected that there are cells where there are multiple line segments and few of which are ignorable. Thus, LSNet, being able to only detect one line segment per cell, is lacking. LSNetv2 can detect multiple lines per cell by performing a fixed number of inferences N, which is chosen to be larger than the maximum number of line segments that exist in the cell. From our observations, $N=10$ is a safe choice. This results in the output of the classification and regression being in the shape of $B \times 31 \times 31 \times N \times 2$ and $B \times 31 \times 31 \times N \times 4$ respectively (Fig. \ref{lsnet_architecture}). \textcolor{red}{To avoid complicated indexing, we now focus the scope of our discussion on an individual cell.} The ground truth $y$ of each cell, which contains $m$ actual line segments, is also perceived to contain N line segments $y=\{y_i\}^N_{i-1}$. However, the ground truth is now padded with $N-m$ negative classification. Inspired by DETR \cite{DETR}, we frame the line segment detection within each cell as a direct set prediction problem. In our loss computation step, we include an optimal bipartite matching between the N predictions and N ground truths.
 
-\commentM{Then dive into the individual components (subsections), again starting from a motivation perspective}
+\begin{figure}
+  \includegraphics[width=\linewidth]{imgs/others/2.png}
+  \caption{LSNetv2 shares similar overall design as LSNet with a fully convolutional feature extractor, a classifier module and a regressor branch module. However, the two branches now perform multiple guesses so that LSNetv2 has capability to detect multiple line segment per cell. This image is modified from \cite{Nguyen2020}}
+  \label{lsnet_architecture}
+\end{figure}
 
-\textcolor{red}{As aforementioned, in practice, images captured for inspection commonly have powerlines visually intersecting or being in close proximities with each other. Even though, with LSNet, images are well divided into cells, it is expected that there are cells where there are multiple line segments and neither of which are ignorable. Thus, LSNet, being able to only detect one line segment per cell, is lacking}. LSNetv2 has the capability to detect multiple lines per cell by performing fixed number of inferences N, which is chosen to be larger than the maximum number of line segments exists in the cell. From our experiments, 10 is a safe choice. This results in the output of the classification and regression being in the shape of $B \times 31 \times 31 \times N \times 2$ and $B \times 31 \times 31 \times N \times 4$ respectively. \textcolor{red}{To avoid complicated indexing, we now focus the scope of our discussion to an individual cell.} The ground truth $y$ of each cell, which contains $m$ actual line segments, is also perceived to contain N line segments $y=\{y_i\}^N_{i-1}$. However, the ground truth is now padded with $N-m$ negative classification. Inspired by DETR \cite{DETR}, we frame the line segment detection within each cell as a direct set prediction problem. In our loss computation step, we include an optimal bipartite matching between the N predictions an N ground truths. \commentM{I would suggest you start this section with this novelty. It is more "novel" than using another backbone and nicely fits the motivation of the line crossings..}
-
-Let $\hat{y}=\{\hat{y}_i\}^N_{i-1}$ be the set of $N$ predictions. The optimal bipartite matching between the $N$ predictions an $N$ ground truths, which is done using Hungarian algorithm, produces a permutation $\hat{\sigma} \in \mathfrak{S}$ that satisfies:
+Let $\hat{y}=\{\hat{y}_i\}^N_{i-1}$ be the set of $N$ predictions. The optimal bipartite matching between the $N$ predictions and $N$ ground truths, which is done using the Hungarian algorithm, produces a permutation $\hat{\sigma} \in \mathfrak{S}$ that satisfies:
 
 \begin{equation} \label{bipartite_eqn}
 \hat{\sigma} = \mathop{\arg \min}\limits_{\sigma \in \mathfrak{S}} \sum_i^N \mathcal{L}_{match} (y_i, \hat{y}_{\sigma(i)})
 \end{equation}
 
-where $\mathcal{L}_{match} (y_i, \hat{y}_{\sigma(i)})$ is the loss when pairing $y_i = (c_i, b_i)$ and $\hat{y}_{\sigma(i)} = (\hat{p}_{\sigma(i)}, \hat{b}_{\sigma(i)})$, which is reordered via permutation $\sigma(i)$. The loss considers both the classification loss and regression loss. Similarly to \cite{DETR}, this loss is defined as $-\hat{p}_{\sigma(i)}(c_i) + \mathds{1}_{\{c_i=\text{positive}\}}L_1(b_i, \hat{b}_{\sigma(i)})$, where $b_i$ and $\hat{b}_{\sigma(i)}$ are line segment endpoint ground truth and permutated prediction at index $i$ respectively. $L_1(.)$ is the $L_1$ loss and $\hat{p}_{\sigma(i)}(c_i)$ is the predicted probability of class $c_i$, which is the classification ground truth at index $i$. The permutation $\hat{\sigma}$ is found by solving the linear sum assigment problem with a modified Jonker-Volgenant algorithm \cite{7738348}, which is implemented in the library \texttt{scipy}.
+where $\mathcal{L}_{match} (y_i, \hat{y}_{\sigma(i)})$ is the loss when pairing $y_i = (c_i, b_i)$ and $\hat{y}_{\sigma(i)} = (\hat{p}_{\sigma(i)}, \hat{b}_{\sigma(i)})$, which is reordered via permutation $\sigma(i)$. Similarly to \cite{DETR}, this loss is defined as $-\hat{p}_{\sigma(i)}(c_i) + \mathds{1}_{\{c_i=\text{positive}\}}L_1(b_i, \hat{b}_{\sigma(i)})$, where $b_i$ and $\hat{b}_{\sigma(i)}$ are line segment endpoint ground truth and permutated prediction at index $i$ respectively. $L_1(.)$ is the $L_1$ loss and $\hat{p}_{\sigma(i)}(c_i)$ is the predicted probability of class $c_i$, which is the classification ground truth at index $i$. The permutation $\hat{\sigma}$ is found by solving the linear sum assignment problem with a modified Jonker-Volgenant algorithm \cite{7738348}, which is implemented in the library \texttt{scipy}.
 
-\textcolor{red}{After bipartite matching has been done, the model can be trained with a multitask loss, $\mathcal{L}$, to simultaneously train the classification and regression module:}
+After bipartite matching has been done, the model can be trained with a multitask loss, $\mathcal{L}$, to simultaneously train the classification and regression module:
 
 \begin{equation} \label{multitask_training_loss}
 \mathcal{L} = \sum_i^N\mathcal{L}_{\text{cls}}(y_i, \hat{y}_i) + \lambda \sum_i^N\mathds{1}_{\{c_i=\text{positive}\}}\mathcal{L}_\text{reg}(y_i, \hat{y}_i) 
@@ -641,24 +657,24 @@ where $\hat{y}_i = \hat{y}_{\hat{\sigma}(i)}$ is one of $N$ prediction at an arb
 \begin{equation}
   \mathcal{L}_{\text{cls}} =
     \begin{cases}
-      -\alpha (1 - p)^\gamma \log(p) \text{  if  } c_i=\text{positive} \\
-      -(1 - \alpha)p^\gamma \log(1-p) \text{  otherwise} 
+      -\alpha (1 - p)^\gamma \log(p) \text{,  if  } c_i=\text{positive} \\
+      -(1 - \alpha)p^\gamma \log(1-p) \text{,  otherwise} 
     \end{cases}       
 \end{equation}
 
-where $p=\hat{p}_{\hat{\sigma}(i)}(\text{positive})$, $\gamma \geq 0$ and $\alpha \in [0, 1]$ are tunable hyperparamemters that adjust the the weight on uncommon class and misclassified examples respectively. This loss is used in the original use Focal Loss to tackle the imbalance problem between cells with line segments and cell without. In LSNetv2, we continue to use this loss to train the classification module.
+where $p=\hat{p}_{\hat{\sigma}(i)}(\text{positive})$, $\alpha \in [0, 1]$ and $\gamma \geq 0$ are tunable hyperparameters that adjust the weight on uncommon class and misclassified examples respectively. This loss is used in the original LSNet to tackle the imbalance problem between cells with line segments and cells without. In LSNetv2, we continue to use this loss to train the classification module.
 
-The regression module is trained using Wing loss \cite{wing_loss} so that the training is more sensitive to small errors and robust against outliers. The loss is defined as:
+The regression module is trained using the Wing loss \cite{wing_loss} so that the training is more sensitive to small errors and robust against outliers. The loss is defined as:
 
 \begin{equation}
   \mathcal{L}_{\text{reg}} =
     \begin{cases}
-      w \text{ln} (1 + \frac{d}{\epsilon}) \text{ if } d < w \\
-      d - C \text{  otherwise}
+      w \text{ln} (1 + \frac{d}{\epsilon}) \text{, if } d < w \\
+      d - C \text{,  otherwise}
     \end{cases}       
 \end{equation}
 
-where $w$ is used to constrain the range of the nonlinaer behavior of the loss to $(-w, w)$, $\epsilon$ controls the growth of loss as regression error increases and the curvature of the nonlinear part, $C = w - w\text{ln}(1 + w / \epsilon)$ is used to smoothen the linear and nonlinear parts of the loss, and $d$ is the distance error. With $b_i = (b_i^{x_1}, b_i^{y_1}, b_i^{x_2}, b_i^{y_2})$ and $\hat{b}_i = \hat{b}_{\hat{\sigma}(i)} = (\hat{b}_i^{x_1}, \hat{b}_i^{y_1}, \hat{b}_i^{x_2}, \hat{b}_i^{y_2})$, the distance error for the original LSNet is defined as:
+where $w$ is used to constrain the range of the nonlinear behavior of the loss to $(-w, w)$, $\epsilon$ controls the growth of loss as regression error increases and the curvature of the nonlinear part, $C = w - w\text{ln}(1 + w / \epsilon)$ is used to smoothen the connection between the linear and nonlinear parts of the loss, and $d$ is the distance error. With $b_i = (b_i^{x_1}, b_i^{y_1}, b_i^{x_2}, b_i^{y_2})$ and $\hat{b}_i = \hat{b}_{\hat{\sigma}(i)} = (\hat{b}_i^{x_1}, \hat{b}_i^{y_1}, \hat{b}_i^{x_2}, \hat{b}_i^{y_2})$, the distance error for the original LSNet is defined as:
 
 \begin{equation}
   d_{\text{LsNet}}(b_i, \hat{b}_i) = \min(\sum (|b_i - \hat{b}_i|), \sum(|b_i - \text{swap}(\hat{b}_i)|))
@@ -666,7 +682,7 @@ where $w$ is used to constrain the range of the nonlinaer behavior of the loss t
 
 where $\text{swap}(\hat{b}_i) = (\hat{b}_i^{x_2}, \hat{b}_i^{y_2}, \hat{b}_i^{x_1}, \hat{b}_i^{y_1})$.
 
-For LSNetv2, however, we propose the change of the distance error $d$ as follows:
+For LSNetv2, however, we propose the ordered distance error as follows:
 \begin{equation}
   d_{\text{LsNetv2}}(b_i, \hat{b}_i) = \sum (|b^*_i - \hat{b}_i|)
 \end{equation}
@@ -676,75 +692,229 @@ where
 \begin{equation}
   b^*_i=
     \begin{cases}
-       (b_i^{x_1}, b_i^{y_1}, b_i^{x_2}, b_i^{y_2}) \text{ if } b_i^{x_1} < b_i^{x_2} \\
-       (b_i^{x_2}, b_i^{y_2}, b_i^{x_1}, b_i^{y_1}) \text{ otherwise }
+       (b_i^{x_1}, b_i^{y_1}, b_i^{x_2}, b_i^{y_2}) \text{, if } b_i^{x_1} < b_i^{x_2} \\
+       (b_i^{x_2}, b_i^{y_2}, b_i^{x_1}, b_i^{y_1}) \text{, otherwise }
     \end{cases}       
 \end{equation}
 
-This distance error ensures that the endpoints with the lower x-coordinate and the endpoints with the higher x-coordinate be detected by the same output elements. As empirically shown in the experiment section, this distance error helps improve the performance of LSNetv2. 
+This distance error ensures that the endpoints with the lower x-coordinate and the endpoints with the higher x-coordinate be detected by the same output elements in the 4-element vectors ouput from the regression module. As empirically shown in the experiment section, the new ordered regression loss with this distance error helps improve the performance of LSNetv2. 
 
 
 
 
-% \textcolor{brown}{We propose a new version of LSNet, called LSNetv2. This version is updated with recent advancement in the deep learning space. \commentM{Again, here it sounds like you "just" leverage a new backbone and other new things. Motivate it instead from the problem and then the solution is a method that incorporates new components.}
+% \textcolor{brown}{We propose a new version of LSNet, called LSNetv2. This version is updated with recent advancements in the deep learning space. \commentM{Again, here it sounds like you "just" leverage a new backbone and other new things. Motivate it instead from the problem and then the solution is a method that incorporates new components.}
 % Specifically, the feature extractor is altered with the state-of-the-art ConvNext model. Furthermore, inspired by DETR \cite{DETR}. LSNetv2 possess the ability to detect and locate multiple line-segments within each grid cell via multi-guess bipartite matching.  \textcolor{red}{Also, we propose the addition of a context module built from multi-head attentions layers, whose effectiveness in extracting global information has been proven}. Finally, \textcolor{red}{adjustments are made to the losses so that the training is more stable and requires less time to achieve plateau performance}.}
 
-It has been shown that LSNet has been successful for cases where images of powerlines being captured from a relatively close distance and the visibility of the powerlines throughout the span of the image is clear \cite{Nguyen2020}. However, in reality, images such as those used for visual inspection can be taken from further away making the segments of powerlines appear really thin and/or blended with the background. If we follow the grid-based approach of LSNet, the detection performance of powerlines in each cell, especially ones that are inconspicuous, may depend heavily on the global information of areas around it. However, according to \textcolor{red}{this calculation} the theoretic receptive field of LSNet is only about four times the cell size (91 as calculated by \texttt{receptive\_field\_analysis\_toolbox} \cite{receptive_field_analysis_toolbox}), which LSNet is unable to aggregate global context for the cell inference. Thus, we propose the replacement of the backbone to ConvNext-Tiny, which has a bigger theoretical receptive field and inherits many modern techniques to improve performance. ConvNeXt was recently introduced as a modernized version of ResNet \cite{resnet} which is equipped with recent properties of the hierarchical vision transformer Swin \cite{swin}. Modifications were made on the macro scale, such as the change in the ratios between stages, the use of depthwise convolution in similar manner to ResNeXt \cite{resnext}, enlarging kernel size to 7, etc.; and on the micro scale, such as the switch from batch normalization \cite{batchnorm} to layer normalization \cite{layernorm}, from ReLU \cite{relu} to GELU \cite{gelu}, etc. These changes allow ConvNeXt to compete favorably with other architectures, including Swin, which is among the state-of-the-art for deep vision tasks. We use an altered version of ConvNeXt-Tiny. Our ConvNeXt-Tiny starts with the stem block that reduce the input image to a feature map 1/4th the original size. The stem block is then followed by has four downsampling stages, each of which ends with a compression convolutional layer with reduction factor of 2. Thus we use a ConvNeXt-Tiny, which is truncted at before the compression layer of the 3rd stage, as the new backbone. The output of the truncated model reduces would have the size of 32x32x384. Together with the classification and regression modules, LSNetv2 has a theoretical receptive field of 1096.
-
-
+It has been shown that LSNet has been successful for cases where images of powerlines are captured from a relatively close distance and the visibility of the powerlines throughout the span of the image is clear \cite{Nguyen2020}. However, in reality, images such as those used for visual inspection can be taken from further away leading to segments of powerlines appearing thin and/or blending in with the background. Following the grid-based approach of LSNet, the detection performance of powerlines in each cell, especially ones that are inconspicuous, may depend heavily on the global information of areas around it. However, the theoretic receptive field of LSNet is only about four times the cell size (91 as calculated by \texttt{receptive\_field\_analysis\_toolbox} \cite{receptive_field_analysis_toolbox}). This limits the capability of LSNet to aggregate global context for the cell inference. Thus, we propose the replacement of the backbone with ConvNext-Tiny, which has a bigger theoretical receptive field and inherits many modern techniques to improve performance. ConvNeXt was recently introduced as a modernized version of ResNet \cite{resnet} which is equipped with recent properties of the hierarchical vision transformer Swin \cite{swin}. Modifications were made on the macro scale, such as the change in the ratios between stages, the use of depthwise convolution in a similar manner to ResNeXt \cite{resnext}, enlarging kernel size to 7, etc.; and on the micro-scale, such as the switch from batch normalization \cite{batchnorm} to layer normalization \cite{layernorm}, from ReLU \cite{relu} to GELU \cite{gelu}, etc. These changes allow ConvNeXt to compete favorably with other architectures, including Swin, which is among the state-of-the-art for deep vision tasks. We use an altered version of ConvNeXt-Tiny. Similarly to ResNet and other well-known CNNs, ConvNext-Tiny has a multi-stage design of 4 stages. Each stage results in the compression of the features with the compression ratio of 2. We use a ConvNeXt-Tiny, which is truncated before the compression layer of the 3rd stage, as the new backbone. The output of the truncated model reduces would have the size of 32x32x384. Using ConvNext-Tiny, LSNetv2 has a theoretical receptive field of 1096. The architecture is detailed in Table \ref{backbone_arch}.
 
 \section{Experiments}
-The procedure and results of experiments are presented. Comparisons to state-of-the-art are also conducted.
-\textcolor{red}{In this section, we provide quantitative and qualitative evaluations of our proposed approach and illustrate its advantages over the current state-of-the-art approaches LSNet~\cite{Nguyen2020} and HAWPv2 \cite{hawpv2}. Experiements are conducted on four different powerline detection dataset of varying creation methods and difficulty. In addition, analysis of different backbones was performed and ablation studies were done to highlight the benefit of the components that constitute LSNetv2.}
+%The procedure and results of the experiments are presented. Comparisons to state-of-the-art are also conducted. 
+In this section, we provide quantitative and qualitative evaluations of our proposed approach and illustrate its advantages over the current state-of-the-art approaches LSNet~\cite{Nguyen2020} and HAWPv2 \cite{hawpv2}. Experiments are conducted on four different powerline detection datasets of varying creation methods and difficulty. In addition, an analysis of different backbones was performed and ablation studies were done to highlight the benefit of the novel components that constitute LSNetv2, namely the new ConvNext-Tiny backbone, the multi-guess capability via bipartite matching and the ordered regression loss .
 
 \subsection{Datasets}
 %\commentM{In the following, we present the powerline datasets in increasing order of difficulty with respect to ...}
 
 \subsubsection{PLD-UAV}
 
-PLD-UAV \cite{PLD_UAV} contains two datasets of powerlines: the power line dataset of urban scenes (PLDU) and the power line dataset of mountain scenes (PLDM). In these datasets, the background are urban and mountain scenes, respectively, and are quite cluttered and complex. However, the powerlines to be detected are still relatively observable. In this dataset, the boundary of powerlines are annotated at the pixel level. To adapt to LSNetv2, we detected individual boundaries by dilating the pixel annotations and clustering the pixels via connected component analysis. From each cluster of pixels, a polygon is approximated and filled up with white pixels (positive labels). Then, the skeletonization algorithm, introduced in \cite{skeleton}, is used to produce polylines tracing the powerlines. The polylines are simplified using the Ramer–Douglas–Peucker algorithm~\cite{RDP} and imposed on the 31x31 grid to produce the annotation for LSNetv2. Manual inspection was done to ensure that the procedure produces accurate labels. PLDU contains 453 training data points and 120 testing data points. PLDM contains 237 training data points and 50 testing data points.
+PLD-UAV \cite{PLD_UAV} contains two datasets of powerlines: the power line dataset of urban scenes (PLDU) and the power line dataset of mountain scenes (PLDM). In these datasets, the backgrounds are urban and mountain scenes respectively, and are relatively cluttered and complex. However, the powerlines to be detected are still quite observable. In this dataset, the boundaries of powerlines are annotated at the pixel level. To adapt to LSNetv2, we detected individual boundaries by dilating the pixel annotations and clustering the pixels via connected component analysis. From each cluster of pixels, a polygon is approximated and filled up with white pixels (positive labels). Then, a skeletonization algorithm, introduced in \cite{skeleton}, is used to produce polylines tracing the powerlines. The polylines are simplified using the Ramer–Douglas–Peucker (RDP) algorithm~\cite{RDP} and imposed on the 31x31 grid to produce the annotation for LSNetv2. Manual inspection was done to ensure that the procedure produces accurate labels. PLDU contains 453 training data points and 120 testing data points. PLDM contains 237 training data points and 50 testing data points.
 
 \subsubsection{TTPLA}
 
-TTPLA \cite{TTPLA} is a newly introduced dataset. It consists of images taken from UAVs under a variety of conditions, such as different scenes, angles, zooming levels and lighting conditions. Many instances in this dataset suffer from problems like occlusion and blending, which make the detection more challenging. The annotation of TTPLA is provided at an instance segmentation level via polygons that precisely wrap around the power lines. TTPLA also possesses many data points that have powerlines being close to each other and powerline crossings. This makes it an ideal test-bed to evaluate the effectiveness of our proposed method, which is designed to effectively segment multiple power-lines /line segments. To adapt this dataset to LSNetv2, similarly to the datasets above, we performed a image processing procedure which includes skeletonizing the blobs that fill the polygons annotations to generate polylines, which are simplified using the RDP algorithm and then imposed on the 31x31 overlapping grid to find intersections, which are the labels for LSNetv2. This dataset contains 1242 images and we use 992 for training and 250 for testing. Examples are shown in Fig. \ref{ttpla_examples_fig}.
+TTPLA \cite{TTPLA} is a newly introduced dataset. It consists of images taken from UAVs under a variety of conditions, such as different scenes, angles, zoom, and lighting conditions. Many instances in this dataset suffer from problems like occlusion and blending, which make the detection more challenging. The annotation of TTPLA is provided at an instance segmentation level via polygons that precisely wrap around the power lines. TTPLA also possesses some data points that have powerlines being close to each other and powerline crossings. This makes it an ideal test bed to evaluate the effectiveness of our proposed method, which is designed to effectively segment multiple powerlines/line segments. To adapt this dataset to LSNetv2, similarly to the datasets above, we performed an image processing procedure that includes skeletonizing the blobs that fill the polygon annotations to generate polylines. The polylines are simplified using the RDP algorithm and then imposed on the 31x31 overlapping grid to find intersections, which are the labels for LSNetv2. This dataset contains 1242 images and we use 992 for training and 250 for testing.
 
 \subsubsection{Esmart dataset}
-We also evaluated the method using a proprietary dataset of powerlines aggregated by EsmartSystems \cite{esmart_website}. This dataset is made from UAV images taken by multiple clients of EsmartSystems, and thus, contains significant diversity in terms of scenes, angles, zooming levels, weather and lighting conditions. This dataset has polyline annotations tracing the trajectories of the powerlines. The polyline annotation can be imposed onto the 31x31 grid to produce the annotation for LSNetv2.
-In this dataset, the lines annotated includes conductors, guy wires and overhead ground wires. Conductors are normally in parallel. However, the other two types of wires can have different directions and, hence, there are many visual crossings. Included in the dataset are also some instances of line segments being in close proximity. The dataset contains 2961 images for training and 468 images for testing. Examples are shown in Fig. \ref{esmart_examples_fig}.
-% \commentM{This results in this dataset being a challenging dataset?} 
-%\commentM{Maybe not the case, after looking at the results.}
+We also evaluated the method using a proprietary dataset of powerlines aggregated by EsmartSystems \cite{esmart_website}. This dataset is made from UAV images taken by multiple clients of EsmartSystems, and thus, contains significant diversity in terms of scenes, angles, zooming levels, weather, and lighting conditions. This dataset has polyline annotations tracing the trajectories of the powerlines. The polyline annotation can be imposed onto the 31x31 grid to produce the annotation for LSNetv2.
+In this dataset, the lines annotated include conductors, guy wires, and overhead ground wires. Conductors are normally in parallel. However, the other two types of wires can have different directions and, hence, there are many visual crossings. Included in the dataset are also some instances of line segments being in close proximity. The dataset contains 2961 images for training and 468 images for testing.
 
 
 \subsection{Implementation Details}
 
-The proposed LSNetv2 is implemented in Tensorflow. Each LSNetv2 model is trained on one NVIDIA RTX 3090 24GB. The model was initialized using Xavier initialization \cite{xavier} and trained with a batch size of 8 for 300 epochs. The Adam optimizer \cite{adam} is used with a learning rate of 0.0001, first momentum of 0.9 and second momentum of 0.99. The input image size is 512 x 512. During training, augmentation techniques applied include randomized occurences of sharpening, blur, color jittering, pixel dropouts and additive noise. After that, randomized square crops of varying size between 360 and 512 are taken from the input and then are scaled back to the input size of 512 x 512.
+The proposed LSNetv2 is implemented in Tensorflow. Each model is trained on one NVIDIA RTX 3090 24GB. The model was initialized using Xavier initialization \cite{xavier} and trained with a batch size of 8 for 300 epochs. The Adam optimizer \cite{adam} is used with a learning rate of 0.0001, the first momentum of 0.9, and the second momentum of 0.99. The input image size is 512 x 512. During training, augmentation techniques applied include randomized occurrences of sharpening, blur, color jittering, pixel dropouts, and additive noise. After that, randomized square crops of varying sizes between 360 and 512 are taken from the input and then scaled back to the input size of 512 x 512.
 
 \subsection{Evaluation Methods}
-For comparison purpose, we evaluate LSNetv2 in the same manner as segmentation models.
-Similarly to \cite{Nguyen2020}, we adopt pixel-level averaged recall rate (ARR), averaged precision rate (APR) and $F_1$ Scores. In addition, we also use averaged $F_{\beta}$:
+For comparison purposes, we follow prior work \cite{XX, XX} and evaluate LSNetv2 in the same manner as segmentation models.
+Similarly to \cite{Nguyen2020}, we adopt pixel-level averaged recall rate (ARR), averaged precision rate (APR), and $F_1$ Scores. In addition, we also use averaged $F_{\beta}$:
 \begin{equation}
   F_{\beta} = \frac{1}{N} \sum_{i=1}^N  \frac{(1 + \beta^2)\text{Precision} \times \text{Recall}}{\beta^2 \times \text{Precision} + \text{Recall}} 
 \end{equation}
-where N is the number of test images and $\beta^2 = 0.3$ in order to place more emphasis on precision compared to the conventional $F_1$ metric. According to~\cite{F03}, recall is not as relevant as precision since the recall rate of 1.0 can be achieved by predicting all pixel in the image as positive. Also, in the case of LSNet, higher recall rates can also be attributed to imprecise prediction of line segment endpoints as illustrated in Fig \ref{hirecall}. Thus the $F_{\beta}$ score can be considered a better measurement of LSNet performance than the $F_1$ score.
+where N is the number of test images and $\beta^2 = 0.3$ in order to place more emphasis on precision compared to the conventional $F_1$ metric. According to \cite{f_beta0, f_beta1}, recall is not as relevant as precision since the recall rate of 1.0 can be achieved by predicting all pixels in the image as positive. Also, in the case of LSNetv2 higher recall rates can be attributed to imprecise predictions of line segment endpoints as illustrated in Fig \ref{hirecall}. Thus the $F_{\beta}$ score can be considered a better measurement of LSNet performance than the $F_1$ score.
 
-To produce the segmentation map, for each cell within the 31x31 output grid that was classified to contain segments of powerlines, we use OpenCV to generate visible white lines from the predicted pairs of endpoints. Specific line widths are chosen for each dataset. \textcolor{red}{Through inspection, we find that the average width of powerline in PLDU dataset is 9. The average is 6 for PDLM dataset, 2 for TTPLA dataset and 5 for Esmart dataset. At these chosen width, the LSNetv2 was also able to achieve the best $F_{\beta}$ score.} 
+To produce the segmentation map, for each cell within the 31x31 output grid that was classified to contain segments of powerlines, we use OpenCV to generate visible white lines from the predicted pairs of endpoints. Specific line widths are chosen for each dataset based on the average width of powerlines for each dataset. \textcolor{red}{Through inspection, we find that the average width of the powerlines in PLDU dataset is 9. The average is 6 for PDLM dataset, 2 for TTPLA dataset, and 5 for Esmart dataset. At these chosen widths, it is observed that the LSNetv2 was able to achieve competitive $F_{\beta}$ score.} 
 
-\textcolor{red}{The comparison is done with the previously proposed LSNet across the four datasets. We also compare LsNetv2 with HAWPv2 by training the model, whose code is provided by the original author \cite{hawpv2code}, the output of HAWPv2 model is rasterized into segmentation maps, from which APR, ARR, $F_1$ and $F_\beta$ score are calculated. In addition, ablation study is done to validate the newly proposed components. Finally, we conducted an analysis of different backbones for LSNetv2. In particular, we looked at the original backbone of LSNet, a truncated Resnet-50 \cite{resnet} and a truncated Efficientnetv2-M\cite{efficientnetv2}. The truncation is performed so that the outputs of the backbones have the size of $32 \times 32$ from the input size of $512 \times 512$. The detailed architecture are shown in Table \ref{backbone_arch}.}
+\begin{figure}
+  \includegraphics[width=\linewidth]{imgs/others/why_f_beta.png}
+  \caption{Illustration of cases where imprecise inferences from LSNetv2 can leads to better reccall. The orange and blue segments are individual inferences of the cells. The line segment inferences are rasterized with a width. The green line are the ground truth rasterized with the actual line width. The left image shows that, especially in cases where the chosen line width is less than the actual one, imprecise inferences of line segments, when combined together, can include more true positive pixels without increase false positive pixels than the more precise inferences shown on the right.}
+  \label{hirecall}
+\end{figure}
+
+The comparison is done with the previously proposed LSNet across the four datasets. We also compare LsNetv2 with HAWPv2 by training the model, whose code is provided by the original author \cite{hawpv2code}, the output of HAWPv2 model is rasterized into segmentation maps, from which APR, ARR, $F_1$ and $F_\beta$ score are calculated. In addition, an ablation study is done to validate the newly proposed components. Finally, we conducted an analysis of different backbones for LSNetv2. In particular, we looked at the original backbone of LSNet, a truncated Resnet-50 \cite{resnet} and a truncated Efficientnetv2-M\cite{efficientnetv2}. The truncation is performed so that the outputs of the backbones have the size of $32 \times 32$ from the input size of $512 \times 512$. The detailed architectures are shown in Table \ref{backbone_arch}.
 
 \subsection{Results}
 
- Results in Table~\ref{res1_table} illustrate that LSNetv2 consistently outperforms LSNet across all datasets considered. The difference are, in general, mainly on the APR, which enlarge the performance gap when considering the $F_{\beta}$ metric. The performance gap is considerable for the TTPLA and Esmart datasets as they are subjectively more complex.  From Fig \ref{ttpla_example_0}, we can see that the TTPLA dataset contains many images of semi-parallel powerlines in large quantity and close to each other, which showcases the effectiveness of LSNetv2 to a larger degree leading to the biggest performance gap among the four datasets. LSNetv2 is able to both detect more true positive line segments and true positive semantic powerline.In the Esmart dataset, as aforementioned, due to the need to also detect guy wires, each image in this dataset usually contain at least one visual crossing. As shown in Fig \ref{esmart_example_0}, LSNet, by design, can not detect the two line segments at the crossing but LsNetv2 is able to perform the task quite well. Also, apparently LsNetv2 is also better than LSNet in general one-line-segment-per-cell cases, especially when the visibility of the line segments are limited due to camera angle making the line segments thin and/or background blending. This can be due to ConvNext having bigger kernel and receptive field.
+\begin{table*}[]
+\centering
+\resizebox{\textwidth}{!}{
+\begin{tabular}{lllll|llll|llll|llll}
+        & \multicolumn{4}{c|}{PLDU}           & \multicolumn{4}{c|}{PLDM}           & \multicolumn{4}{c|}{TTPLA}          & \multicolumn{4}{c}{Esmart}          \\ \cline{2-17} 
+        & APR   & ARR   & $F_1$ & $F_{\beta}$ & APR   & ARR   & $F_1$ & $F_{\beta}$ & APR   & ARR   & $F_1$ & $F_{\beta}$ & APR   & ARR   & $F_1$ & $F_{\beta}$ \\ \hline
+HAWP (best $F_1$)       & 0.830 & 0.649 & 0.728 & 0.780       & 0.815 & 0.664 & 0.732 & 0.775       & 0.559 & 0.639 & 0.596 & 0.575       & 0.751 & 0.850 & 0.797 & 0.772       \\
+HAWP (best $F_\beta$)   & 0.924 & 0.562 & 0.700 & 0.805       & 0.904 & 0.578 & 0.705 & 0.800       & 0.586 & 0.567 & 0.576 & 0.582       & 0.775 & 0.808 & 0.791 & 0.782       \\
+LSNet                   & 0.914 & 0.662 & 0.767 & 0.840       & 0.916 & 0.726 & 0.810 & 0.863       & 0.579 & 0.525 & 0.551 & 0.565       & 0.726 & 0.812 & 0.766 & 0.744       \\
+LSNetv2                 & 0.938 & 0.666 & 0.779 & 0.857       & 0.934 & 0.724 & 0.815 & 0.875       & 0.714 & 0.560 & 0.628 & 0.671       & 0.845 & 0.814 & 0.829 & 0.837      
+\end{tabular}}
+\caption{\label{res1_table} Performance of HAWPv2, LSNet and LSNetv2 across 4 datasets: PLDU, PLDM, TTPLA and eSmart dataset.
+}
+\end{table*}
+
+\begin{table*}[]
+\centering
+\begin{tabular}{lll|ll|ll|ll}
+               & \multicolumn{2}{l|}{PLDU}    & \multicolumn{2}{l|}{PLDM}    & \multicolumn{2}{l|}{TTPLA}   & \multicolumn{2}{l}{Esmart}   \\ \cline{2-9} 
+               & line width & score threshold & line width & score threshold & line width & score threshold & line width & score threshold \\ \hline
+Best $F_1$     & 7          & 0.1             & 7          & 0.1             & 2          & 0.2             & 5          & 0.1             \\
+Best $F_\beta$ & 7          & 0.6             & 5          & 0.1             & 2          & 0.3             & 5          & 0.2             \\ \hline
+\end{tabular}
+\caption{\label{hawp_prop} Line widths and score threshold at which HAWPv2 achieves the best $F_1$ and $F_\beta$ scores across all four datasets.}
+\end{table*}
+
+\begin{table}[]
+\resizebox{\columnwidth}{!}{
+  \begin{tabular}{lll|llll}
+  ConvNext          & Bipartite   & Ordered loss            & APR & ARR & $F_1$ & $F_{\beta}$ \\ \hline
+                    &             &                         & 0.726 & 0.812 & 0.766 & 0.744       \\
+  \checkmark        &             &                         & 0.844 & 0.770 & 0.806 & 0.825       \\
+                    & \checkmark  &                         & 0.743 & 0.787 & 0.764 & 0.752       \\
+                    &             & \checkmark              & 0.769 & 0.749 & 0.759 & 0.764       \\
+  \checkmark        & \checkmark  &                         & 0.825 & 0.820 & 0.823 & 0.824       \\
+  % \checkmark        &             & \checkmark              & 0.829 & 0.772 & 0.799 & 0.815       \\
+  \checkmark        &             & \checkmark              & 0.839 & 0.765 & 0.800 & 0.820       \\
+                    & \checkmark  & \checkmark              & 0.759 & 0.813 & 0.785 & 0.770       \\
+  \checkmark        & \checkmark  & \checkmark              & 0.845 & 0.814 & 0.829 & 0.837  
+  \end{tabular}}
+  \caption{\label{ablation_esmart} Results from the ablation study performed on eSmart dataset. The study looks into the effect of the proposed components individually and in combination with each other.}
+\end{table}
+
+\begin{table}[]
+\resizebox{\columnwidth}{!}{
+  \begin{tabular}{lll|llll}
+  ConvNext          & Bipartite   & Ordered loss            & APR & ARR & $F_1$ & $F_{\beta}$ \\ \hline
+                    &             &                         & 0.579 & 0.525 & 0.551 & 0.565       \\
+  \checkmark        &             &                         & 0.624 & 0.660 & 0.641 & 0.631       \\
+                    & \checkmark  &                         & 0.671 & 0.550 & 0.604 & 0.638       \\
+                    &             & \checkmark              & 0.673 & 0.487 & 0.565 & 0.619       \\
+  \checkmark        & \checkmark  &                         & 0.683 & 0.561 & 0.616 & 0.650       \\
+  % \checkmark        &             & \checkmark              & 0.725 & 0.497 & 0.590 & 0.656       \\
+  \checkmark        &             & \checkmark              & 0.736 & 0.495 & 0.592 & 0.661       \\
+                    & \checkmark  & \checkmark              & 0.696 & 0.566 & 0.624 & 0.660       \\
+  \checkmark        & \checkmark  & \checkmark              & 0.714 & 0.560 & 0.628 & 0.672  
+  \end{tabular}}
+  \caption{\label{ablation_ttpla} Results from the ablation study performed on TTPLA dataset. The study looks into the effect of the proposed components individually and in combination with each other.}
+\end{table}
+
+\begin{table*}[]
+\resizebox{\textwidth}{!}{
+\begin{tabular}{lllll|llll|llll|llll}
+                 & \multicolumn{4}{c|}{PLDU}           & \multicolumn{4}{c|}{PLDM}           & \multicolumn{4}{c|}{TTPLA}          & \multicolumn{4}{c}{Esmart}          \\ \cline{2-17} 
+Backbone         & APR   & ARR   & $F_1$ & $F_{\beta}$ & APR   & ARR   & $F_1$ & $F_{\beta}$ & APR   & ARR   & $F_1$ & $F_{\beta}$ & APR   & ARR   & $F_1$ & $F_{\beta}$ \\ \hline
+modified VGG     & 0.899 & 0.685 & 0.778 & 0.838       & 0.818 & 0.793 & 0.805 & 0.812       & 0.696 & 0.566 & 0.624 & 0.660       & 0.759 & 0.813 & 0.785 & 0.770       \\
+Resnet-50        & 0.920 & 0.673 & 0.778 & 0.848       & 0.918 & 0.731 & 0.814 & 0.866       & 0.643 & 0.635 & 0.639 & 0.641       & 0.794 & 0.809 & 0.802 & 0.797       \\
+Efficientnetv2-M & 0.907 & 0.645 & 0.754 & 0.829       & 0.923 & 0.674 & 0.779 & 0.850       & 0.573 & 0.355 & 0.438 & 0.501       & 0.747 & 0.796 & 0.771 & 0.757       \\
+ConvNext-Tiny    & 0.938 & 0.666 & 0.779 & 0.857       & 0.934 & 0.724 & 0.815 & 0.875       & 0.714 & 0.560 & 0.628 & 0.671       & 0.845 & 0.814 & 0.829 & 0.837      
+\end{tabular}}
+\caption{\label{backbone_res_table} Performance of LSNetv2 using different CNNs as backbone}
+\end{table*}
+
+\begin{figure*}
+  \addtolength{\tabcolsep}{-5pt} 
+  \begin{tabularx}{\textwidth}{ccccc}
+  \centering
+  \subfloat{\includegraphics[width = 1.40in]{imgs/pldu_base_imgs/355.jpg}} &
+  \subfloat{\includegraphics[width = 1.40in]{imgs/pldu_gt/355.png}} &
+  \subfloat{\includegraphics[width = 1.40in]{imgs/hawp/pldu_ha/355.png}} &
+  \subfloat{\includegraphics[width = 1.40in]{imgs/pldu_old/355.png}} &
+  \subfloat{\includegraphics[width = 1.40in]{imgs/pldu_new/355.png}} \\
+  \subfloat{\includegraphics[width = 1.40in]{imgs/pldu_base_imgs/637.jpg}} &
+  \subfloat{\includegraphics[width = 1.40in]{imgs/pldu_gt/637.png}} &
+  \subfloat{\includegraphics[width = 1.40in]{imgs/hawp/pldu_ha/637.png}} &
+  \subfloat{\includegraphics[width = 1.40in]{imgs/pldu_old/637.png}} &
+  \subfloat{\includegraphics[width = 1.40in]{imgs/pldu_new/637.png}} \\
+  \subfloat{\includegraphics[width = 1.40in]{imgs/pldu_base_imgs/250.jpg}} &
+  \subfloat{\includegraphics[width = 1.40in]{imgs/pldu_gt/250.png}} &
+  \subfloat{\includegraphics[width = 1.40in]{imgs/hawp/pldu_ha/250.png}} &
+  \subfloat{\includegraphics[width = 1.40in]{imgs/pldu_old/250.png}} &
+  \subfloat{\includegraphics[width = 1.40in]{imgs/pldu_new/250.png}} \\
+  \subfloat{\includegraphics[width = 1.40in]{imgs/pldu_base_imgs/510.jpg}} &
+  \subfloat{\includegraphics[width = 1.40in]{imgs/pldu_gt/510.png}} &
+  \subfloat{\includegraphics[width = 1.40in]{imgs/hawp/pldu_ha/510.png}} &
+  \subfloat{\includegraphics[width = 1.40in]{imgs/pldu_old/510.png}} &
+  \subfloat{\includegraphics[width = 1.40in]{imgs/pldu_new/510.png}} \\
+  \subfloat{\includegraphics[width = 1.40in]{imgs/pldu_base_imgs/409.jpg}} &
+  \subfloat{\includegraphics[width = 1.40in]{imgs/pldu_gt/409.png}} &
+  \subfloat{\includegraphics[width = 1.40in]{imgs/hawp/pldu_ha/409.png}} &
+  \subfloat{\includegraphics[width = 1.40in]{imgs/pldu_old/409.png}} &
+  \subfloat{\includegraphics[width = 1.40in]{imgs/pldu_new/409.png}} \\
+  \subfloat{\includegraphics[width = 1.40in]{imgs/pldu_base_imgs/481.jpg}} &
+  \subfloat{\includegraphics[width = 1.40in]{imgs/pldu_gt/481.png}} &
+  \subfloat{\includegraphics[width = 1.40in]{imgs/hawp/pldu_ha/481.png}} &
+  \subfloat{\includegraphics[width = 1.40in]{imgs/pldu_old/481.png}} &
+  \subfloat{\includegraphics[width = 1.40in]{imgs/pldu_new/481.png}}\\
+  % \subfloat{\includegraphics[width = 265in]{imgs/pldu_base_imgs/358.jpg}} &
+  % \subfloat{\includegraphics[width = 265in]{imgs/pldu_gt/358.png}} &
+  % \subfloat{\includegraphics[width = 265in]{imgs/pldu_old/358.png}} &
+  % \subfloat{\includegraphics[width = 265in]{imgs/pldu_new/358.png}}\\
+  
+
+  % Add caption row
+  Image & Ground truth & HAWPv2 & LSNet & LSNetv2
+  % \subfloat[caption]{\includegraphics[width = 1.5in]{something}}\\
+  \end{tabularx}
+  \caption{\label{PLDU_example}Example test results of LSNet and LSNetv2 on test images in PLDU dataset. The columns from left to right contain: original images, ground truth segment map, outputs of HAWPv2, outputs of LSNet and outputs of LSNetv2}
+\end{figure*}
+
+\begin{figure*}
+  \addtolength{\tabcolsep}{-5pt} 
+  \begin{tabularx}{\textwidth}{ccccc}
+  \centering
+  \subfloat{\includegraphics[width = 1.40in]{imgs/pldm_base_imgs/18.jpg}} &
+  \subfloat{\includegraphics[width = 1.40in]{imgs/pldm_gt/18.png}} &
+  \subfloat{\includegraphics[width = 1.40in]{imgs/hawp/pldm_ha/18.png}} &
+  \subfloat{\includegraphics[width = 1.40in]{imgs/pldm_old/18.png}} &
+  \subfloat{\includegraphics[width = 1.40in]{imgs/pldm_new/18.png}} \\
+  \subfloat{\includegraphics[width = 1.40in]{imgs/pldm_base_imgs/4.jpg}} &
+  \subfloat{\includegraphics[width = 1.40in]{imgs/pldm_gt/4.png}} &
+  \subfloat{\includegraphics[width = 1.40in]{imgs/hawp/pldm_ha/4.png}} &
+  \subfloat{\includegraphics[width = 1.40in]{imgs/pldm_old/4.png}} &
+  \subfloat{\includegraphics[width = 1.40in]{imgs/pldm_new/4.png}} \\
+  \subfloat{\includegraphics[width = 1.40in]{imgs/pldm_base_imgs/24.jpg}} &
+  \subfloat{\includegraphics[width = 1.40in]{imgs/pldm_gt/24.png}} &
+  \subfloat{\includegraphics[width = 1.40in]{imgs/hawp/pldm_ha/24.png}} &
+  \subfloat{\includegraphics[width = 1.40in]{imgs/pldm_old/24.png}} &
+  \subfloat{\includegraphics[width = 1.40in]{imgs/pldm_new/24.png}} \\
+  \subfloat{\includegraphics[width = 1.40in]{imgs/pldm_base_imgs/124.jpg}} &
+  \subfloat{\includegraphics[width = 1.40in]{imgs/pldm_gt/124.png}} &
+  \subfloat{\includegraphics[width = 1.40in]{imgs/hawp/pldm_ha/124.png}} &
+  \subfloat{\includegraphics[width = 1.40in]{imgs/pldm_old/124.png}} &
+  \subfloat{\includegraphics[width = 1.40in]{imgs/pldm_new/124.png}} \\
+
+  % Add caption row
+  Image & Ground truth & HAWPv2 & LSNet & LSNetv2
+  % \subfloat[caption]{\includegraphics[width = 1.5in]{something}}\\
+  \end{tabularx}
+  \caption{\label{PLDM_example}Example test results of LSNet and LSNetv2 on test images in PLDM dataset. The columns from left to right contain: original images, ground truth segment map, outputs of HAWPv2, outputs of LSNet and outputs of LSNetv2}
+\end{figure*}
+
+ Results in Table~\ref{res1_table} illustrate that LSNetv2 consistently outperforms LSNet across all datasets considered. The difference is, in general, mainly on the APR, which enlarges the performance gap when considering the $F_{\beta}$ metric. The performance gap is considerable for the TTPLA and Esmart datasets as they are subjectively more complex.  From Fig \ref{ttpla_example_0}, we can see that the TTPLA dataset contains many images of semi-parallel powerlines in large quantities and close to each other, which showcases the effectiveness of LSNetv2 to a larger degree leading to the biggest performance gap among the four datasets. LSNetv2 is able to both detect more true positive line segments/ semantic powerlines. In the Esmart dataset, as aforementioned, due to the need to also detect guy wires, each image in this dataset usually contains at least one visual crossing. As shown in Fig \ref{esmart_example_0}, LSNet, by design, can not detect the two line segments at the crossings but LsNetv2 is able to perform the task quite well. Also, apparently, LsNetv2 is also better than LSNet even in general one-line-segment-per-cell cases, especially when the visibility of the line segments is limited due to camera angle and distance, which make the line segments thin, and/or background blending. This can be due to ConvNext having a bigger kernel and receptive field that, together with other modernized features, allows LSNetv2 to get global information across the images to make accurate inferences at each cell.
  
- The performance gap is small for the PLDU and PLDM datasets since these datasets are subjectively less difficult than the remaining two. Similarly to the two previous cases, the improvement lies mainly in the APR metric. There are no explicit line crossings found in the test set and in cases where there are parallel powerline in close proximity, the four-grid design of LSNet may help compensate for when a line segment is not detected by one of the four grid. However, as shown in Fig \ref{PLDU_example}-\ref{PLDM_example}, the missing line segment problem is not eradicated with LSNet leading to the eventual miss-detection of the entire powerline. Furthermore, close line segments may confuse LSNet resulting in imprecise localization of endpoints implied by the occasional fillings in the gaps between powerlines, such as shown in the first column of Fig \ref{PLDU_example}. This might cause further complication for potential downstream instance segmentation tasks. LSNetv2 is more robust to such close-proximity cases and can produce output mask with less missing segments and clearer and precise division between powerlines, which may play a part in improving the APR. The last row of Fig \ref{PLDU_example} shows that LSNet maybe susceptible to confusion by background lines. LSNetv2 seems to be more resistant to that, which might be attributed to the increased kernel size of ConvNext that mimics the non-local self-attention mechanism of the Visual Transformer \cite{visual_transformer} and helps gather more global information helping LSNetv2 better differentiate between semantic line segments.
+ The performance gap is small for the PLDU and PLDM datasets since these datasets are subjectively less difficult than the other two. Similarly to the two previous cases, the improvement lies mainly in the APR metric. There are no explicit line crossings found in the test set and in cases where there are parallel powerlines in close proximity, the four-grid design of LSNet may help compensate for when a line segment is not detected by one of the four grids. However, as shown in Fig \ref{PLDU_example}-\ref{PLDM_example}, the missing line segment problem still exists for LSNet leading to the eventual miss-detection of the whole powerline. Furthermore, close line segments may confuse LSNet resulting in imprecise localization of endpoints implied by the occasional fillings in the gaps between powerlines, such as the examples shown in the first column of Fig \ref{PLDU_example}. This might cause further complications for potential downstream instance segmentation tasks. LSNetv2 is more robust to such close-proximity cases and can produce output masks with fewer missing segments and with clearer and more precise division between powerlines. The last row of Fig \ref{PLDU_example} shows that LSNet is maybe susceptible to confusion by background lines. LSNetv2 seems to be more resistant to that, which might be attributed to ConvNext being able to mimic the non-local self-attention mechanism of the Vision Transformer \cite{vit} and helps gather more global information helping LSNetv2 better differentiate between semantic line segments.
 
 
 
-Table \ref{res1_table} also shows the metric results of HAWPv2. As we observed that HAWPv2 performance was heavily dependent on different evaluation choices of line width and the score threshold (used to filter out inconfident line segments) more than LSNet and LSNetv2. Thus, we considered two settings which lead to the best $F_1$ score and $F_\beta$ score. Table \ref{hawp_prop} shows the configuration choices, at which these highest metric values are achieved for each dataset. Overall, the best values are achieved at line widths similar to those used to calculate metrics for LSNet and LSNetv2. In addition, high score thresholds lead to higher APR and $F_\beta$ at the expense of ARR, which is expected. In general, LsNetv2 is able to beat the best $F_1$ score and $F_\beta$ score across all datasets. Fig \ref{} - \ref{} show that HAWPv2 is able to detect entire powerlines consistently, however, false positive and false negative regions are often larger than those observed in LsNetv2. This can be attributed to the 4-overlapping-grid design, where missing line segments in each cell can be compensated by its neighbors and, since each cell is only responsible for a small region, false positives occuring in one cell do not have a significant impact. Another interesting insight is that HAWPv2 has higher performance than LsNet for the TTPLA and Esmart datasets while the reverse is true for PLDU and PLDM dataset. This makes sense since HAWPv2 does not have the limitations of detecting one line segment per cell and, thus, is more competitive on the TTPA and Esmart datasets.
+Table \ref{res1_table} also shows the metric results of HAWPv2. We observed that HAWPv2 performance, estimated by either $F_1$ or $F_\beta$, was heavily dependent on different choices of line width and the score threshold (used to filter out unconfident line segments). Thus, we considered both settings that lead to the best $F_1$ score and $F_\beta$ score. Table \ref{hawp_prop} shows the configuration choices, at which these highest metric values are achieved for each dataset. Overall, the best values are achieved at line widths similar to those used when calculating the metrics for LSNet and LSNetv2. In addition, high score thresholds lead to higher APR and $F_\beta$ at the expense of ARR and vice versa, which is expected. In general, LsNetv2 is able to beat the best $F_1$ score and $F_\beta$ score across all datasets. Fig \ref{} - \ref{} show that HAWPv2 is able to detect entire powerlines consistently, however, false positive and false negative regions are often larger than those observed in LsNetv2. This can be attributed to the 4-overlapping-grid design, where missing line segments in each cell can be compensated by its neighbors and, since each cell is only responsible for a small region, false positives occuring in one cell do not have a significant impact. Another interesting insight is that HAWPv2 has higher performance than LsNet for the TTPLA and Esmart datasets while the reverse is true for PLDU and PLDM datasets. This makes sense since HAWPv2 does not have the limitations of being only able detecting one line segment per cell and, thus, is more competitive on the TTPA and Esmart datasets.
 
-Table \ref{ablation_ttpla} and \ref{ablation_esmart} show the result of our ablation study experiments. For the TTPLA dataset, the addition of each of the components individually provide noticeable improvements in $F_1$ and $F_{\beta}$ score even though the ordered loss reduced ARR a bit. For Esmart data, ConvNext is clearly a beneficial addition, however, the benefits is less apparent concerning bipartite matching and ordered loss. These two components improved APR at the expense of ARR at a similar degree, ultimately resulting in comparable $F_1$ score and improved $F_{\beta}$ score. This might be due to bipartite matching alone is not quite useful for Esmart dataset as the occurences of powerline crossings or being in close proximity are less prevalent in Esmart than TTPLA dataset. Combining ConvNext-Tiny backbone with either bipartite matching or ordered loss achieve high performance than just using bipartite matching or ordered loss alone. This further validates the benefit of having ConvNext-Tiny as the new backbone.For Esmart dataset, the combination of ConvNext-Tiny and either of the remaining components produced somewhat similar performance to when ConvNext-Tiny is used alone. Meanwhile, for TTPLA, the pairings of ConvNext-Tiny plus one produce models with higher APR and $F_{\beta}$ but with lowered ARR and $F_1$. Although we are more biased towards APR and $F_{\beta}$ metric, the degradation of ARR and $F_1$ is noticeable enough to claim that overall improvement is achieved. This is understandable since bipartite matching provides LSNet with multi-line-segment-per-cell detection ability but might pose a harder task for the model to train and the ordered loss is empirically derived to be paired with bipartite matching. In fact, for both datasets, the combinations of bipartite matching and ordered loss generated models with better performance than if the two components is used alone. Finally, it can be seen that the inclusion of all the components provide the best performance.
+Table \ref{ablation_ttpla} and \ref{ablation_esmart} show the result of our ablation study experiments. For the TTPLA dataset, the addition of each of the components individually provides noticeable improvements in $F_1$ and $F_{\beta}$ score even though the ordered loss reduced ARR a bit. For Esmart data, ConvNext is clearly a beneficial addition, however, the benefits are less apparent when concerning bipartite matching and ordered loss. These two components improved APR at the expense of ARR at a similar degree, ultimately resulting in a comparable $F_1$ score and an improved $F_{\beta}$ score. This might be due to bipartite matching alone is not quite useful for the Esmart dataset as the occurrences of powerline crossings or being in close proximity are less prevalent in Esmart than TTPLA dataset. Combining ConvNext-Tiny backbone with either bipartite matching or ordered loss achieves high performance than just using bipartite matching or ordered loss alone. This further validates the benefit of having ConvNext-Tiny as the new backbone. For Esmart dataset, the combination of ConvNext-Tiny and either of the remaining components produced a somewhat similar performance to when ConvNext-Tiny is used alone. Meanwhile, for TTPLA, the pairings of ConvNext-Tiny plus one provide models with higher APR and $F_{\beta}$ but with lowered ARR and $F_1$ when comparing to just ConvNext-Tiny alone. Although we are more biased towards APR and $F_{\beta}$ metric, the degradation of ARR and $F_1$ is quite noticeable. This is understandable since bipartite matching provides LSNet with multi-line-segment-per-cell detection ability but might pose a harder task for the model to train and the ordered loss is empirically derived to be specifically paired with bipartite matching. In fact, for both datasets, the combinations of bipartite matching and ordered loss generated models with better performance than if the two components is used alone. Finally, it can be seen that the inclusion of all the components provides the best performance.
 
 
-Table \ref{backbone_res_table} shows the results of our experimentation with other backbones. Overall, the ConvNext-Tiny backbone is superior to the other alternatives, helping LSNetv2 reach the highest $F_1$ and $F_\beta$ scores across almost all cases. In addition with ConvNext-Tiny being in the state-of-the-art family of CNNs, the performance of this backbone can be partly due to it having the biggest maximum theoretical receptive field of more than double the size of the input image. \textcolor{red}{This means that each feature produced by this network can hypothetically gain information from the entire image}. Efficientnetv2-M is also a relatively novel architecture which is competitive at image classification \cite{efficientnetv2} and object detection \cite{efficientdet} and also has high theoretical receptive field (technically covers the entire image due to the squeeze-and-excitation blocks. However, this backbone is consistently inferior than the rest, including the original modified-VGG backbone. LSNetv2 with the original backbone has competitive performance versus the first version of LSNet except for PLDM dataset, where LSNetv2 has comparable $F_1$ score but noticeably lower APR and $F_{\beta}$ score. This is probably due to the fact that the need for multi-line-segment-per-cell detection is not prevalent for PLDU and PLDM dataset and the introduction of bipartite matching might have posed more challenges on the training LSNetv2 built on the modified-VGG. Nevertheless, for TTPLA and Esmart datasets, which benefits from the multi-line-segment detection capability, LSNetv2 with modified-VGG backbone achieves considerably better performance than the original LSNet. LSNetv2 with ResNet50 backbone is consistently the second-best across all cases despite having a relatively small maximum theoretical receptive field and the lowest number of trainable parameters. This, together with ConvNext-Tiny being built upon the ResNet family, might suggest that the ResNet design is a good fit for the backbone of LSNetv2, and from our experiments, ConvNext-Tiny is currently the best candidate.
+Table \ref{backbone_res_table} shows the results of our experimentation with other backbones. Overall, the ConvNext-Tiny backbone is superior to the other alternatives, helping LSNetv2 reach the highest $F_1$ and $F_\beta$ scores across almost all cases. In addition with ConvNext-Tiny being in one of the state-of-the-art families of CNNs, the performance of this backbone can be partly due to it having the biggest theoretical receptive field of more than double the size of the input image. This means that each cell inference produced by this network can hypothetically gain information from the entire image. Efficientnetv2-M is also a relatively novel architecture that is competitive at image classification \cite{efficientnetv2} and object detection \cite{efficientdet} and also has high theoretical receptive field (technically covers the entire image due to the squeeze-and-excitation blocks). However, this backbone is consistently inferior than the rest, including the original modified-VGG backbone. LSNetv2 with the original backbone has competitive performance versus the first version of LSNet for all datasets except for PLDM, where LSNetv2 has a comparable $F_1$ score but noticeably lower APR and $F_{\beta}$ score. This is probably due to the fact that the need for multi-line-segment-per-cell detection is not prevalent for PLDU and PLDM dataset and the introduction of bipartite matching might have posed more challenges on the training LSNetv2 built on the modified-VGG. Nevertheless, for TTPLA and Esmart datasets, which benefit from the multi-line-segment detection capability, LSNetv2 with modified-VGG backbone achieves considerably better performance than the original LSNet. LSNetv2 with ResNet50 backbone is consistently the second-best across all cases despite having a relatively smaller theoretical receptive field and the lowest number of trainable parameters. This, together with ConvNext-Tiny being built upon the ResNet family, might suggest that the ResNet design is a good fit for the backbone of LSNetv2, and from our experiments, ConvNext-Tiny is currently the best candidate.
 
 
 
@@ -760,17 +930,7 @@ Table \ref{backbone_res_table} shows the results of our experimentation with oth
 % \caption{\label{res1_table} Result 1}
 % \end{table*}
 
-\begin{table*}[]
-\begin{tabular}{lllll|llll|llll|llll}
-        & \multicolumn{4}{c|}{PLDU}           & \multicolumn{4}{c|}{PLDM}           & \multicolumn{4}{c|}{TTPLA}          & \multicolumn{4}{c}{Esmart}          \\ \cline{2-17} 
-        & APR   & ARR   & $F_1$ & $F_{\beta}$ & APR   & ARR   & $F_1$ & $F_{\beta}$ & APR   & ARR   & $F_1$ & $F_{\beta}$ & APR   & ARR   & $F_1$ & $F_{\beta}$ \\ \hline
-HAWP (best $F_1$)       & 0.830 & 0.649 & 0.728 & 0.780       & 0.815 & 0.664 & 0.732 & 0.775       & 0.559 & 0.639 & 0.596 & 0.575       & 0.751 & 0.850 & 0.797 & 0.772       \\
-HAWP (best $F_\beta$)   & 0.924 & 0.562 & 0.700 & 0.805       & 0.904 & 0.578 & 0.705 & 0.800       & 0.586 & 0.567 & 0.576 & 0.582       & 0.775 & 0.808 & 0.791 & 0.782       \\
-LSNet                   & 0.914 & 0.662 & 0.767 & 0.840       & 0.916 & 0.726 & 0.810 & 0.863       & 0.579 & 0.525 & 0.551 & 0.565       & 0.726 & 0.812 & 0.766 & 0.744       \\
-LSNetv2                 & 0.938 & 0.666 & 0.779 & 0.857       & 0.934 & 0.724 & 0.815 & 0.875       & 0.714 & 0.560 & 0.628 & 0.671       & 0.845 & 0.814 & 0.829 & 0.837      
-\end{tabular}
-\caption{\label{res1_table} Result 1}
-\end{table*}
+
 
 
 % \begin{table*}[]
@@ -785,65 +945,99 @@ LSNetv2                 & 0.938 & 0.666 & 0.779 & 0.857       & 0.934 & 0.724 & 
 % \caption{\label{backbone_res_table} Backbone analysis}
 % \end{table*}
 
-\begin{table*}[]
-\begin{tabular}{lllll|llll|llll|llll}
-                 & \multicolumn{4}{c|}{PLDU}           & \multicolumn{4}{c|}{PLDM}           & \multicolumn{4}{c|}{TTPLA}          & \multicolumn{4}{c}{Esmart}          \\ \cline{2-17} 
-Backbone         & APR   & ARR   & $F_1$ & $F_{\beta}$ & APR   & ARR   & $F_1$ & $F_{\beta}$ & APR   & ARR   & $F_1$ & $F_{\beta}$ & APR   & ARR   & $F_1$ & $F_{\beta}$ \\ \hline
-modified VGG     & 0.899 & 0.685 & 0.778 & 0.838       & 0.818 & 0.793 & 0.805 & 0.812       & 0.696 & 0.566 & 0.624 & 0.660       & 0.759 & 0.813 & 0.785 & 0.770       \\
-Resnet-50        & 0.920 & 0.673 & 0.778 & 0.848       & 0.918 & 0.731 & 0.814 & 0.866       & 0.643 & 0.635 & 0.639 & 0.641       & 0.794 & 0.809 & 0.802 & 0.797       \\
-Efficientnetv2-M & 0.907 & 0.645 & 0.754 & 0.829       & 0.923 & 0.674 & 0.779 & 0.850       & 0.573 & 0.355 & 0.438 & 0.501       & 0.747 & 0.796 & 0.771 & 0.757       \\
-ConvNext-Tiny    & 0.938 & 0.666 & 0.779 & 0.857       & 0.934 & 0.724 & 0.815 & 0.875       & 0.714 & 0.560 & 0.628 & 0.671       & 0.845 & 0.814 & 0.829 & 0.837      
-\end{tabular}
-\caption{\label{backbone_res_table} Backbone analysis}
-\end{table*}
+\newcommand\vggone{
+    $3 \times 3, 64$ \\
+    $3 \times 3, 64$ \\
+    $1 \times 3, 64, \text{, s=2}$ \\
+}
 
+\newcommand\vggtwo{
+    $3 \times 3, 128$ \\
+    $3 \times 3, 128$ \\
+    $1 \times 3, 128, \text{, s=2}$ \\
+}
+\newcommand\vggthree{
+    $3 \times 3, 256$ \\
+    $3 \times 3, 256$ \\
+    $1 \times 3, 256, \text{, s=2}$ \\
+}
+\newcommand\vggfour{
+    $3 \times 3, 512$ \\
+    $3 \times 3, 512$ \\
+    $1 \times 3, 512, \text{, s=2}$ \\
+}
 
-\begin{table}[]
-  \begin{tabular}{lll|llll}
-  ConvNext          & Bipartite   & Ordered loss            & APR & ARR & $F_1$ & $F_{\beta}$ \\ \hline
-                    &             &                         & 0.726 & 0.812 & 0.766 & 0.744       \\
-  \checkmark        &             &                         & 0.844 & 0.770 & 0.806 & 0.825       \\
-                    & \checkmark  &                         & 0.743 & 0.787 & 0.764 & 0.752       \\
-                    &             & \checkmark              & 0.769 & 0.749 & 0.759 & 0.764       \\
-  \checkmark        & \checkmark  &                         & 0.825 & 0.820 & 0.823 & 0.824       \\
-  % \checkmark        &             & \checkmark              & 0.829 & 0.772 & 0.799 & 0.815       \\
-  \checkmark        &             & \checkmark              & 0.839 & 0.765 & 0.800 & 0.820       \\
-                    & \checkmark  & \checkmark              & 0.759 & 0.813 & 0.785 & 0.770       \\
-  \checkmark        & \checkmark  & \checkmark              & 0.845 & 0.814 & 0.829 & 0.837  
-  \end{tabular}
-  \caption{\label{ablation_esmart} Esmart ablation.}
-\end{table}
-
-\begin{table}[]
-  \begin{tabular}{lll|llll}
-  ConvNext          & Bipartite   & Ordered loss            & APR & ARR & $F_1$ & $F_{\beta}$ \\ \hline
-                    &             &                         & 0.579 & 0.525 & 0.551 & 0.565       \\
-  \checkmark        &             &                         & 0.624 & 0.660 & 0.641 & 0.631       \\
-                    & \checkmark  &                         & 0.671 & 0.550 & 0.604 & 0.638       \\
-                    &             & \checkmark              & 0.673 & 0.487 & 0.565 & 0.619       \\
-  \checkmark        & \checkmark  &                         & 0.683 & 0.561 & 0.616 & 0.650       \\
-  % \checkmark        &             & \checkmark              & 0.725 & 0.497 & 0.590 & 0.656       \\
-  \checkmark        &             & \checkmark              & 0.736 & 0.495 & 0.592 & 0.661       \\
-                    & \checkmark  & \checkmark              & 0.696 & 0.566 & 0.624 & 0.660       \\
-  \checkmark        & \checkmark  & \checkmark              & 0.714 & 0.560 & 0.628 & 0.672  
-  \end{tabular}
-  \caption{\label{ablation_esmart} TTPLA ablation.}
-\end{table}
-
+\newcommand\branch{
+    $2 \times 2, 512$ \\
+    $1 \times 1, \text{2 * 10 or 4 * 10}$ \\
+}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \newcommand\resone{
-    1 \times 1 \text{ maxpool, s=2 } \\
+    7 \times 7 \text{, s=2 } \\
+}
+
+
+
+\newcommand\restwo{
+    3 \times 3 \text{ maxpool, s=2 } \\
     \schema{
-    \schemabox{$2 \times$}
+    \schemabox{$3 \times$}
     }
     {
     \schemabox{
     $1 \times 1, 64$ \\
     $3 \times 3, 64$ \\
-    $1 \times 3, 64$ \\
+    $1 \times 3, 256$ \\
     }
     }
 }
 
+\newcommand\resthree{
+    \schema{
+    \schemabox{$1 \times$}
+    }
+    {
+    \schemabox{
+    $1 \times 1, 128 \text{, s=2}$ \\
+    $3 \times 3, 128$ \\
+    $1 \times 3, 512$ \\
+    }
+    }\\
+    \schema{
+    \schemabox{$3 \times$}
+    }
+    {
+    \schemabox{
+    $1 \times 1, 128$ \\
+    $3 \times 3, 128$ \\
+    $1 \times 3, 512$ \\
+    }
+    }
+}
+
+\newcommand\resfour{
+    \schema{
+    \schemabox{$1 \times$}
+    }
+    {
+    \schemabox{
+    $1 \times 1, 256 \text{, s=2}$ \\
+    $3 \times 3, 256$ \\
+    $1 \times 3, 1024$ \\
+    }
+    }\\
+    \schema{
+    \schemabox{$5 \times$}
+    }
+    {
+    \schemabox{
+    $1 \times 1, 256$ \\
+    $3 \times 3, 256$ \\
+    $1 \times 3, 1024$ \\
+    }
+    }
+}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \newcommand\effone{
     3 \times 3, 24 \text{, s=2 } \\
     \schema{
@@ -921,7 +1115,7 @@ $1 \times 1, 176$ \\
 } \\
 $1 \times 1, 1056$ \\
 }
-
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \newcommand\convnextone{
     4 \times 4, 96 \text{, s=4 } \\
 }
@@ -970,142 +1164,26 @@ $1 \times 1, 1056$ \\
 }
 
 \begin{table*}[]
+\centering
 \begin{tabular}{l|l|l|l|l|l}
 Stage & Output size & Modified VGG & Resnet-50 & EfficientnetV2-M & ConvNext-Tiny \\ \hline
-1     & 256 x 256   &              &     & \makecell{\effone} &               \\ \hline
-2     & 128 x 128   &              & \makecell{\resone}  & \makecell{\efftwo}  & \makecell{\convnextone} \\ \hline
-3     & 64 x 64     &              &           & \makecell{\effthree} & \makecell{\convnexttwo}   \\ \hline
-4     & 32 x 32     &              &           & \makecell{\efffour}  & \makecell{\convnextthree}  \\ \hline
-5     & 32 x 32     &              &           & \makecell{\efffive}  & \makecell{\convnextfour}   \\ \hline
-6     &             &              &           &                  &               \\ \hline
-7     &             &              &           &                  &                \\ \hline
-Receptive field     &              & 91         & 291          & 779 (inf)           & 1096          
+1     & $256 \times 256$   & \makecell{\vggone}      & \makecell{\resone}    & \makecell{\effone} &               \\ \hline
+2     & $128 \times 128$   & \makecell{\vggtwo}      & \makecell{\restwo}  & \makecell{\efftwo}  & \makecell{\convnextone} \\ \hline
+3     & $64 \times 64$     & \makecell{\vggthree}    & \makecell{\resthree}          & \makecell{\effthree} & \makecell{\convnexttwo}   \\ \hline
+4     & $32 \times 32$     & \makecell{\vggfour}     & \makecell{\resfour}          & \makecell{\efffour}  & \makecell{\convnextthree}  \\ \hline
+5     & $32 \times 32$     &              &           & \makecell{\efffive}  & \makecell{\convnextfour}   \\ \hline
+\pbox{20cm}{Classifier or \\ Regressor module} & $31 \times 31$     & \multicolumn{4}{c}{\makecell{\branch}}                 \\ \hline
+Receptive field     &              & 91         & 291          & 779 (inf)           & 1096                 \\ \hline
+Parameters (M)      &              & 10.0       & 12.8          & 14.5           & 13.9 
 \end{tabular}
-\caption{\label{backbone_arch} Backbone architecture.}
+\caption{\label{backbone_arch} Architecture of LSNetv2 using different CNNs as backbone. \textit{$ a \times a, b, \text{s}=c$} indicates a convolutional layer with kernel size $a$, number of filters $b$ and stride $c$. \textit{dw} indicates a depthwise convolutional layer. The curl brackets signals groups of layers with skip connections. This table excludes information about the skip connections, normalization and activation layers.}
 \end{table*}
 
-% \begin{figure*}
-%   \begin{tabularx}{\textwidth}{cccc}
-%   \centering
-%   \subfloat{\includegraphics[width = 1.65in]{imgs/pldu_base_imgs/250.jpg}} &
-%   \subfloat{\includegraphics[width = 1.65in]{imgs/pldu_gt/250.png}} &
-%   \subfloat{\includegraphics[width = 1.65in]{imgs/pldu_old/250.png}} &
-%   \subfloat{\includegraphics[width = 1.65in]{imgs/pldu_new/250.png}}\\
-%   \subfloat{\includegraphics[width = 1.65in]{imgs/pldu_base_imgs/355.jpg}} &
-%   \subfloat{\includegraphics[width = 1.65in]{imgs/pldu_gt/355.png}} &
-%   \subfloat{\includegraphics[width = 1.65in]{imgs/pldu_old/355.png}} &
-%   \subfloat{\includegraphics[width = 1.65in]{imgs/pldu_new/355.png}}\\
-%   % \subfloat{\includegraphics[width = 1.65in]{imgs/pldu_base_imgs/358.jpg}} &
-%   % \subfloat{\includegraphics[width = 1.65in]{imgs/pldu_gt/358.png}} &
-%   % \subfloat{\includegraphics[width = 1.65in]{imgs/pldu_old/358.png}} &
-%   % \subfloat{\includegraphics[width = 1.65in]{imgs/pldu_new/358.png}}\\
-%   \subfloat{\includegraphics[width = 1.65in]{imgs/pldu_base_imgs/481.jpg}} &
-%   \subfloat{\includegraphics[width = 1.65in]{imgs/pldu_gt/481.png}} &
-%   \subfloat{\includegraphics[width = 1.65in]{imgs/pldu_old/481.png}} &
-%   \subfloat{\includegraphics[width = 1.65in]{imgs/pldu_new/481.png}}\\
-%   \subfloat{\includegraphics[width = 1.65in]{imgs/pldu_base_imgs/426.jpg}} &
-%   \subfloat{\includegraphics[width = 1.65in]{imgs/pldu_gt/426.png}} &
-%   \subfloat{\includegraphics[width = 1.65in]{imgs/pldu_old/426.png}} &
-%   \subfloat{\includegraphics[width = 1.65in]{imgs/pldu_new/426.png}}\\
-%   \subfloat{\includegraphics[width = 1.65in]{imgs/pldu_base_imgs/637.jpg}} &
-%   \subfloat{\includegraphics[width = 1.65in]{imgs/pldu_gt/637.png}} &
-%   \subfloat{\includegraphics[width = 1.65in]{imgs/pldu_old/637.png}} &
-%   \subfloat{\includegraphics[width = 1.65in]{imgs/pldu_new/637.png}}\\
 
-%   % Add caption row
-%   Image & Ground truth & LSNet & LSNetv2
-%   % \subfloat[caption]{\includegraphics[width = 1.5in]{something}}\\
-%   \end{tabularx}
-%   \caption{\label{PLDU_example}Example test results of LSNet and LSNetv2 on test images in PLDU dataset. The columns from left to right contain: original images, ground truth segment map, outputs of LSNet and outputs of LSNetv2}
-% \end{figure*}
 
-\begin{figure*}
-  \addtolength{\tabcolsep}{-5pt} 
-  \begin{tabularx}{\textwidth}{ccccc}
-  \centering
-  \subfloat{\includegraphics[width = 1.40in]{imgs/pldu_base_imgs/355.jpg}} &
-  \subfloat{\includegraphics[width = 1.40in]{imgs/pldu_gt/355.png}} &
-  \subfloat{\includegraphics[width = 1.40in]{imgs/hawp/pldu_ha/355.png}} &
-  \subfloat{\includegraphics[width = 1.40in]{imgs/pldu_old/355.png}} &
-  \subfloat{\includegraphics[width = 1.40in]{imgs/pldu_new/355.png}} \\
-  \subfloat{\includegraphics[width = 1.40in]{imgs/pldu_base_imgs/637.jpg}} &
-  \subfloat{\includegraphics[width = 1.40in]{imgs/pldu_gt/637.png}} &
-  \subfloat{\includegraphics[width = 1.40in]{imgs/hawp/pldu_ha/637.png}} &
-  \subfloat{\includegraphics[width = 1.40in]{imgs/pldu_old/637.png}} &
-  \subfloat{\includegraphics[width = 1.40in]{imgs/pldu_new/637.png}} \\
-  \subfloat{\includegraphics[width = 1.40in]{imgs/pldu_base_imgs/250.jpg}} &
-  \subfloat{\includegraphics[width = 1.40in]{imgs/pldu_gt/250.png}} &
-  \subfloat{\includegraphics[width = 1.40in]{imgs/hawp/pldu_ha/250.png}} &
-  \subfloat{\includegraphics[width = 1.40in]{imgs/pldu_old/250.png}} &
-  \subfloat{\includegraphics[width = 1.40in]{imgs/pldu_new/250.png}} \\
-  \subfloat{\includegraphics[width = 1.40in]{imgs/pldu_base_imgs/510.jpg}} &
-  \subfloat{\includegraphics[width = 1.40in]{imgs/pldu_gt/510.png}} &
-  \subfloat{\includegraphics[width = 1.40in]{imgs/hawp/pldu_ha/510.png}} &
-  \subfloat{\includegraphics[width = 1.40in]{imgs/pldu_old/510.png}} &
-  \subfloat{\includegraphics[width = 1.40in]{imgs/pldu_new/510.png}} \\
-  \subfloat{\includegraphics[width = 1.40in]{imgs/pldu_base_imgs/409.jpg}} &
-  \subfloat{\includegraphics[width = 1.40in]{imgs/pldu_gt/409.png}} &
-  \subfloat{\includegraphics[width = 1.40in]{imgs/hawp/pldu_ha/409.png}} &
-  \subfloat{\includegraphics[width = 1.40in]{imgs/pldu_old/409.png}} &
-  \subfloat{\includegraphics[width = 1.40in]{imgs/pldu_new/409.png}} \\
-  \subfloat{\includegraphics[width = 1.40in]{imgs/pldu_base_imgs/481.jpg}} &
-  \subfloat{\includegraphics[width = 1.40in]{imgs/pldu_gt/481.png}} &
-  \subfloat{\includegraphics[width = 1.40in]{imgs/hawp/pldu_ha/481.png}} &
-  \subfloat{\includegraphics[width = 1.40in]{imgs/pldu_old/481.png}} &
-  \subfloat{\includegraphics[width = 1.40in]{imgs/pldu_new/481.png}}\\
-  % \subfloat{\includegraphics[width = 265in]{imgs/pldu_base_imgs/358.jpg}} &
-  % \subfloat{\includegraphics[width = 265in]{imgs/pldu_gt/358.png}} &
-  % \subfloat{\includegraphics[width = 265in]{imgs/pldu_old/358.png}} &
-  % \subfloat{\includegraphics[width = 265in]{imgs/pldu_new/358.png}}\\
-  
 
-  % Add caption row
-  Image & Ground truth & LSNet & LSNetv2
-  % \subfloat[caption]{\includegraphics[width = 1.5in]{something}}\\
-  \end{tabularx}
-  \caption{\label{PLDU_example}Example test results of LSNet and LSNetv2 on test images in PLDU dataset. The columns from left to right contain: original images, ground truth segment map, outputs of LSNet and outputs of LSNetv2}
-\end{figure*}
 
-\begin{figure*}
-  \addtolength{\tabcolsep}{-5pt} 
-  \begin{tabularx}{\textwidth}{ccccc}
-  \centering
-  \subfloat{\includegraphics[width = 1.40in]{imgs/pldm_base_imgs/18.jpg}} &
-  \subfloat{\includegraphics[width = 1.40in]{imgs/pldm_gt/18.png}} &
-  \subfloat{\includegraphics[width = 1.40in]{imgs/hawp/pldm_ha/18.png}} &
-  \subfloat{\includegraphics[width = 1.40in]{imgs/pldm_old/18.png}} &
-  \subfloat{\includegraphics[width = 1.40in]{imgs/pldm_new/18.png}} \\
-  \subfloat{\includegraphics[width = 1.40in]{imgs/pldm_base_imgs/4.jpg}} &
-  \subfloat{\includegraphics[width = 1.40in]{imgs/pldm_gt/4.png}} &
-  \subfloat{\includegraphics[width = 1.40in]{imgs/hawp/pldm_ha/4.png}} &
-  \subfloat{\includegraphics[width = 1.40in]{imgs/pldm_old/4.png}} &
-  \subfloat{\includegraphics[width = 1.40in]{imgs/pldm_new/4.png}} \\
-  \subfloat{\includegraphics[width = 1.40in]{imgs/pldm_base_imgs/24.jpg}} &
-  \subfloat{\includegraphics[width = 1.40in]{imgs/pldm_gt/24.png}} &
-  \subfloat{\includegraphics[width = 1.40in]{imgs/hawp/pldm_ha/24.png}} &
-  \subfloat{\includegraphics[width = 1.40in]{imgs/pldm_old/24.png}} &
-  \subfloat{\includegraphics[width = 1.40in]{imgs/pldm_new/24.png}} \\
-  \subfloat{\includegraphics[width = 1.40in]{imgs/pldm_base_imgs/124.jpg}} &
-  \subfloat{\includegraphics[width = 1.40in]{imgs/pldm_gt/124.png}} &
-  \subfloat{\includegraphics[width = 1.40in]{imgs/hawp/pldm_ha/124.png}} &
-  \subfloat{\includegraphics[width = 1.40in]{imgs/pldm_old/124.png}} &
-  \subfloat{\includegraphics[width = 1.40in]{imgs/pldm_new/124.png}} \\
 
-  % Add caption row
-  % \subfloat[caption]{\includegraphics[width = 1.5in]{something}}\\
-  \end{tabularx}
-  \caption{\label{PLDM_example}Example test results of LSNet and LSNetv2 on test images in PLDM dataset. The columns from left to right contain: original images, ground truth segment map, outputs of LSNet and outputs of LSNetv2}
-\end{figure*}
-
-\begin{table}[]
-\begin{tabular}{lll|ll|ll|ll}
-               & \multicolumn{2}{l|}{PLDU}    & \multicolumn{2}{l|}{PLDM}    & \multicolumn{2}{l|}{TTPLA}   & \multicolumn{2}{l}{Esmart}   \\ \cline{2-9} 
-               & line width & score threshold & line width & score threshold & line width & score threshold & line width & score threshold \\ \hline
-Best $F_1$     & 7          & 0.1             & 7          & 0.1             & 2          & 0.2             & 5          & 0.1             \\
-Best $F_\beta$ & 7          & 0.6             & 5          & 0.1             & 2          & 0.3             & 5          & 0.2             \\ \hline
-\end{tabular}
-\caption{\label{hawp_prop} Properties}
-\end{table}
 
 \begin{figure*}
   \addtolength{\tabcolsep}{-5pt} 
@@ -1157,7 +1235,7 @@ Best $F_\beta$ & 7          & 0.6             & 5          & 0.1             & 2
   Image & Ground truth & HAWPv2 & LSNet & LSNetv2
   % \subfloat[caption]{\includegraphics[width = 1.5in]{something}}\\
   \end{tabularx}
-  \caption{\label{ttpla_example_0}First five example test results of LSNet and LSNetv2 on test images in PLDU dataset. The columns from left to right contain: original images, ground truth segment map, outputs of LSNet and outputs of LSNetv2}
+  \caption{\label{ttpla_example_0}First five example test results of LSNet and LSNetv2 on test images in PLDU dataset. The columns from left to right contain: original images, ground truth segment map, outputs of HAWPv2, outputs of LSNet and outputs of LSNetv2}
 \end{figure*}
 
 % \begin{figure*}
@@ -1268,10 +1346,10 @@ Best $F_\beta$ & 7          & 0.6             & 5          & 0.1             & 2
   % \subfloat{\includegraphics[width = 1.65in]{imgs/esmart_new/Alta__98d795b2-512d-e740-2b9c-dfb9b6b40696.png}}\\
 
   % Add caption row
-  Image & Ground truth & LSNet & LSNetv2
+  Image & Ground truth & HAWPv2 & LSNet & LSNetv2
   % \subfloat[caption]{\includegraphics[width = 1.5in]{something}}\\
   \end{tabularx}
-  \caption{\label{esmart_example_0}Example test results of LSNet and LSNetv2 on test images in Esmart dataset. The columns from left to right contain: original images, ground truth segment map, outputs of LSNet and outputs of LSNetv2}
+  \caption{\label{esmart_example_0}Example test results of LSNet and LSNetv2 on test images in Esmart dataset. The columns from left to right contain: original images, ground truth segment map, outputs of HAWPv2, outputs of LSNet and outputs of LSNetv2}
 \end{figure*}
 
 % \begin{figure*}
@@ -1361,9 +1439,9 @@ Best $F_\beta$ & 7          & 0.6             & 5          & 0.1             & 2
 
 
 \section{Conclusion}
-We presented LSNetv2, an improved version of LSNet with better performance and capability to detect multiple line segments per divided grid cell. This capability is brought about by using multiple outputs trained with bipartite matching. Furthermore, we proposed a new loss, where the order of the detected enpoints is fixed, to train the regression branch. By using this new loss, the endpoint with smaller x-coordinate is always inferred by the same element pairs in the output matrix and the remaining endpoint is inferred with the same remaining element pair. In addition, we updated the backbone to the state-of-the-art family of ConvNext, which inherited well-proven designed elements from ResNet and Visual Transformer, in order to increase the overall performance.
+We presented LSNetv2, an improved version of LSNet with better performance and the capability to detect multiple line segments per divided grid cell. This capability is brought about by using multiple outputs trained with bipartite matching. Furthermore, we proposed a new loss, where the order of the detected endpoints is fixed, to train the regression branch. By using this new loss, the endpoint with a smaller x-coordinate is always inferred by the same element pair in the output matrix, and the remaining endpoint is inferred with the same remaining element pair. In addition, we updated the backbone to the state-of-the-art family of ConvNext, which inherited well-proven designed elements from ResNet and Visual Transformer, in order to increase the overall performance.
 
-LSNetv2 were able outperform its predecessor and its competitor HAWPv2 across all datasets evaluated. Through ablation study, each component has a role to play in enhacing the effectiveness pf LSNetv2. Analysis of different backbones also validated the choice of ConvNext-Tiny.
+LSNetv2 was able to outperform its predecessor and its competitor HAWPv2 across all datasets evaluated. Through ablation study, each component has a role to play in enhancing the effectiveness of LSNetv2. Analysis of different backbones also validated the choice of ConvNext-Tiny.
 
 
 
@@ -1390,7 +1468,8 @@ LSNetv2 were able outperform its predecessor and its competitor HAWPv2 across al
 % use section* for acknowledgment
 \section*{Acknowledgment}
 
-We would like to extend our appreciation towards eSmart Systems and UiT Machine Learning Group for their support to realize this paper. This work was backed by the Research Council of Norway.
+%We would like to extend our appreciation towards eSmart Systems and UiT Machine Learning Group for their support to realize this paper. 
+This work was supported by the Research Council of Norway under grant no. XXX.
 
 
 % Can use something like this to put references on a page
@@ -1443,22 +1522,22 @@ We would like to extend our appreciation towards eSmart Systems and UiT Machine 
 %\begin{IEEEbiography}[{\includegraphics[width=1in,height=1.25in,clip,keepaspectratio]{mshell}}]{Michael Shell}
 % or if you just want to reserve a space for a photo:
 
-\begin{IEEEbiography}{Michael Shell}
-Biography text here.
-\end{IEEEbiography}
+% \begin{IEEEbiography}{Michael Shell}
+% Biography text here.
+% \end{IEEEbiography}
 
-% if you will not have a photo at all:
-\begin{IEEEbiographynophoto}{John Doe}
-Biography text here.
-\end{IEEEbiographynophoto}
+% % if you will not have a photo at all:
+% \begin{IEEEbiographynophoto}{John Doe}
+% Biography text here.
+% \end{IEEEbiographynophoto}
 
-% insert where needed to balance the two columns on the last page with
-% biographies
-%\newpage
+% % insert where needed to balance the two columns on the last page with
+% % biographies
+% %\newpage
 
-\begin{IEEEbiographynophoto}{Jane Doe}
-Biography text here.
-\end{IEEEbiographynophoto}
+% \begin{IEEEbiographynophoto}{Jane Doe}
+% Biography text here.
+% \end{IEEEbiographynophoto}
 
 % You can push biographies down or up by placing
 % a \vfill before or after them. The appropriate
